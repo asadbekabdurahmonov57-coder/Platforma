@@ -128,7 +128,7 @@
             max-width: 1100px;
             margin: 40px auto;
             padding: 0 20px;
-            display: grid;
+            display: none; /* Ro'yxatdan o'tmaguncha yashirin turadi */
             grid-template-columns: 1fr 2fr;
             gap: 40px;
         }
@@ -145,7 +145,7 @@
             gap: 30px;
         }
 
-        /* Umumiy panellar uslubi */
+        /* Bloklar paneli */
         .upload-panel, .register-panel, .users-panel {
             background: white;
             padding: 25px;
@@ -157,7 +157,7 @@
         .register-panel { border-top: 4px solid #f59e0b; }
         .users-panel { border-top: 4px solid #3b82f6; display: none; }
 
-        .upload-panel input, .upload-panel textarea, .register-panel input, .register-panel select {
+        .upload-panel input, .upload-panel textarea, .register-panel input {
             -webkit-user-select: text;
             -moz-user-select: text;
             -ms-user-select: text;
@@ -182,7 +182,7 @@
             color: #475569;
         }
 
-        .form-group input, .form-group textarea, .form-group select {
+        .form-group input, .form-group textarea {
             width: 100%;
             padding: 10px;
             border: 1px solid #cbd5e1;
@@ -192,7 +192,7 @@
             background-color: #f8fafc;
         }
 
-        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+        .form-group input:focus, .form-group textarea:focus {
             border-color: #3b82f6;
             background-color: white;
         }
@@ -218,6 +218,13 @@
         .btn-green:hover { background-color: #059669; }
         .btn-gold { background-color: #d97706; }
         .btn-gold:hover { background-color: #b45309; }
+
+        /* Maxsus ochiq registratsiya qutisi (Sayt markazida) */
+        .auth-container {
+            max-width: 450px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
 
         /* Admin kirish tugmasi */
         .admin-login-btn {
@@ -310,13 +317,11 @@
             font-weight: bold;
             border-radius: 6px;
             cursor: pointer;
-            display: none; /* Faqat adminga ko'rinadi */
+            display: none; 
             transition: 0.2s;
         }
 
-        .btn-delete:hover {
-            background-color: #dc2626;
-        }
+        .btn-delete:hover { background-color: #dc2626; }
 
         .modda-text {
             font-size: 15px;
@@ -346,38 +351,32 @@
         
         <p>IIV tizimiga oid qonunlar, buyruqlar va moddalar toʻplami</p>
         
-        <div class="search-box">
+        <div class="search-box" id="searchBoxContainer" style="display: none;">
             <input type="text" id="searchBar" style="user-select: text;" placeholder="Modda raqami yoki kalit so'zni yozing..." oninput="searchModda()">
         </div>
     </div>
 
-    <div class="main-container">
+    <div class="auth-container" id="authScreen">
+        <div class="register-panel">
+            <h2>Platformadan foydalanish uchun roʻyxatdan oʻting</h2>
+            <form id="registerForm" onsubmit="registerUser(event)">
+                <div class="form-group">
+                    <label for="regName">Ismingiz va Familiyangiz</label>
+                    <input type="text" id="regName" placeholder="Masalan: Ali Valiyev" required>
+                </div>
+                <div class="form-group">
+                    <label for="regPassword">Parol yarating</label>
+                    <input type="password" id="regPassword" placeholder="Kamida 4 ta belgi" required>
+                </div>
+                <button type="submit" class="btn-submit btn-gold">Roʻyxatdan oʻtish va Kirish</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="main-container" id="mainPlatform">
         
         <div class="left-sidebar">
             
-            <div class="register-panel" id="regPanel">
-                <h2>Xodimni Roʻyxatdan oʻtkazish</h2>
-                <form id="registerForm" onsubmit="registerUser(event)">
-                    <div class="form-group">
-                        <label for="regName">F.I.O.</label>
-                        <input type="text" id="regName" placeholder="Masalan: Sardor Olimov" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="regRole">Unvoni / Lavozimi</label>
-                        <select id="regRole" required>
-                            <option value="Oddiy askar">Oddiy askar</option>
-                            <option value="Sardor">Sardor (Serjant)</option>
-                            <option value="Leytenant">Leytenant</option>
-                            <option value="Kapitan">Kapitan</option>
-                            <option value="Mayor">Mayor</option>
-                            <option value="Podpolkovnik">Podpolkovnik</option>
-                            <option value="Polkovnik">Polkovnik</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn-submit btn-gold">Roʻyxatdan oʻtish</button>
-                </form>
-            </div>
-
             <div class="upload-panel">
                 <h2>Yangi Modda Qoʻshish</h2>
                 <form id="moddaForm" onsubmit="saveModda(event)">
@@ -393,10 +392,10 @@
                 </form>
             </div>
 
-            <button class="admin-login-btn" id="loginBtn" onclick="checkAdminPassword()">Foydalanuvchilar ro'yxati (Faqat Admin)</button>
+            <button class="admin-login-btn" id="loginBtn" onclick="checkAdminPassword()">Roʻyxatdan oʻtgan fuqarolar (Faqat Admin)</button>
 
             <div class="users-panel" id="adminUsersPanel">
-                <h2>Roʻyxatdan oʻtgan xodimlar (<span id="userCount">0</span>)</h2>
+                <h2>Roʻyxatdan oʻtgan fuqarolar (<span id="userCount">0</span>)</h2>
                 <ul class="user-list" id="usersContainer">
                 </ul>
             </div>
@@ -423,7 +422,6 @@
             e.preventDefault();
         });
 
-        // Global holat (Admin kirgan yoki kirmaganligi)
         let isAdmin = false;
 
         function checkAdminPassword() {
@@ -433,7 +431,7 @@
                 document.getElementById('adminUsersPanel').style.display = 'block';
                 document.getElementById('loginBtn').style.display = 'none';
                 alert("Xush kelibsiz Admin!");
-                renderLaws(iivLaws); // O'chirish tugmalari ko'rinishi uchun qayta chizamiz
+                renderLaws(iivLaws); 
             } else {
                 alert("Xato parol!");
             }
@@ -451,6 +449,42 @@
         let iivLaws = JSON.parse(localStorage.getItem('iiv_laws')) || initialData;
         let registeredUsers = JSON.parse(localStorage.getItem('registered_users')) || [];
 
+        // Sahifa yuklanganda tekshirish: Agar oldin ro'yxatdan o'tgan bo'lsa birdan platformani ochish
+        window.onload = function() {
+            const currentUser = localStorage.getItem('current_logged_user');
+            if (currentUser) {
+                showPlatform();
+            }
+        }
+
+        function showPlatform() {
+            document.getElementById('authScreen').style.display = 'none';
+            document.getElementById('mainPlatform').style.display = 'grid';
+            document.getElementById('searchBoxContainer').style.display = 'block';
+            renderLaws(iivLaws);
+            renderUsers(registeredUsers);
+        }
+
+        // Fuqaroni ro'yxatdan o'tkazish funksiyasi
+        function registerUser(event) {
+            event.preventDefault();
+            const name = document.getElementById('regName').value;
+            const password = document.getElementById('regPassword').value;
+
+            const newUser = {
+                id: Date.now(),
+                name: name,
+                role: "Oddiy fuqaro"
+            };
+
+            registeredUsers.unshift(newUser);
+            localStorage.setItem('registered_users', JSON.stringify(registeredUsers));
+            localStorage.setItem('current_logged_user', name); // Tizimga kirdi deb belgilash
+            
+            alert(`Muhtaram ${name}, siz muvaffaqiyatli roʻyxatdan oʻtdingiz va platformaga kirdingiz!`);
+            showPlatform();
+        }
+
         function renderLaws(data) {
             const container = document.getElementById('moddaContainer');
             container.innerHTML = '';
@@ -461,8 +495,6 @@
             data.forEach(item => {
                 const card = document.createElement('div');
                 card.className = 'modda-card';
-                
-                // Admin bo'lsa o'chirish tugmasi ko'rinadi
                 const deleteBtnStyle = isAdmin ? 'display: block;' : 'display: none;';
 
                 card.innerHTML = `
@@ -477,32 +509,12 @@
             });
         }
 
-        // Moddani o'chirish funksiyasi
         function deleteModda(id) {
-            if (confirm("Ushbu moddani bazadan butunlay oʻchirmoqchimisiz?")) {
+            if (confirm("Ushbu moddani oʻchirib tashlamoqchimisiz?")) {
                 iivLaws = iivLaws.filter(item => item.id !== id);
                 localStorage.setItem('iiv_laws', JSON.stringify(iivLaws));
                 renderLaws(iivLaws);
             }
-        }
-
-        // YANGI: Haqiqiy foydalanuvchini ro'yxatdan o'tkazish funksiyasi
-        function registerUser(event) {
-            event.preventDefault();
-            const name = document.getElementById('regName').value;
-            const role = document.getElementById('regRole').value;
-
-            const newUser = {
-                id: Date.now(),
-                name: name,
-                role: role
-            };
-
-            registeredUsers.unshift(newUser);
-            localStorage.setItem('registered_users', JSON.stringify(registeredUsers));
-            renderUsers(registeredUsers);
-            document.getElementById('registerForm').reset();
-            alert("Xodim muvaffaqiyatli roʻyxatdan oʻtdi!");
         }
 
         function renderUsers(users) {
@@ -552,9 +564,6 @@
             );
             renderLaws(result);
         }
-
-        renderLaws(iivLaws);
-        renderUsers(registeredUsers);
     </script>
 </body>
 </html>
