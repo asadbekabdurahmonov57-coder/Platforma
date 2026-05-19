@@ -36,7 +36,6 @@
             margin-bottom: 20px;
         }
 
-        /* YANGILANGAN: Rasm ustida har qanday amalni (bosish, sudrash, saqlash) bloklash */
         .logo-container img {
             width: 100px;
             height: 100px;
@@ -45,13 +44,9 @@
             padding: 5px;
             border-radius: 50px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            
-            /* Mobil qurilmalarda rasm ustiga uzoq bosganda menyu chiqishini to'sish */
             -webkit-touch-callout: none; 
             -webkit-user-select: none;
             user-select: none;
-            
-            /* Rasmni sichqoncha bilan sudrab ko'chirishni taqiqlash */
             pointer-events: none; 
         }
 
@@ -150,23 +145,26 @@
             gap: 30px;
         }
 
-        /* Modda qo'shish paneli */
-        .upload-panel {
+        /* Umumiy panellar uslubi */
+        .upload-panel, .register-panel, .users-panel {
             background: white;
             padding: 25px;
             border-radius: 12px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            border-top: 4px solid #10b981;
         }
 
-        .upload-panel input, .upload-panel textarea {
+        .upload-panel { border-top: 4px solid #10b981; }
+        .register-panel { border-top: 4px solid #f59e0b; }
+        .users-panel { border-top: 4px solid #3b82f6; display: none; }
+
+        .upload-panel input, .upload-panel textarea, .register-panel input, .register-panel select {
             -webkit-user-select: text;
             -moz-user-select: text;
             -ms-user-select: text;
             user-select: text;
         }
 
-        .upload-panel h2, .users-panel h2 {
+        h2 {
             font-size: 18px;
             margin-bottom: 15px;
             color: #0f172a;
@@ -184,7 +182,7 @@
             color: #475569;
         }
 
-        .form-group input, .form-group textarea {
+        .form-group input, .form-group textarea, .form-group select {
             width: 100%;
             padding: 10px;
             border: 1px solid #cbd5e1;
@@ -194,7 +192,7 @@
             background-color: #f8fafc;
         }
 
-        .form-group input:focus, .form-group textarea:focus {
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
             border-color: #3b82f6;
             background-color: white;
         }
@@ -207,7 +205,6 @@
         .btn-submit {
             width: 100%;
             padding: 12px;
-            background-color: #10b981;
             color: white;
             border: none;
             border-radius: 8px;
@@ -217,19 +214,10 @@
             transition: 0.2s;
         }
 
-        .btn-submit:hover {
-            background-color: #059669;
-        }
-
-        /* Foydalanuvchilar ro'yxati paneli */
-        .users-panel {
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            border-top: 4px solid #3b82f6;
-            display: none; 
-        }
+        .btn-green { background-color: #10b981; }
+        .btn-green:hover { background-color: #059669; }
+        .btn-gold { background-color: #d97706; }
+        .btn-gold:hover { background-color: #b45309; }
 
         /* Admin kirish tugmasi */
         .admin-login-btn {
@@ -261,10 +249,6 @@
             border-bottom: 1px solid #f1f5f9;
         }
 
-        .user-item:last-child {
-            border-bottom: none;
-        }
-
         .user-avatar {
             width: 35px;
             height: 35px;
@@ -279,16 +263,8 @@
             margin-right: 12px;
         }
 
-        .user-info .user-name {
-            font-size: 14px;
-            font-weight: 600;
-            color: #1e293b;
-        }
-
-        .user-info .user-role {
-            font-size: 11px;
-            color: #64748b;
-        }
+        .user-info .user-name { font-size: 14px; font-weight: 600; color: #1e293b; }
+        .user-info .user-role { font-size: 11px; color: #64748b; }
 
         /* O'ng tomon: Qonunlar bloki */
         .laws-list h2 {
@@ -306,20 +282,40 @@
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
             margin-bottom: 25px;
             border-left: 6px solid #1e3a8a;
+            position: relative;
             transition: 0.3s;
         }
 
-        .modda-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        .modda-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
         }
 
         .modda-number {
             font-size: 18px;
             font-weight: 700;
             color: #1e3a8a;
-            margin-bottom: 12px;
             text-transform: uppercase;
+        }
+
+        /* Admin o'chirish tugmasi */
+        .btn-delete {
+            background-color: #ef4444;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            font-size: 12px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            display: none; /* Faqat adminga ko'rinadi */
+            transition: 0.2s;
+        }
+
+        .btn-delete:hover {
+            background-color: #dc2626;
         }
 
         .modda-text {
@@ -359,6 +355,29 @@
         
         <div class="left-sidebar">
             
+            <div class="register-panel" id="regPanel">
+                <h2>Xodimni Roʻyxatdan oʻtkazish</h2>
+                <form id="registerForm" onsubmit="registerUser(event)">
+                    <div class="form-group">
+                        <label for="regName">F.I.O.</label>
+                        <input type="text" id="regName" placeholder="Masalan: Sardor Olimov" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="regRole">Unvoni / Lavozimi</label>
+                        <select id="regRole" required>
+                            <option value="Oddiy askar">Oddiy askar</option>
+                            <option value="Sardor">Sardor (Serjant)</option>
+                            <option value="Leytenant">Leytenant</option>
+                            <option value="Kapitan">Kapitan</option>
+                            <option value="Mayor">Mayor</option>
+                            <option value="Podpolkovnik">Podpolkovnik</option>
+                            <option value="Polkovnik">Polkovnik</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn-submit btn-gold">Roʻyxatdan oʻtish</button>
+                </form>
+            </div>
+
             <div class="upload-panel">
                 <h2>Yangi Modda Qoʻshish</h2>
                 <form id="moddaForm" onsubmit="saveModda(event)">
@@ -370,16 +389,16 @@
                         <label for="moddaContent">Modda matni</label>
                         <textarea id="moddaContent" placeholder="Qonun matnini kiriting..." required></textarea>
                     </div>
-                    <button type="submit" class="btn-submit">Bazaga saqlash</button>
+                    <button type="submit" class="btn-submit btn-green">Bazaga saqlash</button>
                 </form>
             </div>
 
             <button class="admin-login-btn" id="loginBtn" onclick="checkAdminPassword()">Foydalanuvchilar ro'yxati (Faqat Admin)</button>
 
             <div class="users-panel" id="adminUsersPanel">
-                <h2>Roʻyxatdan oʻtganlar (<span id="userCount">0</span>)</h2>
+                <h2>Roʻyxatdan oʻtgan xodimlar (<span id="userCount">0</span>)</h2>
                 <ul class="user-list" id="usersContainer">
-                    </ul>
+                </ul>
             </div>
 
         </div>
@@ -387,13 +406,12 @@
         <div class="laws-list">
             <h2>Qonun hujjatlari matnlari</h2>
             <div id="moddaContainer">
-                </div>
+            </div>
         </div>
 
     </div>
 
     <script>
-        // Klaviatura orqali nusxalashni taqiqlash
         document.addEventListener('keydown', function(e) {
             if (e.ctrlKey && (e.keyCode === 67 || e.keyCode === 85 || e.keyCode === 73)) {
                 e.preventDefault();
@@ -401,17 +419,21 @@
             }
         });
 
-        // Mobil qurilmalarda uzoq bosib turganda kontekst menyu ochilishini to'xtatish
         document.addEventListener('contextmenu', function(e) {
             e.preventDefault();
         });
 
+        // Global holat (Admin kirgan yoki kirmaganligi)
+        let isAdmin = false;
+
         function checkAdminPassword() {
             const password = prompt("Admin parolini kiriting:");
             if (password === "1234") {
+                isAdmin = true;
                 document.getElementById('adminUsersPanel').style.display = 'block';
                 document.getElementById('loginBtn').style.display = 'none';
                 alert("Xush kelibsiz Admin!");
+                renderLaws(iivLaws); // O'chirish tugmalari ko'rinishi uchun qayta chizamiz
             } else {
                 alert("Xato parol!");
             }
@@ -426,14 +448,8 @@
             }
         ];
 
-        const initialUsers = [
-            { id: 1, name: "Asadbek Anvarjonov", role: "Platforma Admini" },
-            { id: 2, name: "Sardor Olimov", role: "Foydalanuvchi" },
-            { id: 3, name: "Jasur Rahimov", role: "Foydalanuvchi" }
-        ];
-
         let iivLaws = JSON.parse(localStorage.getItem('iiv_laws')) || initialData;
-        let registeredUsers = JSON.parse(localStorage.getItem('registered_users')) || initialUsers;
+        let registeredUsers = JSON.parse(localStorage.getItem('registered_users')) || [];
 
         function renderLaws(data) {
             const container = document.getElementById('moddaContainer');
@@ -445,13 +461,48 @@
             data.forEach(item => {
                 const card = document.createElement('div');
                 card.className = 'modda-card';
+                
+                // Admin bo'lsa o'chirish tugmasi ko'rinadi
+                const deleteBtnStyle = isAdmin ? 'display: block;' : 'display: none;';
+
                 card.innerHTML = `
-                    <div class="modda-number">${item.title}</div>
+                    <div class="modda-header">
+                        <div class="modda-number">${item.title}</div>
+                        <button class="btn-delete" style="${deleteBtnStyle}" onclick="deleteModda(${item.id})">Oʻchirish</button>
+                    </div>
                     <div class="modda-text">${item.text}</div>
                     <div class="modda-footer">Kiritilgan sana: ${item.date}</div>
                 `;
                 container.appendChild(card);
             });
+        }
+
+        // Moddani o'chirish funksiyasi
+        function deleteModda(id) {
+            if (confirm("Ushbu moddani bazadan butunlay oʻchirmoqchimisiz?")) {
+                iivLaws = iivLaws.filter(item => item.id !== id);
+                localStorage.setItem('iiv_laws', JSON.stringify(iivLaws));
+                renderLaws(iivLaws);
+            }
+        }
+
+        // YANGI: Haqiqiy foydalanuvchini ro'yxatdan o'tkazish funksiyasi
+        function registerUser(event) {
+            event.preventDefault();
+            const name = document.getElementById('regName').value;
+            const role = document.getElementById('regRole').value;
+
+            const newUser = {
+                id: Date.now(),
+                name: name,
+                role: role
+            };
+
+            registeredUsers.unshift(newUser);
+            localStorage.setItem('registered_users', JSON.stringify(registeredUsers));
+            renderUsers(registeredUsers);
+            document.getElementById('registerForm').reset();
+            alert("Xodim muvaffaqiyatli roʻyxatdan oʻtdi!");
         }
 
         function renderUsers(users) {
