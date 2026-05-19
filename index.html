@@ -31,7 +31,6 @@
             border-bottom: 5px solid #3b82f6;
         }
 
-        /* IIV Logotipi uchun CSS uslubi */
         .logo-container {
             margin-bottom: 20px;
         }
@@ -119,24 +118,20 @@
             transition: 0.3s;
         }
 
-        .search-box input:focus {
-            border-color: #3b82f6;
-        }
+        .search-box input:focus { border-color: #3b82f6; }
 
         /* Asosiy bloklar joylashuvu */
         .main-container {
             max-width: 1100px;
             margin: 40px auto;
             padding: 0 20px;
-            display: none; /* Ro'yxatdan o'tmaguncha yashirin turadi */
+            display: none; 
             grid-template-columns: 1fr 2fr;
             gap: 40px;
         }
 
         @media (max-width: 768px) {
-            .main-container {
-                grid-template-columns: 1fr;
-            }
+            .main-container { grid-template-columns: 1fr; }
         }
 
         .left-sidebar {
@@ -146,7 +141,7 @@
         }
 
         /* Bloklar paneli */
-        .upload-panel, .register-panel, .users-panel {
+        .upload-panel, .register-panel, .users-panel, .admin-auth-panel {
             background: white;
             padding: 25px;
             border-radius: 12px;
@@ -155,9 +150,10 @@
 
         .upload-panel { border-top: 4px solid #10b981; }
         .register-panel { border-top: 4px solid #f59e0b; }
-        .users-panel { border-top: 4px solid #3b82f6; display: none; }
+        .users-panel { border-top: 4px solid #3b82f6; }
+        .admin-auth-panel { border-top: 4px solid #64748b; }
 
-        .upload-panel input, .upload-panel textarea, .register-panel input {
+        .upload-panel input, .upload-panel textarea, .register-panel input, .admin-auth-panel input, .comment-input-box input {
             -webkit-user-select: text;
             -moz-user-select: text;
             -ms-user-select: text;
@@ -170,9 +166,7 @@
             color: #0f172a;
         }
 
-        .form-group {
-            margin-bottom: 15px;
-        }
+        .form-group { margin-bottom: 15px; }
 
         .form-group label {
             display: block;
@@ -197,10 +191,7 @@
             background-color: white;
         }
 
-        .form-group textarea {
-            height: 120px;
-            resize: vertical;
-        }
+        .form-group textarea { height: 120px; resize: vertical; }
 
         .btn-submit {
             width: 100%;
@@ -218,43 +209,35 @@
         .btn-green:hover { background-color: #059669; }
         .btn-gold { background-color: #d97706; }
         .btn-gold:hover { background-color: #b45309; }
+        .btn-navy { background-color: #1e3a8a; }
+        .btn-navy:hover { background-color: #172554; }
 
-        /* Maxsus ochiq registratsiya qutisi (Sayt markazida) */
+        /* Maxsus ochiq registratsiya qutisi */
         .auth-container {
             max-width: 450px;
             margin: 60px auto;
             padding: 0 20px;
         }
 
-        /* Admin kirish tugmasi */
-        .admin-login-btn {
-            background: none;
-            border: 1px dashed #cbd5e1;
-            color: #64748b;
-            padding: 10px;
+        .status-msg {
             font-size: 13px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: 0.3s;
+            font-weight: 600;
+            margin-top: 8px;
             text-align: center;
-        }
-        .admin-login-btn:hover {
-            background-color: #f1f5f9;
-            color: #1e3a8a;
+            display: none;
         }
 
-        .user-list {
-            list-style: none;
-            max-height: 250px;
-            overflow-y: auto;
-        }
+        .user-list { list-style: none; max-height: 250px; overflow-y: auto; }
 
         .user-item {
             display: flex;
             align-items: center;
+            justify-content: space-between;
             padding: 10px 0;
             border-bottom: 1px solid #f1f5f9;
         }
+
+        .user-left { display: flex; align-items: center; }
 
         .user-avatar {
             width: 35px;
@@ -271,16 +254,24 @@
         }
 
         .user-info .user-name { font-size: 14px; font-weight: 600; color: #1e293b; }
-        .user-info .user-role { font-size: 11px; color: #64748b; }
+        .user-info .user-status { font-size: 11px; color: #64748b; }
+        .user-info .user-status.blocked { color: #ef4444; font-weight: bold; }
 
-        /* O'ng tomon: Qonunlar bloki */
-        .laws-list h2 {
-            font-size: 22px;
-            margin-bottom: 20px;
-            color: #0f172a;
-            border-bottom: 2px solid #e2e8f0;
-            padding-bottom: 10px;
+        /* Bloklash tugmasi */
+        .btn-block {
+            background-color: #f1f5f9;
+            color: #ef4444;
+            border: 1px solid #fee2e2;
+            padding: 4px 8px;
+            font-size: 11px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
         }
+        .btn-block.unblock { background-color: #dcfce7; color: #15803d; border-color: #bbf7d0; }
+
+        /* Qonunlar ro'yxati */
+        .laws-list { display: flex; flex-direction: column; }
 
         .modda-card {
             background: white;
@@ -289,25 +280,11 @@
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
             margin-bottom: 25px;
             border-left: 6px solid #1e3a8a;
-            position: relative;
-            transition: 0.3s;
         }
 
-        .modda-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 12px;
-        }
+        .modda-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+        .modda-number { font-size: 18px; font-weight: 700; color: #1e3a8a; text-transform: uppercase; }
 
-        .modda-number {
-            font-size: 18px;
-            font-weight: 700;
-            color: #1e3a8a;
-            text-transform: uppercase;
-        }
-
-        /* Admin o'chirish tugmasi */
         .btn-delete {
             background-color: #ef4444;
             color: white;
@@ -318,24 +295,25 @@
             border-radius: 6px;
             cursor: pointer;
             display: none; 
-            transition: 0.2s;
         }
 
-        .btn-delete:hover { background-color: #dc2626; }
+        .modda-text { font-size: 15px; line-height: 1.7; color: #334155; white-space: pre-line; }
+        .modda-footer { margin-top: 15px; font-size: 12px; color: #94a3b8; text-align: right; border-bottom: 1px dashed #e2e8f0; padding-bottom: 10px; }
 
-        .modda-text {
-            font-size: 15px;
-            line-height: 1.7;
-            color: #334155;
-            white-space: pre-line;
-        }
+        /* KOMMENTARIYA TIZIMI */
+        .comments-section { margin-top: 15px; background-color: #f8fafc; padding: 15px; border-radius: 8px; }
+        .comments-title { font-size: 13px; font-weight: 700; color: #475569; margin-bottom: 10px; display: flex; align-items: center; gap: 5px; }
+        
+        .comment-item { background: white; padding: 10px; border-radius: 6px; margin-bottom: 8px; border: 1px solid #e2e8f0; }
+        .comment-meta { font-size: 11px; font-weight: bold; color: #1e3a8a; margin-bottom: 4px; display: flex; justify-content: space-between; }
+        .comment-meta span { color: #94a3b8; font-weight: normal; }
+        .comment-body { font-size: 13px; color: #334155; -webkit-user-select: text; user-select: text; }
 
-        .modda-footer {
-            margin-top: 15px;
-            font-size: 12px;
-            color: #94a3b8;
-            text-align: right;
-        }
+        .comment-input-box { display: flex; gap: 10px; margin-top: 12px; }
+        .comment-input-box input { flex: 1; padding: 8px 12px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 13px; outline: none; }
+        .comment-input-box input:focus { border-color: #3b82f6; }
+        .btn-reply { background-color: #3b82f6; color: white; border: none; padding: 8px 15px; font-size: 12px; font-weight: bold; border-radius: 6px; cursor: pointer; }
+        .btn-reply:hover { background-color: #2563eb; }
     </style>
 </head>
 <body oncontextmenu="return false;">
@@ -369,6 +347,7 @@
                     <input type="password" id="regPassword" placeholder="Kamida 4 ta belgi" required>
                 </div>
                 <button type="submit" class="btn-submit btn-gold">Roʻyxatdan oʻtish va Kirish</button>
+                <div id="authError" class="status-msg" style="color: #ef4444;"></div>
             </form>
         </div>
     </div>
@@ -392,7 +371,15 @@
                 </form>
             </div>
 
-            <button class="admin-login-btn" id="loginBtn" onclick="checkAdminPassword()">Roʻyxatdan oʻtgan fuqarolar (Faqat Admin)</button>
+            <div class="admin-auth-panel" id="adminAuthBlock">
+                <h2>Admin Huquqlarini Tasdiqlash</h2>
+                <div class="form-group">
+                    <label for="adminPassInput">Maxfiy parol</label>
+                    <input type="password" id="adminPassInput" placeholder="Admin parolini yozing...">
+                </div>
+                <button onclick="submitAdminLogin()" class="btn-submit btn-navy">Tizimni Tasdiqlash</button>
+                <div id="adminStatusText" class="status-msg" style="color: #ef4444;"></div>
+            </div>
 
             <div class="users-panel" id="adminUsersPanel">
                 <h2>Roʻyxatdan oʻtgan fuqarolar (<span id="userCount">0</span>)</h2>
@@ -402,10 +389,7 @@
 
         </div>
 
-        <div class="laws-list">
-            <h2>Qonun hujjatlari matnlari</h2>
-            <div id="moddaContainer">
-            </div>
+        <div class="laws-list" id="moddaContainer">
         </div>
 
     </div>
@@ -418,42 +402,37 @@
             }
         });
 
-        document.addEventListener('contextmenu', function(e) {
-            e.preventDefault();
-        });
+        document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
 
         let isAdmin = false;
-
-        function checkAdminPassword() {
-            const password = prompt("Admin parolini kiriting:");
-            if (password === "1234") {
-                isAdmin = true;
-                document.getElementById('adminUsersPanel').style.display = 'block';
-                document.getElementById('loginBtn').style.display = 'none';
-                alert("Xush kelibsiz Admin!");
-                renderLaws(iivLaws); 
-            } else {
-                alert("Xato parol!");
-            }
-        }
+        let currentUserGlobal = null;
 
         const initialData = [
             {
                 id: 1,
-                title: "1-modda. Ushbu Qonunning maqsadi",
+                title: "1-modda. Qonunning maqsadi",
                 text: "Ushbu Qonunning maqsadi ichki ishlar organlarining faoliyatini tartibga solishdan iborat.",
-                date: "2026-05-19"
+                date: "2026-05-19",
+                comments: [
+                    { name: "Asadbek Anvarjonov", text: "Juda toʻgʻri shakllantirilgan modda.", date: "2026-05-19" }
+                ]
             }
         ];
 
         let iivLaws = JSON.parse(localStorage.getItem('iiv_laws')) || initialData;
         let registeredUsers = JSON.parse(localStorage.getItem('registered_users')) || [];
 
-        // Sahifa yuklanganda tekshirish: Agar oldin ro'yxatdan o'tgan bo'lsa birdan platformani ochish
         window.onload = function() {
-            const currentUser = localStorage.getItem('current_logged_user');
-            if (currentUser) {
-                showPlatform();
+            const savedUser = localStorage.getItem('current_logged_user');
+            if (savedUser) {
+                // Foydalanuvchi bloklanganligini tekshirish
+                const userObj = registeredUsers.find(u => u.name === savedUser);
+                if (userObj && userObj.isBlocked) {
+                    localStorage.removeItem('current_logged_user');
+                } else {
+                    currentUserGlobal = savedUser;
+                    showPlatform();
+                }
             }
         }
 
@@ -465,37 +444,77 @@
             renderUsers(registeredUsers);
         }
 
-        // Fuqaroni ro'yxatdan o'tkazish funksiyasi
+        // Fuqaro Registratsiyasi
         function registerUser(event) {
             event.preventDefault();
-            const name = document.getElementById('regName').value;
+            const name = document.getElementById('regName').value.trim();
             const password = document.getElementById('regPassword').value;
+            const errorDiv = document.getElementById('authError');
 
-            const newUser = {
-                id: Date.now(),
-                name: name,
-                role: "Oddiy fuqaro"
-            };
+            // Oldin bloklanganligini tekshirish
+            const existingUser = registeredUsers.find(u => u.name.toLowerCase() === name.toLowerCase());
+            if (existingUser && existingUser.isBlocked) {
+                errorDiv.innerText = "Ushbu akkaunt admin tomonidan bloklangan!";
+                errorDiv.style.display = 'block';
+                return;
+            }
 
-            registeredUsers.unshift(newUser);
-            localStorage.setItem('registered_users', JSON.stringify(registeredUsers));
-            localStorage.setItem('current_logged_user', name); // Tizimga kirdi deb belgilash
-            
-            alert(`Muhtaram ${name}, siz muvaffaqiyatli roʻyxatdan oʻtdingiz va platformaga kirdingiz!`);
+            if(!existingUser) {
+                const newUser = { id: Date.now(), name: name, isBlocked: false };
+                registeredUsers.unshift(newUser);
+                localStorage.setItem('registered_users', JSON.stringify(registeredUsers));
+            }
+
+            currentUserGlobal = name;
+            localStorage.setItem('current_logged_user', name);
+            errorDiv.style.display = 'none';
             showPlatform();
         }
 
+        // JavaScript Prompt o'rniga oddiy panel orqali Admin kirishi
+        function submitAdminLogin() {
+            const pass = document.getElementById('adminPassInput').value;
+            const statusText = document.getElementById('adminStatusText');
+
+            if (pass === "1234") {
+                isAdmin = true;
+                statusText.innerText = "Admin huquqlari faollashdi!";
+                statusText.style.color = "#10b981";
+                statusText.style.display = "block";
+                document.getElementById('adminUsersPanel').style.display = 'block';
+                renderLaws(iivLaws);
+                renderUsers(registeredUsers);
+            } else {
+                statusText.innerText = "Xato maxfiy parol!";
+                statusText.style.color = "#ef4444";
+                statusText.style.display = "block";
+            }
+        }
+
+        // Moddalarni chizish va Kommentariyalar bloki
         function renderLaws(data) {
             const container = document.getElementById('moddaContainer');
             container.innerHTML = '';
             if (data.length === 0) {
-                container.innerHTML = '<p style="text-align:center; color:#64748b; padding: 20px;">Hech qanday ma\'lumot topilmadi.</p>';
+                container.innerHTML = '<p style="text-align:center; color:#64748b; padding: 20px;">Hech qanday modda topilmadi.</p>';
                 return;
             }
             data.forEach(item => {
+                if(!item.comments) item.comments = [];
+                
                 const card = document.createElement('div');
                 card.className = 'modda-card';
                 const deleteBtnStyle = isAdmin ? 'display: block;' : 'display: none;';
+
+                let commentsHTML = '';
+                item.comments.forEach(com => {
+                    commentsHTML += `
+                        <div class="comment-item">
+                            <div class="comment-meta">${com.name} <span>${com.date}</span></div>
+                            <div class="comment-body">${com.text}</div>
+                        </div>
+                    `;
+                });
 
                 card.innerHTML = `
                     <div class="modda-header">
@@ -504,37 +523,91 @@
                     </div>
                     <div class="modda-text">${item.text}</div>
                     <div class="modda-footer">Kiritilgan sana: ${item.date}</div>
+                    
+                    <div class="comments-section">
+                        <div class="comments-title">Muhokamalar (${item.comments.length})</div>
+                        <div class="comments-list">${commentsHTML}</div>
+                        <div class="comment-input-box">
+                            <input type="text" id="input-com-${item.id}" placeholder="Fikringizni yozing (Reply)...">
+                            <button class="btn-reply" onclick="addComment(${item.id})">Reply</button>
+                        </div>
+                    </div>
                 `;
                 container.appendChild(card);
             });
         }
 
-        function deleteModda(id) {
-            if (confirm("Ushbu moddani oʻchirib tashlamoqchimisiz?")) {
-                iivLaws = iivLaws.filter(item => item.id !== id);
+        // Kommentariya qo'shish (Reply)
+        function addComment(moddaId) {
+            const inputField = document.getElementById(`input-com-${moddaId}`);
+            const commentText = inputField.value.trim();
+            if(!commentText) return;
+
+            const targetModda = iivLaws.find(item => item.id === moddaId);
+            if(targetModda) {
+                const today = new Date().toISOString().split('T')[0];
+                targetModda.comments.push({
+                    name: currentUserGlobal || "Fuqaro",
+                    text: commentText,
+                    date: today
+                });
                 localStorage.setItem('iiv_laws', JSON.stringify(iivLaws));
                 renderLaws(iivLaws);
             }
+            inputField.value = '';
         }
 
+        function deleteModda(id) {
+            iivLaws = iivLaws.filter(item => item.id !== id);
+            localStorage.setItem('iiv_laws', JSON.stringify(iivLaws));
+            renderLaws(iivLaws);
+        }
+
+        // Fuqarolarni ko'rsatish va BLOKLASH funksiyasi
         function renderUsers(users) {
             const container = document.getElementById('usersContainer');
             const countSpan = document.getElementById('userCount');
             container.innerHTML = '';
             countSpan.innerText = users.length;
+            
             users.forEach(user => {
                 const firstLetter = user.name.charAt(0).toUpperCase();
                 const li = document.createElement('li');
                 li.className = 'user-item';
+                
+                const statusLabel = user.isBlocked ? '<span class="user-status blocked">Bloklangan</span>' : '<span class="user-status">Faol</span>';
+                const btnLabel = user.isBlocked ? 'Tiklash' : 'Bloklash';
+                const btnClass = user.isBlocked ? 'btn-block unblock' : 'btn-block';
+
                 li.innerHTML = `
-                    <div class="user-avatar">${firstLetter}</div>
-                    <div class="user-info">
-                        <div class="user-name">${user.name}</div>
-                        <div class="user-role">${user.role}</div>
+                    <div class="user-left">
+                        <div class="user-avatar">${firstLetter}</div>
+                        <div class="user-info">
+                            <div class="user-name">${user.name}</div>
+                            ${statusLabel}
+                        </div>
                     </div>
+                    <button class="${btnClass}" onclick="toggleBlockUser(${user.id})">${btnLabel}</button>
                 `;
                 container.appendChild(li);
             });
+        }
+
+        // Akkauntni bloklash yoki blokdan chiqarish komandasi
+        function toggleBlockUser(id) {
+            const userObj = registeredUsers.find(u => u.id === id);
+            if(userObj) {
+                userObj.isBlocked = !userObj.isBlocked;
+                localStorage.setItem('registered_users', JSON.stringify(registeredUsers));
+                
+                // Agar bloklangan odam hozir saytda o'tirgan bo'lsa uni haydash
+                if(userObj.isBlocked && currentUserGlobal === userObj.name) {
+                    localStorage.removeItem('current_logged_user');
+                    location.reload();
+                } else {
+                    renderUsers(registeredUsers);
+                }
+            }
         }
 
         function saveModda(event) {
@@ -547,7 +620,8 @@
                 id: Date.now(),
                 title: title,
                 text: text,
-                date: today
+                date: today,
+                comments: []
             };
 
             iivLaws.unshift(newModda);
