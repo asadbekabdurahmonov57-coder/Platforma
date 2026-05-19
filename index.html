@@ -36,6 +36,7 @@
             margin-bottom: 20px;
         }
 
+        /* YANGILANGAN: Rasm ustida har qanday amalni (bosish, sudrash, saqlash) bloklash */
         .logo-container img {
             width: 100px;
             height: 100px;
@@ -44,6 +45,14 @@
             padding: 5px;
             border-radius: 50px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            
+            /* Mobil qurilmalarda rasm ustiga uzoq bosganda menyu chiqishini to'sish */
+            -webkit-touch-callout: none; 
+            -webkit-user-select: none;
+            user-select: none;
+            
+            /* Rasmni sichqoncha bilan sudrab ko'chirishni taqiqlash */
+            pointer-events: none; 
         }
 
         /* Sarlavha atrofidagi YALTIROQ OVAL RAMKA */
@@ -332,7 +341,7 @@
 
     <div class="hero-banner">
         <div class="logo-container">
-            <img src="logo.png" alt="IIV Logotipi">
+            <img src="logo.png" alt="IIV Logotipi" draggable="false">
         </div>
         
         <div class="oval-shining-container">
@@ -384,11 +393,17 @@
     </div>
 
     <script>
+        // Klaviatura orqali nusxalashni taqiqlash
         document.addEventListener('keydown', function(e) {
             if (e.ctrlKey && (e.keyCode === 67 || e.keyCode === 85 || e.keyCode === 73)) {
                 e.preventDefault();
                 return false;
             }
+        });
+
+        // Mobil qurilmalarda uzoq bosib turganda kontekst menyu ochilishini to'xtatish
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
         });
 
         function checkAdminPassword() {
