@@ -149,12 +149,12 @@
         .custom-modal-overlay {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             background: rgba(0,0,0,0.8); display: flex;
-            justify-content: center; align-items: center; z-index: 99999;
+            justify-content: center; align-items: center; z-index: 9999;
         }
         .custom-modal {
             background-color: #1a365d; border: 2px solid #2a4365;
             border-radius: 15px; padding: 30px; text-align: center;
-            max-width: 380px; width: 90%;
+            max-width: 350px; width: 90%;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             animation: modalPop 0.3s ease;
         }
@@ -174,13 +174,6 @@
             text-transform: uppercase;
         }
         .modal-close-btn:hover { background-color: #2b6cb0; }
-        .custom-modal .modal-textarea {
-            width: 100%; padding: 12px; border: 2px solid #3182ce;
-            background: #0d213b; color: white; border-radius: 8px;
-            font-size: 14px; margin-bottom: 15px; min-height: 80px;
-            resize: vertical; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            -webkit-user-select: text; user-select: text;
-        }
 
         .admin-add-form {
             background: #0d213b; padding: 20px; border-radius: 10px;
@@ -342,20 +335,6 @@
         <div class="context-menu-item" id="context-select-all-btn">✅ Barchasini belgilash</div>
     </div>
 
-    <!-- Paste uchun custom modal -->
-    <div id="paste-modal-overlay" class="custom-modal-overlay hidden">
-        <div class="custom-modal">
-            <div class="modal-icon">📋</div>
-            <div class="modal-title" style="color:#63b3ed;">Matnni joylash</div>
-            <div class="modal-message">Matnni pastdagi maydonga qo'ying (Ctrl+V ishlaydi)</div>
-            <textarea id="paste-modal-textarea" class="modal-textarea" placeholder="Matnni shu yerga qo'ying..."></textarea>
-            <div class="btn-row">
-                <button class="login-btn btn-green" id="paste-modal-ok-btn">📋 Joylash</button>
-                <button class="login-btn btn-red" id="paste-modal-cancel-btn">❌ Bekor qilish</button>
-            </div>
-        </div>
-    </div>
-
     <div id="auth-container" class="login-container">
         <div class="login-logo"><img src="logo.png" alt="Ilova logotipi"></div>
         <div id="login-form-block">
@@ -453,46 +432,6 @@
     </div>
 
     <script>
-        // ========== PASTE MODAL ==========
-        const pasteModalOverlay = document.getElementById('paste-modal-overlay');
-        const pasteModalTextarea = document.getElementById('paste-modal-textarea');
-        const pasteModalOkBtn = document.getElementById('paste-modal-ok-btn');
-        const pasteModalCancelBtn = document.getElementById('paste-modal-cancel-btn');
-        let pendingPasteInput = null;
-
-        function openPasteModal(inputElement) {
-            pendingPasteInput = inputElement;
-            pasteModalTextarea.value = '';
-            pasteModalOverlay.classList.remove('hidden');
-            setTimeout(() => pasteModalTextarea.focus(), 300);
-        }
-
-        function closePasteModal() {
-            pasteModalOverlay.classList.add('hidden');
-            pendingPasteInput = null;
-        }
-
-        function doPaste() {
-            if (!pendingPasteInput) return;
-            const text = pasteModalTextarea.value;
-            if (text) {
-                const start = pendingPasteInput.selectionStart;
-                const end = pendingPasteInput.selectionEnd;
-                const value = pendingPasteInput.value;
-                pendingPasteInput.value = value.substring(0, start) + text + value.substring(end);
-                pendingPasteInput.selectionStart = pendingPasteInput.selectionEnd = start + text.length;
-                pendingPasteInput.focus();
-            }
-            closePasteModal();
-        }
-
-        pasteModalOkBtn.addEventListener('click', doPaste);
-        pasteModalCancelBtn.addEventListener('click', closePasteModal);
-        pasteModalOverlay.addEventListener('click', function(e) {
-            if (e.target === pasteModalOverlay) closePasteModal();
-        });
-
-        // ========== CONTEXT MENU ==========
         const contextMenu = document.getElementById('custom-context-menu');
         let activeInputElement = null;
 
@@ -517,10 +456,23 @@
             if (!contextMenu.contains(e.target)) { contextMenu.classList.add('hidden'); activeInputElement = null; }
         });
 
-        document.getElementById('context-paste-btn').addEventListener('click', function() {
+        // Paste - bir martalik, to'g'ridan-to'g'ri clipboard'dan oladi
+        document.getElementById('context-paste-btn').addEventListener('click', async function() {
             if (!activeInputElement) return;
             contextMenu.classList.add('hidden');
-            openPasteModal(activeInputElement);
+            try {
+                const text = await navigator.clipboard.readText();
+                if (text) {
+                    const start = activeInputElement.selectionStart;
+                    const end = activeInputElement.selectionEnd;
+                    const value = activeInputElement.value;
+                    activeInputElement.value = value.substring(0, start) + text + value.substring(end);
+                    activeInputElement.selectionStart = activeInputElement.selectionEnd = start + text.length;
+                    activeInputElement.focus();
+                }
+            } catch (err) {
+                alert("Bu brauzerda clipboard ruxsati yo'q! Iltimos, matnni qo'lda kiriting.");
+            }
         });
 
         document.getElementById('context-copy-btn').addEventListener('click', function() {
@@ -571,7 +523,6 @@
             contextMenu.classList.add('hidden');
         });
 
-        // ========== DATA STORAGE ==========
         if (!localStorage.getItem('huquqiy_info')) {
             localStorage.setItem('huquqiy_info', JSON.stringify([{
                 id: Date.now(),
