@@ -254,6 +254,7 @@
             border-radius: 12px;
             margin-bottom: 20px;
             border: 1px solid #2a4365;
+            position: relative;
         }
 
         .info-card h3 {
@@ -261,6 +262,7 @@
             font-size: 20px;
             margin-bottom: 15px;
             font-weight: 800;
+            padding-right: 40px;
         }
 
         .info-card p {
@@ -641,7 +643,8 @@
             font-size: 11px;
             font-weight: bold;
             cursor: pointer;
-            margin-right: 5px;
+            margin-right: 3px;
+            margin-bottom: 3px;
             transition: background 0.2s;
         }
 
@@ -653,6 +656,10 @@
         .btn-unblock:hover { background-color: #2f855a; }
         .btn-chat { background-color: #3182ce; color: white; }
         .btn-chat:hover { background-color: #2b6cb0; }
+        .btn-delete { background-color: #9b2c2c; color: white; }
+        .btn-delete:hover { background-color: #742a2a; }
+        .btn-delete-info { background-color: #c53030; color: white; }
+        .btn-delete-info:hover { background-color: #9b2c2c; }
 
         /* YORDAM BO'LIMI */
         .help-content {
@@ -891,18 +898,21 @@
             display: none !important;
         }
 
-        .delete-info-btn {
+        .admin-delete-info-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
             background: #e53e3e;
             color: white;
             border: none;
             padding: 5px 10px;
             border-radius: 4px;
-            font-size: 11px;
+            font-size: 12px;
             font-weight: bold;
             cursor: pointer;
-            float: right;
+            z-index: 10;
         }
-        .delete-info-btn:hover {
+        .admin-delete-info-btn:hover {
             background: #c53030;
         }
     </style>
@@ -1265,11 +1275,13 @@
 
             const item = infoData[currentInfoIndex];
             const currentUser = currentLoggedInUser ? currentLoggedInUser.name.toLowerCase() : '';
+            const isAdmin = currentUser === 'asadbek';
             const isLiked = item.likedBy && item.likedBy.includes(currentUser);
             const isDisliked = item.dislikedBy && item.dislikedBy.includes(currentUser);
             
             container.innerHTML = `
                 <div class="info-card" id="info-card-${item.id}">
+                    ${isAdmin ? `<button class="admin-delete-info-btn" onclick="deleteInfo(${item.id})">🗑 O'chirish</button>` : ''}
                     <h3>${item.title}</h3>
                     <p>${item.content}</p>
                     <div class="info-stats">
@@ -1290,6 +1302,31 @@
 
             prevBtn.style.display = currentInfoIndex > 0 ? 'inline-block' : 'none';
             nextBtn.style.display = currentInfoIndex < infoData.length - 1 ? 'inline-block' : 'none';
+        }
+
+        // --- DELETE INFO FUNCTION ---
+        function deleteInfo(infoId) {
+            if (!currentLoggedInUser || currentLoggedInUser.name.toLowerCase() !== 'asadbek') {
+                alert("Faqat admin o'chira oladi!");
+                return;
+            }
+            
+            if (!confirm("Rostdan ham bu ma'lumotni o'chirmoqchimisiz?")) {
+                return;
+            }
+
+            infoData = JSON.parse(localStorage.getItem('huquqiy_info')) || [];
+            infoData = infoData.filter(item => item.id !== infoId);
+            localStorage.setItem('huquqiy_info', JSON.stringify(infoData));
+            
+            if (infoData.length === 0) {
+                currentInfoIndex = 0;
+            } else if (currentInfoIndex >= infoData.length) {
+                currentInfoIndex = infoData.length - 1;
+            }
+            
+            loadInfoContent();
+            alert("✅ Ma'lumot o'chirildi!");
         }
 
         function reactToInfo(infoId, type) {
@@ -1549,6 +1586,34 @@
             renderUserList(); 
         });
 
+        // --- DELETE USER FUNCTION ---
+        window.deleteUser = function(usernameKey) {
+            if (!currentLoggedInUser || currentLoggedInUser.name.toLowerCase() !== 'asadbek') {
+                alert("Faqat admin foydalanuvchilarni o'chira oladi!");
+                return;
+            }
+            
+            if (usernameKey === 'asadbek') {
+                alert("Admin hisobini o'chirib bo'lmaydi!");
+                return;
+            }
+
+            if (!confirm(`"${usernameKey}" foydalanuvchisini rostdan ham o'chirmoqchimisiz? Bu amal qaytarib bo'lmaydi!`)) {
+                return;
+            }
+
+            localStorage.removeItem(usernameKey);
+            
+            const chats = JSON.parse(localStorage.getItem('quiz_chats')) || {};
+            if (chats[usernameKey]) {
+                delete chats[usernameKey];
+                localStorage.setItem('quiz_chats', JSON.stringify(chats));
+            }
+
+            renderUserList();
+            alert(`✅ "${usernameKey}" foydalanuvchisi o'chirildi!`);
+        }
+
         function renderUserList() {
             userListTbody.innerHTML = '';
             const chats = JSON.parse(localStorage.getItem('quiz_chats')) || {};
@@ -1574,6 +1639,7 @@
                                 <button class="action-btn btn-chat" onclick="openAdminChat('${user.name.toLowerCase()}')">Chat</button>
                                 <button class="action-btn btn-warn" onclick="warnUser('${user.name.toLowerCase()}')">Ogohlantirish</button>
                                 <button class="action-btn ${blockBtnClass}" onclick="toggleBlockUser('${user.name.toLowerCase()}')">${blockBtnText}</button>
+                                <button class="action-btn btn-delete" onclick="deleteUser('${user.name.toLowerCase()}')">🗑 O'chirish</button>
                             `;
                         } else {
                             actionButtons = `<span style="color: #4ade80; font-size:11px;">Asosiy egasi</span>`;
