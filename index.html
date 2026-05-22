@@ -126,7 +126,6 @@
         }
         .admin-edit-stats button:hover { background: #2b6cb0; }
 
-        /* Kontekst menyu - faqat Copy, Cut, Select All */
         .custom-context-menu {
             position: fixed; background: #1a365d; border: 2px solid #3182ce;
             border-radius: 10px; padding: 5px 0; z-index: 99999;
@@ -201,8 +200,13 @@
             border-radius: 8px; border-left: 4px solid #3182ce;
         }
         .name-status-box { display: flex; align-items: center; gap: 8px; }
-        .admin-badge-img { width: 18px; height: 18px; object-fit: contain; vertical-align: middle; display: inline-block; }
-        .admin-badge-wrapper { display: inline-flex; align-items: center; gap: 4px; }
+        .admin-badge-img {
+            width: 18px; height: 18px; object-fit: contain;
+            vertical-align: middle; display: inline-block;
+        }
+        .admin-badge-wrapper {
+            display: inline-flex; align-items: center; gap: 4px;
+        }
         .online-dot { width: 10px; height: 10px; background-color: #4ade80; border-radius: 50%; display: none; box-shadow: 0 0 8px #4ade80; }
         .profile-item span { display: block; font-size: 12px; color: #a0aec0; font-weight: 700; margin-bottom: 5px; }
         .profile-item strong { font-size: 18px; color: #ffffff; font-weight: 800; }
@@ -324,7 +328,6 @@
 </head>
 <body>
 
-    <!-- Kontekst menyu - faqat Copy, Cut, Select All -->
     <div id="custom-context-menu" class="custom-context-menu hidden">
         <div class="context-menu-item" id="context-paste-btn">📋 Joylash</div>
         <div class="context-menu-divider"></div>
@@ -455,7 +458,6 @@
             if (!contextMenu.contains(e.target)) { contextMenu.classList.add('hidden'); activeInputElement = null; }
         });
 
-        // Paste - oddiy prompt orqali
         document.getElementById('context-paste-btn').addEventListener('click', function() {
             if (!activeInputElement) return;
             contextMenu.classList.add('hidden');
@@ -807,13 +809,18 @@
                             let blockBtnText = user.isBlocked ? "Chiqarish" : "Bloklash";
                             let blockBtnClass = user.isBlocked ? "btn-unblock" : "btn-block";
                             actionButtons = `<button class="action-btn btn-chat" onclick="openAdminChat('${user.name.toLowerCase()}')">Chat</button><button class="action-btn btn-warn" onclick="warnUser('${user.name.toLowerCase()}')">Ogohlantirish</button><button class="action-btn ${blockBtnClass}" onclick="toggleBlockUser('${user.name.toLowerCase()}')">${blockBtnText}</button><button class="action-btn btn-delete" onclick="deleteUser('${user.name.toLowerCase()}')">🗑 O'chirish</button>`;
-                        } else { actionButtons = `<span style="color:#4ade80;font-size:11px;">Asosiy egasi</span>`; }
+                        } else {
+                            actionButtons = `<span style="color:#4ade80;font-size:11px;">Asosiy egasi</span>`;
+                        }
                         let userKey = user.name.toLowerCase();
                         let hasNewMessage = false;
                         if (chats[userKey] && chats[userKey].length > 0) { let unreadMsgs = chats[userKey].filter(m => m.sender !== 'admin' && !m.read); if (unreadMsgs.length > 0) hasNewMessage = true; }
                         let tdName = document.createElement('td');
-                        if (user.name.toLowerCase() === 'asadbek') { tdName.innerHTML = `${user.name} <img src="${ADMIN_AVATAR_URL}" class="admin-badge-img" alt="verified">`; }
-                        else { tdName.innerHTML = user.name + (hasNewMessage ? ' <span style="background-color:#e53e3e;color:white;padding:2px 6px;border-radius:4px;font-size:10px;">📩 Yangi</span>' : ''); }
+                        if (user.name.toLowerCase() === 'asadbek') {
+                            tdName.innerHTML = `${user.name} <img src="${ADMIN_AVATAR_URL}" class="admin-badge-img" alt="verified">`;
+                        } else {
+                            tdName.textContent = user.name + (hasNewMessage ? ' 📩 Yangi' : '');
+                        }
                         tr.appendChild(tdName);
                         tr.innerHTML += `<td>${user.password}</td><td>${device}</td><td>${statusText}</td><td>${actionButtons}</td>`;
                         userListTbody.appendChild(tr);
@@ -852,7 +859,7 @@
 
         registerForm.addEventListener('submit', async (e) => { e.preventDefault(); const name = document.getElementById('reg-name').value.trim(); const password = document.getElementById('reg-password').value; const confirmPassword = document.getElementById('reg-confirm-password').value; if (name.toLowerCase() === 'asadbek') { alert("Bunday ism tizimda mavjud!"); return; } if (password !== confirmPassword) { alert("Parollar mos kelmadi!"); return; } if (localStorage.getItem(name.toLowerCase())) { alert("Bu ismli foydalanuvchi allaqachon ro'yxatdan o'tgan!"); return; } const deviceModel = await getExactDeviceName(); localStorage.setItem(name.toLowerCase(), JSON.stringify({ name, password, device: deviceModel, status: 'offline', isBlocked: false, warning: "" })); alert("Ro'yxatdan muvaffaqiyatli o'tdingiz! Endi kirishingiz mumkin."); registerForm.reset(); registerBlock.classList.add('hidden'); loginBlock.classList.remove('hidden'); });
 
-        loginForm.addEventListener('submit', async function(e) { e.preventDefault(); const name = document.getElementById('username').value.trim(); const pass = document.getElementById('password').value; const userKey = name.toLowerCase(); const userData = localStorage.getItem(userKey); if (!userData) { alert("Foydalanuvchi topilmadi!"); return; } const user = JSON.parse(userData); if (user.password !== pass) { alert("Parol noto'g'ri!"); return; } if (user.isBlocked) { alert("Sizning profilingiz administrator tomonidan bloklangan!"); return; } const detectedDevice = await getExactDeviceName(); user.device = detectedDevice; user.status = 'online'; currentLoggedInUser = user; localStorage.setItem(userKey, JSON.stringify(currentLoggedInUser)); recordLogin(user.name); if (currentLoggedInUser.warning && currentLoggedInUser.warning !== "") { alert("⚠️ Administrator ogohlantirishi:\n" + currentLoggedInUser.warning); currentLoggedInUser.warning = ""; localStorage.setItem(userKey, JSON.stringify(currentLoggedInUser)); } authContainer.classList.add('hidden'); mainScreenBlock.classList.remove('hidden'); welcomeTitle.textContent = `Xush kelibsiz, ${user.name}!`; document.getElementById('prof-name').textContent = user.name; document.getElementById('prof-pass').textContent = "******"; togglePwdBtn.textContent = "Ko'rsatish"; if (userKey === 'asadbek') { navAdmin.classList.remove('hidden'); adminOnlineDot.style.display = 'inline-block'; profBadge.innerHTML = `<img src="${ADMIN_AVATAR_URL}" class="admin-badge-img" alt="verified">`; profBadge.classList.remove('hidden'); } else { navAdmin.classList.add('hidden'); adminOnlineDot.style.display = 'none'; profBadge.classList.remove('hidden'); } resetActiveNav(); navMenu.classList.add('active'); subMenuPage.classList.remove('hidden'); loginForm.reset(); });
+        loginForm.addEventListener('submit', async function(e) { e.preventDefault(); const name = document.getElementById('username').value.trim(); const pass = document.getElementById('password').value; const userKey = name.toLowerCase(); const userData = localStorage.getItem(userKey); if (!userData) { alert("Foydalanuvchi topilmadi!"); return; } const user = JSON.parse(userData); if (user.password !== pass) { alert("Parol noto'g'ri!"); return; } if (user.isBlocked) { alert("Sizning profilingiz administrator tomonidan bloklangan!"); return; } const detectedDevice = await getExactDeviceName(); user.device = detectedDevice; user.status = 'online'; currentLoggedInUser = user; localStorage.setItem(userKey, JSON.stringify(currentLoggedInUser)); recordLogin(user.name); if (currentLoggedInUser.warning && currentLoggedInUser.warning !== "") { alert("⚠️ Administrator ogohlantirishi:\n" + currentLoggedInUser.warning); currentLoggedInUser.warning = ""; localStorage.setItem(userKey, JSON.stringify(currentLoggedInUser)); } authContainer.classList.add('hidden'); mainScreenBlock.classList.remove('hidden'); welcomeTitle.textContent = `Xush kelibsiz, ${user.name}!`; document.getElementById('prof-name').textContent = user.name; document.getElementById('prof-pass').textContent = "******"; togglePwdBtn.textContent = "Ko'rsatish"; if (userKey === 'asadbek') { navAdmin.classList.remove('hidden'); adminOnlineDot.style.display = 'inline-block'; profBadge.innerHTML = `<img src="${ADMIN_AVATAR_URL}" class="admin-badge-img" alt="verified">`; profBadge.classList.remove('hidden'); } else { navAdmin.classList.add('hidden'); adminOnlineDot.style.display = 'none'; profBadge.classList.add('hidden'); profBadge.innerHTML = ''; } resetActiveNav(); navMenu.classList.add('active'); subMenuPage.classList.remove('hidden'); loginForm.reset(); });
 
         function setOfflineAndLogout() { if (currentLoggedInUser) { const userKey = currentLoggedInUser.name.toLowerCase(); let freshData = JSON.parse(localStorage.getItem(userKey)); if (freshData) { freshData.status = 'offline'; localStorage.setItem(userKey, JSON.stringify(freshData)); } } }
         logoutTrigger.addEventListener('click', function() { setOfflineAndLogout(); currentLoggedInUser = null; mainScreenBlock.classList.add('hidden'); authContainer.classList.remove('hidden'); closeUserChat(); });
