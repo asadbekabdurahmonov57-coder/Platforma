@@ -456,22 +456,26 @@
             if (!contextMenu.contains(e.target)) { contextMenu.classList.add('hidden'); activeInputElement = null; }
         });
 
-        // Paste - bir martalik, to'g'ridan-to'g'ri clipboard'dan oladi
+        // Paste - takomillashtirilgan va xatosi to'g'irlangan variant
         document.getElementById('context-paste-btn').addEventListener('click', async function() {
             if (!activeInputElement) return;
             contextMenu.classList.add('hidden');
+            activeInputElement.focus(); // Qiymat o'zgarishidan oldin fokus qilish
             try {
-                const text = await navigator.clipboard.readText();
-                if (text) {
-                    const start = activeInputElement.selectionStart;
-                    const end = activeInputElement.selectionEnd;
-                    const value = activeInputElement.value;
-                    activeInputElement.value = value.substring(0, start) + text + value.substring(end);
-                    activeInputElement.selectionStart = activeInputElement.selectionEnd = start + text.length;
-                    activeInputElement.focus();
+                if (navigator.clipboard && navigator.clipboard.readText) {
+                    const text = await navigator.clipboard.readText();
+                    if (text) {
+                        const start = activeInputElement.selectionStart;
+                        const end = activeInputElement.selectionEnd;
+                        const value = activeInputElement.value;
+                        activeInputElement.value = value.substring(0, start) + text + value.substring(end);
+                        activeInputElement.selectionStart = activeInputElement.selectionEnd = start + text.length;
+                    }
+                } else {
+                    document.execCommand('paste'); // Eskiroq brauzerlar uchun zaxira
                 }
             } catch (err) {
-                alert("Bu brauzerda clipboard ruxsati yo'q! Iltimos, matnni qo'lda kiriting.");
+                alert("Bu brauzerda maxsus joylash tugmasi orqali ruxsat yo'q! Iltimos, standart 'Paste' (Ctrl+V yoki ekranni bosib turish) dan foydalaning.");
             }
         });
 
