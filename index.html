@@ -1249,7 +1249,8 @@
                     dislikes: 0,
                     views: 0,
                     likedBy: [],
-                    dislikedBy: []
+                    dislikedBy: [],
+                    viewedBy: []
                 }
             ];
             localStorage.setItem('huquqiy_info', JSON.stringify(defaultInfo));
@@ -1257,6 +1258,26 @@
 
         let currentInfoIndex = 0;
         let infoData = JSON.parse(localStorage.getItem('huquqiy_info')) || [];
+
+        function addViewIfNeeded() {
+            if (!currentLoggedInUser) return;
+            
+            infoData = JSON.parse(localStorage.getItem('huquqiy_info')) || [];
+            if (infoData.length === 0) return;
+            
+            const item = infoData[currentInfoIndex];
+            const userKey = currentLoggedInUser.name.toLowerCase();
+            
+            if (!item.viewedBy) item.viewedBy = [];
+            if (!item.views) item.views = 0;
+            
+            if (!item.viewedBy.includes(userKey)) {
+                item.viewedBy.push(userKey);
+                item.views = (item.views || 0) + 1;
+                infoData[currentInfoIndex] = item;
+                localStorage.setItem('huquqiy_info', JSON.stringify(infoData));
+            }
+        }
 
         function loadInfoContent() {
             const container = document.getElementById('dynamic-info-content');
@@ -1302,9 +1323,17 @@
 
             prevBtn.style.display = currentInfoIndex > 0 ? 'inline-block' : 'none';
             nextBtn.style.display = currentInfoIndex < infoData.length - 1 ? 'inline-block' : 'none';
+            
+            addViewIfNeeded();
+            
+            infoData = JSON.parse(localStorage.getItem('huquqiy_info')) || [];
+            const updatedItem = infoData[currentInfoIndex];
+            if (updatedItem) {
+                const viewsEl = document.getElementById(`views-${updatedItem.id}`);
+                if (viewsEl) viewsEl.textContent = updatedItem.views || 0;
+            }
         }
 
-        // --- DELETE INFO FUNCTION ---
         function deleteInfo(infoId) {
             if (!currentLoggedInUser || currentLoggedInUser.name.toLowerCase() !== 'asadbek') {
                 alert("Faqat admin o'chira oladi!");
@@ -1443,7 +1472,8 @@
                 dislikes: 0,
                 views: 0,
                 likedBy: [],
-                dislikedBy: []
+                dislikedBy: [],
+                viewedBy: []
             };
 
             infoData.push(newInfo);
@@ -1983,13 +2013,6 @@
             infoData = JSON.parse(localStorage.getItem('huquqiy_info')) || [];
             currentInfoIndex = 0;
             loadInfoContent();
-            
-            if (infoData.length > 0) {
-                infoData[currentInfoIndex].views = (infoData[currentInfoIndex].views || 0) + 1;
-                localStorage.setItem('huquqiy_info', JSON.stringify(infoData));
-                const viewsEl = document.getElementById(`views-${infoData[currentInfoIndex].id}`);
-                if (viewsEl) viewsEl.textContent = infoData[currentInfoIndex].views;
-            }
         });
 
         setInterval(() => {
