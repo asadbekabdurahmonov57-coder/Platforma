@@ -10,12 +10,10 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            
             -webkit-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
             user-select: none;
-
             -webkit-tap-highlight-color: transparent;
             outline: none;
         }
@@ -61,7 +59,7 @@
             min-height: 110px;
             object-fit: cover;
             border-radius: 50%;
-            background-color: #ffffff; 
+            background-color: #ffffff;
             padding: 5px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
@@ -160,6 +158,13 @@
             background-color: #c53030;
         }
 
+        .btn-purple {
+            background-color: #6b46c1;
+        }
+        .btn-purple:hover {
+            background-color: #553c9a;
+        }
+
         .form-footer {
             text-align: center;
             margin-top: 25px;
@@ -173,7 +178,6 @@
             cursor: pointer;
         }
 
-        /* ASOSIY EKRAN */
         .main-screen {
             position: fixed;
             top: 0;
@@ -241,7 +245,6 @@
             transform: translateY(-3px);
         }
 
-        /* MA'LUMOTLAR STYLES */
         .info-wrapper {
             width: 100%;
             max-width: 600px;
@@ -328,7 +331,41 @@
             gap: 5px;
         }
 
-        /* CUSTOM CONTEXT MENU */
+        .admin-edit-stats {
+            display: flex;
+            gap: 8px;
+            margin-left: auto;
+        }
+
+        .admin-edit-stats input {
+            width: 50px;
+            padding: 4px 6px;
+            border: 1px solid #3182ce;
+            background: #0d213b;
+            color: white;
+            border-radius: 4px;
+            font-size: 12px;
+            text-align: center;
+            font-weight: 700;
+            -webkit-user-select: text;
+            user-select: text;
+        }
+
+        .admin-edit-stats button {
+            background: #3182ce;
+            color: white;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .admin-edit-stats button:hover {
+            background: #2b6cb0;
+        }
+
         .custom-context-menu {
             position: fixed;
             background: #1a365d;
@@ -365,18 +402,15 @@
         .context-menu-item:first-child {
             border-radius: 8px 8px 0 0;
         }
-
         .context-menu-item:last-child {
             border-radius: 0 0 8px 8px;
         }
-
         .context-menu-divider {
             height: 1px;
             background: #2a4365;
             margin: 5px 0;
         }
 
-        /* CUSTOM MODAL */
         .custom-modal-overlay {
             position: fixed;
             top: 0;
@@ -447,7 +481,6 @@
             background-color: #2b6cb0;
         }
 
-        /* ADMIN ADD FORM */
         .admin-add-form {
             background: #0d213b;
             padding: 20px;
@@ -496,7 +529,6 @@
             transition: background 0.3s;
         }
 
-        /* PROFIL VA PANEL KONTEYNERLARI */
         .profile-container, .admin-container, .help-container {
             width: 100%;
             max-width: 800px;
@@ -543,9 +575,9 @@
         .online-dot {
             width: 10px;
             height: 10px;
-            background-color: #4ade80; 
+            background-color: #4ade80;
             border-radius: 50%;
-            display: none; 
+            display: none;
             box-shadow: 0 0 8px #4ade80;
         }
 
@@ -591,12 +623,11 @@
             transition: background 0.3s;
             text-transform: uppercase;
         }
-        
+
         .logout-btn-profile:hover {
             background-color: #c53030;
         }
 
-        /* JADVAL */
         .admin-table-wrapper {
             margin-top: 15px;
             max-height: 250px;
@@ -635,7 +666,6 @@
             color: #a0aec0;
         }
 
-        /* AMAL TUGMALARI */
         .action-btn {
             padding: 6px 10px;
             border: none;
@@ -658,10 +688,7 @@
         .btn-chat:hover { background-color: #2b6cb0; }
         .btn-delete { background-color: #9b2c2c; color: white; }
         .btn-delete:hover { background-color: #742a2a; }
-        .btn-delete-info { background-color: #c53030; color: white; }
-        .btn-delete-info:hover { background-color: #9b2c2c; }
 
-        /* YORDAM BO'LIMI */
         .help-content {
             margin-top: 15px;
             display: flex;
@@ -721,7 +748,6 @@
             background-color: #2b6cb0;
         }
 
-        /* CHAT OYNASI */
         .chat-window {
             background-color: #0d213b;
             border: 2px solid #2a4365;
@@ -812,12 +838,8 @@
             font-size: 8px;
             font-weight: bold;
         }
-        .tick-unread {
-            color: #a0aec0;
-        }
-        .tick-read {
-            color: #49c5ff;
-        }
+        .tick-unread { color: #a0aec0; }
+        .tick-read { color: #49c5ff; }
 
         .chat-input-area {
             display: flex;
@@ -855,7 +877,6 @@
             background-color: #2f855a;
         }
 
-        /* NAVIGATSIYA PANEL */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -915,87 +936,90 @@
         .admin-delete-info-btn:hover {
             background: #c53030;
         }
+
+        .stats-card {
+            background: #1a365d;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #2a4365;
+        }
+
+        .stats-card h3 {
+            color: #63b3ed;
+            margin-bottom: 15px;
+            font-size: 18px;
+            font-weight: 800;
+        }
+
+        .stats-row {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            background: #0d213b;
+            padding: 15px;
+            border-radius: 8px;
+            flex: 1;
+            min-width: 120px;
+            text-align: center;
+            border-left: 3px solid #3182ce;
+        }
+
+        .stat-item .stat-value {
+            font-size: 28px;
+            font-weight: 800;
+            color: #63b3ed;
+        }
+
+        .stat-item .stat-label {
+            font-size: 11px;
+            color: #a0aec0;
+            margin-top: 5px;
+            font-weight: 700;
+        }
     </style>
 </head>
 <body>
 
-    <!-- CUSTOM CONTEXT MENU -->
     <div id="custom-context-menu" class="custom-context-menu hidden">
-        <div class="context-menu-item" id="context-paste-btn">
-            📋 Joylash (Paste)
-        </div>
+        <div class="context-menu-item" id="context-paste-btn">📋 Joylash (Paste)</div>
         <div class="context-menu-divider"></div>
-        <div class="context-menu-item" id="context-copy-btn">
-            📝 Nusxalash (Copy)
-        </div>
-        <div class="context-menu-item" id="context-cut-btn">
-            ✂️ Kesish (Cut)
-        </div>
+        <div class="context-menu-item" id="context-copy-btn">📝 Nusxalash (Copy)</div>
+        <div class="context-menu-item" id="context-cut-btn">✂️ Kesish (Cut)</div>
         <div class="context-menu-divider"></div>
-        <div class="context-menu-item" id="context-select-all-btn">
-            ✅ Barchasini belgilash
-        </div>
+        <div class="context-menu-item" id="context-select-all-btn">✅ Barchasini belgilash</div>
     </div>
 
     <div id="auth-container" class="login-container">
-        <div class="login-logo">
-            <img src="logo.png" alt="Ilova logotipi">
-        </div>
-
+        <div class="login-logo"><img src="logo.png" alt="Ilova logotipi"></div>
         <div id="login-form-block">
-            <div class="login-header">
-                <h2>Huquqiy Ma'lumot</h2>
-                <p>TIZIMGA KIRISH</p>
-            </div>
+            <div class="login-header"><h2>Huquqiy Ma'lumot</h2><p>TIZIMGA KIRISH</p></div>
             <form id="login-form">
-                <div class="input-group">
-                    <label for="username">ISMINGIZ</label>
-                    <input type="text" id="username" placeholder="Ismingizni kiriting" required>
-                </div>
-                <div class="input-group">
-                    <label for="password">PAROL</label>
-                    <input type="password" id="password" placeholder="Parolingizni kiriting" required>
-                </div>
+                <div class="input-group"><label for="username">ISMINGIZ</label><input type="text" id="username" placeholder="Ismingizni kiriting" required></div>
+                <div class="input-group"><label for="password">PAROL</label><input type="password" id="password" placeholder="Parolingizni kiriting" required></div>
                 <button type="submit" class="login-btn">KIRISH</button>
             </form>
-            <div class="form-footer">
-                <p>Hisobingiz yo'qmi? <a id="go-to-register">Ro'yxatdan o'tish</a></p>
-            </div>
+            <div class="form-footer"><p>Hisobingiz yo'qmi? <a id="go-to-register">Ro'yxatdan o'tish</a></p></div>
         </div>
-
         <div id="register-form-block" class="hidden">
-            <div class="login-header">
-                <h2>Huquqiy Ma'lumot</h2>
-                <p>RO'YXATDAN O'TISH</p>
-            </div>
+            <div class="login-header"><h2>Huquqiy Ma'lumot</h2><p>RO'YXATDAN O'TISH</p></div>
             <form id="register-form">
-                <div class="input-group">
-                    <label for="reg-name">ISMINGIZ</label>
-                    <input type="text" id="reg-name" placeholder="Ismingizni kiriting" required>
-                </div>
-                <div class="input-group">
-                    <label for="reg-password">YANGI PAROL</label>
-                    <input type="password" id="reg-password" placeholder="Parol o'ylab toping" required>
-                </div>
-                <div class="input-group">
-                    <label for="reg-confirm-password">PAROLNI TASDIQLASH</label>
-                    <input type="password" id="reg-confirm-password" placeholder="Parolni qayta kiriting" required>
-                </div>
+                <div class="input-group"><label for="reg-name">ISMINGIZ</label><input type="text" id="reg-name" placeholder="Ismingizni kiriting" required></div>
+                <div class="input-group"><label for="reg-password">YANGI PAROL</label><input type="password" id="reg-password" placeholder="Parol o'ylab toping" required></div>
+                <div class="input-group"><label for="reg-confirm-password">PAROLNI TASDIQLASH</label><input type="password" id="reg-confirm-password" placeholder="Parolni qayta kiriting" required></div>
                 <button type="submit" class="login-btn">RO'YXATDAN O'TISH</button>
             </form>
-            <div class="form-footer">
-                <p>Hisobingiz bormi? <a id="go-to-login">Kirish oynasiga qaytish</a></p>
-            </div>
+            <div class="form-footer"><p>Hisobingiz bormi? <a id="go-to-login">Kirish oynasiga qaytish</a></p></div>
         </div>
     </div>
 
     <div id="main-screen-block" class="main-screen hidden">
-        
         <div class="screen-content">
             <div id="sub-menu-page" class="menu-text-container">
-                <div class="login-logo" style="margin-bottom: 25px;">
-                    <img src="logo.png" alt="Ilova logotipi">
-                </div>
+                <div class="login-logo" style="margin-bottom:25px;"><img src="logo.png" alt="Ilova logotipi"></div>
                 <h1 id="welcome-title">Xush kelibsiz!</h1>
                 <p>Huquqiy ma'lumotlarni o'rganishga tayyormisiz?</p>
                 <button class="start-quiz-btn" id="start-quiz-trigger">Ma'lumotlarni ko'rish</button>
@@ -1003,154 +1027,91 @@
 
             <div id="info-page" class="info-wrapper hidden">
                 <div id="dynamic-info-content"></div>
-                <div id="info-navigation" style="margin-top: 15px; text-align: center; padding-bottom: 10px;">
-                    <button class="login-btn" id="prev-info-btn" style="display:none; width: auto; padding: 10px 20px; font-size: 14px;">⬅ Oldingi</button>
-                    <button class="login-btn" id="next-info-btn" style="display:none; width: auto; padding: 10px 20px; font-size: 14px;">Keyingi ➡</button>
+                <div id="info-navigation" style="margin-top:15px;text-align:center;padding-bottom:10px;">
+                    <button class="login-btn" id="prev-info-btn" style="display:none;width:auto;padding:10px 20px;font-size:14px;">⬅ Oldingi</button>
+                    <button class="login-btn" id="next-info-btn" style="display:none;width:auto;padding:10px 20px;font-size:14px;">Keyingi ➡</button>
                 </div>
             </div>
 
             <div id="sub-profile-page" class="profile-container hidden">
-                <div class="login-header" style="margin-bottom: 15px;">
-                    <h2>Mening Profilim</h2>
-                </div>
+                <div class="login-header" style="margin-bottom:15px;"><h2>Mening Profilim</h2></div>
                 <div class="profile-card">
-                    <div class="profile-item">
-                        <span>ISM / FOYDALANUVCHI</span>
-                        <div class="name-status-box">
-                            <strong id="prof-name">---</strong>
-                            <span id="prof-badge" class="admin-badge-wrapper hidden"></span>
-                            <span class="online-dot" id="admin-online-dot"></span>
-                        </div>
-                    </div>
-                    <div class="profile-item">
-                        <span>XAVFSIZLIK PAROLI</span>
-                        <div class="password-box">
-                            <strong id="prof-pass">******</strong>
-                            <button class="toggle-pwd" id="toggle-pwd-btn">Ko'rsatish</button>
-                        </div>
-                    </div>
+                    <div class="profile-item"><span>ISM / FOYDALANUVCHI</span><div class="name-status-box"><strong id="prof-name">---</strong><span id="prof-badge" class="admin-badge-wrapper hidden"></span><span class="online-dot" id="admin-online-dot"></span></div></div>
+                    <div class="profile-item"><span>XAVFSIZLIK PAROLI</span><div class="password-box"><strong id="prof-pass">******</strong><button class="toggle-pwd" id="toggle-pwd-btn">Ko'rsatish</button></div></div>
                     <button class="logout-btn-profile" id="logout-trigger">Tizimdan chiqish</button>
                 </div>
             </div>
 
             <div id="sub-admin-page" class="admin-container hidden">
-                <div class="login-header" style="margin-bottom: 15px;">
-                    <h2 id="admin-panel-title-text">Panel</h2>
-                    <p style="color: #4ade80;" id="admin-panel-sub-text">Boshqaruvchi: Asadbek</p>
-                </div>
+                <div class="login-header" style="margin-bottom:15px;"><h2 id="admin-panel-title-text">Panel</h2><p style="color:#4ade80;" id="admin-panel-sub-text">Boshqaruvchi: Asadbek</p></div>
                 
-                <button class="login-btn btn-green" id="toggle-add-form-btn" style="margin-bottom: 15px;">➕ Yangi Ma'lumot Qo'shish</button>
+                <button class="login-btn btn-green" id="toggle-add-form-btn" style="margin-bottom:10px;">➕ Yangi Ma'lumot Qo'shish</button>
+                <button class="login-btn btn-purple" id="toggle-stats-btn" style="margin-bottom:15px;">📊 Statistika</button>
+                
+                <div id="admin-stats-block" class="hidden" style="margin-bottom:15px;">
+                    <div class="stats-card">
+                        <h3>📊 Kunlik Statistika (Bugun)</h3>
+                        <div class="stats-row">
+                            <div class="stat-item"><div class="stat-value" id="stat-today-logins">0</div><div class="stat-label">👤 Platformaga kirganlar</div></div>
+                            <div class="stat-item"><div class="stat-value" id="stat-today-views">0</div><div class="stat-label">👁 Jami ko'rishlar</div></div>
+                            <div class="stat-item"><div class="stat-value" id="stat-today-reactions">0</div><div class="stat-label">👍👎 Jami reaksiyalar</div></div>
+                        </div>
+                    </div>
+                    <div class="stats-card">
+                        <h3>📈 Umumiy Statistika</h3>
+                        <div class="stats-row">
+                            <div class="stat-item"><div class="stat-value" id="stat-total-users">0</div><div class="stat-label">👥 Jami foydalanuvchilar</div></div>
+                            <div class="stat-item"><div class="stat-value" id="stat-total-infos">0</div><div class="stat-label">📋 Jami ma'lumotlar</div></div>
+                            <div class="stat-item"><div class="stat-value" id="stat-total-reactions">0</div><div class="stat-label">🎯 Jami reaksiyalar</div></div>
+                        </div>
+                    </div>
+                </div>
                 
                 <div id="admin-add-form-block" class="admin-add-form hidden">
                     <h3>📝 Yangi huquqiy ma'lumot qo'shish</h3>
-                    <div class="input-group">
-                        <label>Sarlavha</label>
-                        <input type="text" id="new-title" placeholder="Ma'lumot sarlavhasini kiriting">
-                    </div>
-                    <div class="input-group">
-                        <label>Matn</label>
-                        <textarea id="new-content" placeholder="Ma'lumot matnini kiriting"></textarea>
-                    </div>
+                    <div class="input-group"><label>Sarlavha</label><input type="text" id="new-title" placeholder="Ma'lumot sarlavhasini kiriting"></div>
+                    <div class="input-group"><label>Matn</label><textarea id="new-content" placeholder="Ma'lumot matnini kiriting"></textarea></div>
                     <div class="btn-row">
                         <button class="login-btn btn-green" id="save-new-info-btn">💾 Saqlash</button>
                         <button class="login-btn btn-red" id="cancel-add-form-btn">❌ Bekor qilish</button>
                     </div>
                 </div>
 
-                <p style="font-size: 14px; color: #a0aec0; margin-bottom: 10px;">Ro'yxatdan o'tganlar va boshqaruv:</p>
-                <div class="admin-table-wrapper">
-                    <table class="admin-table">
-                        <thead>
-                            <tr>
-                                <th>Foydalanuvchi</th>
-                                <th>Parol</th>
-                                <th>Qurilma modeli</th>
-                                <th>Status</th>
-                                <th>Amallar</th>
-                            </tr>
-                        </thead>
-                        <tbody id="user-list-tbody"></tbody>
-                    </table>
-                </div>
+                <p style="font-size:14px;color:#a0aec0;margin-bottom:10px;">Ro'yxatdan o'tganlar va boshqaruv:</p>
+                <div class="admin-table-wrapper"><table class="admin-table"><thead><tr><th>Foydalanuvchi</th><th>Parol</th><th>Qurilma modeli</th><th>Status</th><th>Amallar</th></tr></thead><tbody id="user-list-tbody"></tbody></table></div>
 
                 <div id="admin-chat-block" class="chat-window hidden">
-                    <div class="chat-header">
-                        <span id="admin-chat-title">Foydalanuvchi bilan chat</span>
-                        <button class="chat-close-btn" onclick="closeAdminChat()">❌</button>
-                    </div>
+                    <div class="chat-header"><span id="admin-chat-title">Foydalanuvchi bilan chat</span><button class="chat-close-btn" onclick="closeAdminChat()">❌</button></div>
                     <div class="chat-messages" id="admin-chat-messages"></div>
-                    <div class="chat-input-area">
-                        <input type="text" id="admin-chat-input" placeholder="Javobingizni yozing...">
-                        <button class="chat-send-btn" id="admin-send-btn">Yuborish</button>
-                    </div>
+                    <div class="chat-input-area"><input type="text" id="admin-chat-input" placeholder="Javobingizni yozing..."><button class="chat-send-btn" id="admin-send-btn">Yuborish</button></div>
                 </div>
             </div>
 
             <div id="sub-help-page" class="help-container hidden">
-                <div class="login-header" style="margin-bottom: 15px;">
-                    <h2>Yordam va Qo'llab-quvvatlash</h2>
-                    <p>Tizim bo'yicha ko'p beriladigan savollar</p>
-                </div>
-                
+                <div class="login-header" style="margin-bottom:15px;"><h2>Yordam va Qo'llab-quvvatlash</h2><p>Tizim bo'yicha ko'p beriladigan savollar</p></div>
                 <div id="help-main-content" class="help-content">
-                    <div class="help-faq-item">
-                        <h4>❓ Ma'lumotlarni qanday ko'rish mumkin?</h4>
-                        <p>"Ma'lumotlar" bo'limiga o'ting va "Ma'lumotlarni ko'rish" tugmasini bosing.</p>
-                    </div>
-                    <div class="help-faq-item">
-                        <h4>❓ Parolni o'zgartirsa bo'ladimi?</h4>
-                        <p>Hozircha parolni faqat mas'ul boshqaruvchi orqali tiklash yoki o'zgartirish imkoniyati mavjud.</p>
-                    </div>
-                    <div class="help-faq-item">
-                        <h4>⚙️ Texnik muammo yuzasidan bog'lanish:</h4>
-                        <p>Ilova sinov rejimida ishlamoqda. Muammo bo'lsa, tizim ichida bog'laning.</p>
-                    </div>
-
-                    <div class="admin-contact-box">
-                        <h4>👨‍💻 Administrator bilan aloqa</h4>
-                        <p style="font-size: 13px; color: #a0aec0; margin-bottom: 12px;">Xatoliklar yoki savollar bo'yicha ilova ichida chat ochish:</p>
-                        <button class="open-chat-btn" id="open-user-chat-trigger">💬 Bog'lanish</button>
-                    </div>
+                    <div class="help-faq-item"><h4>❓ Ma'lumotlarni qanday ko'rish mumkin?</h4><p>"Ma'lumotlar" bo'limiga o'ting va "Ma'lumotlarni ko'rish" tugmasini bosing.</p></div>
+                    <div class="help-faq-item"><h4>❓ Parolni o'zgartirsa bo'ladimi?</h4><p>Hozircha parolni faqat mas'ul boshqaruvchi orqali tiklash yoki o'zgartirish imkoniyati mavjud.</p></div>
+                    <div class="help-faq-item"><h4>⚙️ Texnik muammo yuzasidan bog'lanish:</h4><p>Ilova sinov rejimida ishlamoqda. Muammo bo'lsa, tizim ichida bog'laning.</p></div>
+                    <div class="admin-contact-box"><h4>👨‍💻 Administrator bilan aloqa</h4><p style="font-size:13px;color:#a0aec0;margin-bottom:12px;">Xatoliklar yoki savollar bo'yicha ilova ichida chat ochish:</p><button class="open-chat-btn" id="open-user-chat-trigger">💬 Bog'lanish</button></div>
                 </div>
-
                 <div id="user-chat-block" class="chat-window hidden">
-                    <div class="chat-header">
-                        <span>👨‍💻 Asadbek <img src="https://img.icons8.com/color/48/verified-badge.png" class="msg-author-badge" alt="verified"></span>
-                        <button class="chat-close-btn" id="close-user-chat-trigger">❌</button>
-                    </div>
+                    <div class="chat-header"><span>👨‍💻 Asadbek <img src="https://img.icons8.com/color/48/verified-badge.png" class="msg-author-badge" alt="verified"></span><button class="chat-close-btn" id="close-user-chat-trigger">❌</button></div>
                     <div class="chat-messages" id="user-chat-messages"></div>
-                    <div class="chat-input-area">
-                        <input type="text" id="user-chat-input" placeholder="Xabaringizni yozing...">
-                        <button class="chat-send-btn" id="user-send-btn">Yuborish</button>
-                    </div>
+                    <div class="chat-input-area"><input type="text" id="user-chat-input" placeholder="Xabaringizni yozing..."><button class="chat-send-btn" id="user-send-btn">Yuborish</button></div>
                 </div>
             </div>
-
         </div>
 
         <div class="bottom-nav">
-            <div class="nav-item active" id="nav-menu">
-                <div class="nav-icon">📋</div>
-                <div>Ma'lumotlar</div>
-            </div>
-            <div class="nav-item" id="nav-profile">
-                <div class="nav-icon">👤</div>
-                <div>Profil</div>
-            </div>
-            <div class="nav-item" id="nav-help">
-                <div class="nav-icon">ℹ️</div>
-                <div>Yordam</div>
-            </div>
-            <div class="nav-item hidden" id="nav-admin">
-                <div class="nav-icon">⚙️</div>
-                <div>Panel</div>
-            </div>
+            <div class="nav-item active" id="nav-menu"><div class="nav-icon">📋</div><div>Ma'lumotlar</div></div>
+            <div class="nav-item" id="nav-profile"><div class="nav-icon">👤</div><div>Profil</div></div>
+            <div class="nav-item" id="nav-help"><div class="nav-icon">ℹ️</div><div>Yordam</div></div>
+            <div class="nav-item hidden" id="nav-admin"><div class="nav-icon">⚙️</div><div>Panel</div></div>
         </div>
-
     </div>
 
     <script>
-        // --- CUSTOM CONTEXT MENU ---
         const contextMenu = document.getElementById('custom-context-menu');
         let activeInputElement = null;
 
@@ -1159,21 +1120,12 @@
             if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA') {
                 e.preventDefault();
                 activeInputElement = target;
-                
-                const menuWidth = 200;
-                const menuHeight = 160;
-                let x = e.clientX;
-                let y = e.clientY;
-                
-                if (x + menuWidth > window.innerWidth) {
-                    x = window.innerWidth - menuWidth - 10;
-                }
-                if (y + menuHeight > window.innerHeight) {
-                    y = window.innerHeight - menuHeight - 10;
-                }
+                const menuWidth = 200, menuHeight = 160;
+                let x = e.clientX, y = e.clientY;
+                if (x + menuWidth > window.innerWidth) x = window.innerWidth - menuWidth - 10;
+                if (y + menuHeight > window.innerHeight) y = window.innerHeight - menuHeight - 10;
                 if (x < 5) x = 5;
                 if (y < 5) y = 5;
-                
                 contextMenu.style.left = x + 'px';
                 contextMenu.style.top = y + 'px';
                 contextMenu.classList.remove('hidden');
@@ -1181,46 +1133,33 @@
         });
 
         document.addEventListener('click', function(e) {
-            if (!contextMenu.contains(e.target)) {
-                contextMenu.classList.add('hidden');
-                activeInputElement = null;
-            }
+            if (!contextMenu.contains(e.target)) { contextMenu.classList.add('hidden'); activeInputElement = null; }
         });
 
         document.getElementById('context-paste-btn').addEventListener('click', async function() {
             if (!activeInputElement) return;
             try {
                 const text = await navigator.clipboard.readText();
-                const start = activeInputElement.selectionStart;
-                const end = activeInputElement.selectionEnd;
+                const start = activeInputElement.selectionStart, end = activeInputElement.selectionEnd;
                 const value = activeInputElement.value;
                 activeInputElement.value = value.substring(0, start) + text + value.substring(end);
                 activeInputElement.selectionStart = activeInputElement.selectionEnd = start + text.length;
                 activeInputElement.focus();
-            } catch (err) {
-                alert("Bu brauzerda clipboard ruxsati yo'q!");
-            }
+            } catch (err) { alert("Bu brauzerda clipboard ruxsati yo'q!"); }
             contextMenu.classList.add('hidden');
         });
 
         document.getElementById('context-copy-btn').addEventListener('click', function() {
             if (!activeInputElement) return;
-            const selectedText = activeInputElement.value.substring(
-                activeInputElement.selectionStart,
-                activeInputElement.selectionEnd
-            );
-            if (selectedText) {
-                navigator.clipboard.writeText(selectedText).catch(() => {});
-            } else {
-                navigator.clipboard.writeText(activeInputElement.value).catch(() => {});
-            }
+            const selectedText = activeInputElement.value.substring(activeInputElement.selectionStart, activeInputElement.selectionEnd);
+            if (selectedText) navigator.clipboard.writeText(selectedText).catch(() => {});
+            else navigator.clipboard.writeText(activeInputElement.value).catch(() => {});
             contextMenu.classList.add('hidden');
         });
 
         document.getElementById('context-cut-btn').addEventListener('click', function() {
             if (!activeInputElement) return;
-            const start = activeInputElement.selectionStart;
-            const end = activeInputElement.selectionEnd;
+            const start = activeInputElement.selectionStart, end = activeInputElement.selectionEnd;
             const selectedText = activeInputElement.value.substring(start, end);
             if (selectedText) {
                 navigator.clipboard.writeText(selectedText).catch(() => {});
@@ -1238,22 +1177,17 @@
             contextMenu.classList.add('hidden');
         });
 
-        // --- DATA STORAGE ---
         if (!localStorage.getItem('huquqiy_info')) {
-            const defaultInfo = [
-                {
-                    id: Date.now(),
-                    title: "Shaharlararo avtobus haydovchilarining vazifalari",
-                    content: "Harakatni boshlashdan avval shaharlararo avtobus haydovchilari yo'lovchilarga halokat bo'lganda chiqish joylaridan foydalanish haqida tushuntirishlari shart. Bu yo'lovchilar xavfsizligini ta'minlashning muhim talabidir.",
-                    likes: 0,
-                    dislikes: 0,
-                    views: 0,
-                    likedBy: [],
-                    dislikedBy: [],
-                    viewedBy: []
-                }
-            ];
-            localStorage.setItem('huquqiy_info', JSON.stringify(defaultInfo));
+            localStorage.setItem('huquqiy_info', JSON.stringify([{
+                id: Date.now(),
+                title: "Shaharlararo avtobus haydovchilarining vazifalari",
+                content: "Harakatni boshlashdan avval shaharlararo avtobus haydovchilari yo'lovchilarga halokat bo'lganda chiqish joylaridan foydalanish haqida tushuntirishlari shart.",
+                likes: 0, dislikes: 0, views: 0, likedBy: [], dislikedBy: [], viewedBy: []
+            }]));
+        }
+
+        if (!localStorage.getItem('daily_stats')) {
+            localStorage.setItem('daily_stats', JSON.stringify({ date: new Date().toDateString(), logins: [], views: 0, reactions: 0 }));
         }
 
         let currentInfoIndex = 0;
@@ -1261,21 +1195,48 @@
 
         function addViewIfNeeded() {
             if (!currentLoggedInUser) return;
-            
             infoData = JSON.parse(localStorage.getItem('huquqiy_info')) || [];
             if (infoData.length === 0) return;
-            
             const item = infoData[currentInfoIndex];
             const userKey = currentLoggedInUser.name.toLowerCase();
-            
             if (!item.viewedBy) item.viewedBy = [];
             if (!item.views) item.views = 0;
-            
             if (!item.viewedBy.includes(userKey)) {
                 item.viewedBy.push(userKey);
                 item.views = (item.views || 0) + 1;
                 infoData[currentInfoIndex] = item;
                 localStorage.setItem('huquqiy_info', JSON.stringify(infoData));
+                incrementDailyStat('views');
+            }
+        }
+
+        function incrementDailyStat(type) {
+            const stats = JSON.parse(localStorage.getItem('daily_stats')) || { date: new Date().toDateString(), logins: [], views: 0, reactions: 0 };
+            const today = new Date().toDateString();
+            if (stats.date !== today) {
+                stats.date = today;
+                stats.logins = [];
+                stats.views = 0;
+                stats.reactions = 0;
+            }
+            if (type === 'views') stats.views++;
+            if (type === 'reactions') stats.reactions++;
+            localStorage.setItem('daily_stats', JSON.stringify(stats));
+        }
+
+        function recordLogin(username) {
+            const stats = JSON.parse(localStorage.getItem('daily_stats')) || { date: new Date().toDateString(), logins: [], views: 0, reactions: 0 };
+            const today = new Date().toDateString();
+            if (stats.date !== today) {
+                stats.date = today;
+                stats.logins = [];
+                stats.views = 0;
+                stats.reactions = 0;
+            }
+            const userKey = username.toLowerCase();
+            if (!stats.logins.includes(userKey)) {
+                stats.logins.push(userKey);
+                localStorage.setItem('daily_stats', JSON.stringify(stats));
             }
         }
 
@@ -1299,7 +1260,7 @@
             const isAdmin = currentUser === 'asadbek';
             const isLiked = item.likedBy && item.likedBy.includes(currentUser);
             const isDisliked = item.dislikedBy && item.dislikedBy.includes(currentUser);
-            
+
             container.innerHTML = `
                 <div class="info-card" id="info-card-${item.id}">
                     ${isAdmin ? `<button class="admin-delete-info-btn" onclick="deleteInfo(${item.id})">🗑 O'chirish</button>` : ''}
@@ -1317,15 +1278,21 @@
                         <div class="view-count">
                             👁 <span id="views-${item.id}">${item.views || 0}</span> ko'rish
                         </div>
+                        ${isAdmin ? `
+                        <div class="admin-edit-stats">
+                            <input type="number" id="edit-views-${item.id}" value="${item.views || 0}" min="0" style="width:50px;" title="Ko'rishlar">
+                            <input type="number" id="edit-likes-${item.id}" value="${item.likes || 0}" min="0" style="width:50px;" title="Likelar">
+                            <input type="number" id="edit-dislikes-${item.id}" value="${item.dislikes || 0}" min="0" style="width:50px;" title="Dislikelar">
+                            <button onclick="saveEditedStats(${item.id})">💾</button>
+                        </div>` : ''}
                     </div>
                 </div>
             `;
 
             prevBtn.style.display = currentInfoIndex > 0 ? 'inline-block' : 'none';
             nextBtn.style.display = currentInfoIndex < infoData.length - 1 ? 'inline-block' : 'none';
-            
+
             addViewIfNeeded();
-            
             infoData = JSON.parse(localStorage.getItem('huquqiy_info')) || [];
             const updatedItem = infoData[currentInfoIndex];
             if (updatedItem) {
@@ -1334,44 +1301,46 @@
             }
         }
 
-        function deleteInfo(infoId) {
-            if (!currentLoggedInUser || currentLoggedInUser.name.toLowerCase() !== 'asadbek') {
-                alert("Faqat admin o'chira oladi!");
-                return;
-            }
-            
-            if (!confirm("Rostdan ham bu ma'lumotni o'chirmoqchimisiz?")) {
-                return;
-            }
+        function saveEditedStats(infoId) {
+            if (!currentLoggedInUser || currentLoggedInUser.name.toLowerCase() !== 'asadbek') return;
+            const newViews = parseInt(document.getElementById(`edit-views-${infoId}`).value) || 0;
+            const newLikes = parseInt(document.getElementById(`edit-likes-${infoId}`).value) || 0;
+            const newDislikes = parseInt(document.getElementById(`edit-dislikes-${infoId}`).value) || 0;
 
+            infoData = JSON.parse(localStorage.getItem('huquqiy_info')) || [];
+            const infoIndex = infoData.findIndex(item => item.id === infoId);
+            if (infoIndex === -1) return;
+
+            infoData[infoIndex].views = newViews;
+            infoData[infoIndex].likes = newLikes;
+            infoData[infoIndex].dislikes = newDislikes;
+            localStorage.setItem('huquqiy_info', JSON.stringify(infoData));
+
+            document.getElementById(`views-${infoId}`).textContent = newViews;
+            document.getElementById(`likes-${infoId}`).textContent = newLikes;
+            document.getElementById(`dislikes-${infoId}`).textContent = newDislikes;
+            alert("✅ Statistika yangilandi!");
+        }
+
+        function deleteInfo(infoId) {
+            if (!currentLoggedInUser || currentLoggedInUser.name.toLowerCase() !== 'asadbek') return;
+            if (!confirm("Rostdan ham bu ma'lumotni o'chirmoqchimisiz?")) return;
             infoData = JSON.parse(localStorage.getItem('huquqiy_info')) || [];
             infoData = infoData.filter(item => item.id !== infoId);
             localStorage.setItem('huquqiy_info', JSON.stringify(infoData));
-            
-            if (infoData.length === 0) {
-                currentInfoIndex = 0;
-            } else if (currentInfoIndex >= infoData.length) {
-                currentInfoIndex = infoData.length - 1;
-            }
-            
+            if (infoData.length === 0) currentInfoIndex = 0;
+            else if (currentInfoIndex >= infoData.length) currentInfoIndex = infoData.length - 1;
             loadInfoContent();
             alert("✅ Ma'lumot o'chirildi!");
         }
 
         function reactToInfo(infoId, type) {
-            if (!currentLoggedInUser) {
-                alert("Reaksiya qoldirish uchun tizimga kiring!");
-                return;
-            }
-
+            if (!currentLoggedInUser) { alert("Reaksiya qoldirish uchun tizimga kiring!"); return; }
             infoData = JSON.parse(localStorage.getItem('huquqiy_info')) || [];
             const infoIndex = infoData.findIndex(item => item.id === infoId);
-            
             if (infoIndex === -1) return;
-
             const item = infoData[infoIndex];
             const userKey = currentLoggedInUser.name.toLowerCase();
-
             if (!item.likedBy) item.likedBy = [];
             if (!item.dislikedBy) item.dislikedBy = [];
             if (!item.likes) item.likes = 0;
@@ -1405,90 +1374,82 @@
 
             infoData[infoIndex] = item;
             localStorage.setItem('huquqiy_info', JSON.stringify(infoData));
-            
+            incrementDailyStat('reactions');
+
             document.getElementById(`likes-${infoId}`).textContent = item.likes;
             document.getElementById(`dislikes-${infoId}`).textContent = item.dislikes;
-            
             const likeBtn = document.querySelector(`#info-card-${infoId} .reaction-btn:first-child`);
             const dislikeBtn = document.querySelector(`#info-card-${infoId} .reaction-btn:last-child`);
-            
-            if (item.likedBy.includes(userKey)) {
-                likeBtn.classList.add('liked');
-            } else {
-                likeBtn.classList.remove('liked');
-            }
-            
-            if (item.dislikedBy.includes(userKey)) {
-                dislikeBtn.classList.add('disliked');
-            } else {
-                dislikeBtn.classList.remove('disliked');
-            }
+            if (item.likedBy.includes(userKey)) likeBtn.classList.add('liked'); else likeBtn.classList.remove('liked');
+            if (item.dislikedBy.includes(userKey)) dislikeBtn.classList.add('disliked'); else dislikeBtn.classList.remove('disliked');
         }
 
-        document.getElementById('prev-info-btn').addEventListener('click', () => {
-            if (currentInfoIndex > 0) {
-                currentInfoIndex--;
-                loadInfoContent();
-            }
-        });
+        document.getElementById('prev-info-btn').addEventListener('click', () => { if (currentInfoIndex > 0) { currentInfoIndex--; loadInfoContent(); } });
+        document.getElementById('next-info-btn').addEventListener('click', () => { if (currentInfoIndex < infoData.length - 1) { currentInfoIndex++; loadInfoContent(); } });
 
-        document.getElementById('next-info-btn').addEventListener('click', () => {
-            if (currentInfoIndex < infoData.length - 1) {
-                currentInfoIndex++;
-                loadInfoContent();
-            }
-        });
-
-        // --- ADMIN ADD INFO ---
         const toggleAddFormBtn = document.getElementById('toggle-add-form-btn');
         const adminAddFormBlock = document.getElementById('admin-add-form-block');
         const saveNewInfoBtn = document.getElementById('save-new-info-btn');
         const cancelAddFormBtn = document.getElementById('cancel-add-form-btn');
 
-        toggleAddFormBtn.addEventListener('click', () => {
-            adminAddFormBlock.classList.toggle('hidden');
-        });
-
-        cancelAddFormBtn.addEventListener('click', () => {
-            adminAddFormBlock.classList.add('hidden');
-            document.getElementById('new-title').value = '';
-            document.getElementById('new-content').value = '';
-        });
+        toggleAddFormBtn.addEventListener('click', () => { adminAddFormBlock.classList.toggle('hidden'); });
+        cancelAddFormBtn.addEventListener('click', () => { adminAddFormBlock.classList.add('hidden'); document.getElementById('new-title').value = ''; document.getElementById('new-content').value = ''; });
 
         saveNewInfoBtn.addEventListener('click', () => {
             const title = document.getElementById('new-title').value.trim();
             const content = document.getElementById('new-content').value.trim();
-
-            if (!title || !content) {
-                alert("Iltimos, sarlavha va matnni to'ldiring!");
-                return;
-            }
-
-            const newInfo = {
-                id: Date.now(),
-                title: title,
-                content: content,
-                likes: 0,
-                dislikes: 0,
-                views: 0,
-                likedBy: [],
-                dislikedBy: [],
-                viewedBy: []
-            };
-
-            infoData.push(newInfo);
+            if (!title || !content) { alert("Iltimos, sarlavha va matnni to'ldiring!"); return; }
+            infoData.push({ id: Date.now(), title, content, likes: 0, dislikes: 0, views: 0, likedBy: [], dislikedBy: [], viewedBy: [] });
             localStorage.setItem('huquqiy_info', JSON.stringify(infoData));
-            
             document.getElementById('new-title').value = '';
             document.getElementById('new-content').value = '';
             adminAddFormBlock.classList.add('hidden');
             alert("✅ Yangi ma'lumot muvaffaqiyatli qo'shildi!");
         });
 
-        // --- REST OF THE CODE ---
+        // --- STATISTIKA ---
+        const toggleStatsBtn = document.getElementById('toggle-stats-btn');
+        const adminStatsBlock = document.getElementById('admin-stats-block');
+
+        toggleStatsBtn.addEventListener('click', () => {
+            adminStatsBlock.classList.toggle('hidden');
+            if (!adminStatsBlock.classList.contains('hidden')) loadStatistics();
+        });
+
+        function loadStatistics() {
+            const dailyStats = JSON.parse(localStorage.getItem('daily_stats')) || { date: new Date().toDateString(), logins: [], views: 0, reactions: 0 };
+            const today = new Date().toDateString();
+            if (dailyStats.date !== today) {
+                dailyStats.date = today;
+                dailyStats.logins = [];
+                dailyStats.views = 0;
+                dailyStats.reactions = 0;
+            }
+
+            document.getElementById('stat-today-logins').textContent = dailyStats.logins.length;
+            document.getElementById('stat-today-views').textContent = dailyStats.views;
+            document.getElementById('stat-today-reactions').textContent = dailyStats.reactions;
+
+            let totalUsers = 0;
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key === 'quiz_chats' || key === 'huquqiy_info' || key === 'daily_stats') continue;
+                try { const user = JSON.parse(localStorage.getItem(key)); if (user && user.name) totalUsers++; } catch(e) {}
+            }
+
+            const infoDataLocal = JSON.parse(localStorage.getItem('huquqiy_info')) || [];
+            let totalReactions = 0;
+            infoDataLocal.forEach(item => {
+                totalReactions += (item.likes || 0) + (item.dislikes || 0);
+            });
+
+            document.getElementById('stat-total-users').textContent = totalUsers;
+            document.getElementById('stat-total-infos').textContent = infoDataLocal.length;
+            document.getElementById('stat-total-reactions').textContent = totalReactions;
+        }
+
         document.addEventListener('copy', e => e.preventDefault());
         document.addEventListener('cut', e => e.preventDefault());
-
         document.addEventListener('keydown', function(e) {
             if (e.ctrlKey && (e.keyCode === 67 || e.keyCode === 88 || e.keyCode === 85 || e.keyCode === 83)) e.preventDefault();
             if (e.ctrlKey && e.keyCode === 65 && e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') e.preventDefault();
@@ -1496,23 +1457,19 @@
         });
 
         const ADMIN_AVATAR_URL = "https://img.icons8.com/color/48/verified-badge.png";
-
         const authContainer = document.getElementById('auth-container');
         const loginBlock = document.getElementById('login-form-block');
         const registerBlock = document.getElementById('register-form-block');
         const mainScreenBlock = document.getElementById('main-screen-block');
-        
         const subMenuPage = document.getElementById('sub-menu-page');
         const infoPage = document.getElementById('info-page');
         const subProfilePage = document.getElementById('sub-profile-page');
         const subAdminPage = document.getElementById('sub-admin-page');
         const subHelpPage = document.getElementById('sub-help-page');
-        
         const navMenu = document.getElementById('nav-menu');
         const navProfile = document.getElementById('nav-profile');
         const navAdmin = document.getElementById('nav-admin');
         const navHelp = document.getElementById('nav-help');
-
         const goToRegister = document.getElementById('go-to-register');
         const goToLogin = document.getElementById('go-to-login');
         const welcomeTitle = document.getElementById('welcome-title');
@@ -1521,10 +1478,8 @@
         const adminOnlineDot = document.getElementById('admin-online-dot');
         const userListTbody = document.getElementById('user-list-tbody');
         const profBadge = document.getElementById('prof-badge');
-
         const registerForm = document.getElementById('register-form');
         const loginForm = document.getElementById('login-form');
-
         const helpMainContent = document.getElementById('help-main-content');
         const userChatBlock = document.getElementById('user-chat-block');
         const userChatMessages = document.getElementById('user-chat-messages');
@@ -1532,7 +1487,6 @@
         const userSendBtn = document.getElementById('user-send-btn');
         const openUserChatTrigger = document.getElementById('open-user-chat-trigger');
         const closeUserChatTrigger = document.getElementById('close-user-chat-trigger');
-
         const adminChatBlock = document.getElementById('admin-chat-block');
         const adminChatMessages = document.getElementById('admin-chat-messages');
         const adminChatInput = document.getElementById('admin-chat-input');
@@ -1540,25 +1494,19 @@
         const adminChatTitle = document.getElementById('admin-chat-title');
 
         let currentLoggedInUser = null;
-        let activeAdminChatUser = null; 
+        let activeAdminChatUser = null;
         let chatInterval = null;
 
         if (!localStorage.getItem('asadbek')) {
-            localStorage.setItem('asadbek', JSON.stringify({ 
-                name: 'Asadbek', password: 'admin123', device: 'PC / Admin Panel', status: 'offline', isBlocked: false, warning: ""
-            }));
+            localStorage.setItem('asadbek', JSON.stringify({ name: 'Asadbek', password: 'admin123', device: 'PC / Admin Panel', status: 'offline', isBlocked: false, warning: "" }));
         }
-
         if (!localStorage.getItem('quiz_chats')) {
             localStorage.setItem('quiz_chats', JSON.stringify({}));
         }
 
         async function getExactDeviceName() {
             if (navigator.userAgentData && typeof navigator.userAgentData.getHighEntropyValues === 'function') {
-                try {
-                    const hints = await navigator.userAgentData.getHighEntropyValues(['model']);
-                    if (hints.model) return hints.model; 
-                } catch (e) {}
+                try { const hints = await navigator.userAgentData.getHighEntropyValues(['model']); if (hints.model) return hints.model; } catch (e) {}
             }
             const ua = navigator.userAgent;
             if (/iPhone/.test(ua)) return "iPhone";
@@ -1567,79 +1515,27 @@
             return "Noma'lum qurilma";
         }
 
-        goToRegister.addEventListener('click', () => {
-            loginBlock.classList.add('hidden');
-            registerBlock.classList.remove('hidden');
-        });
-
-        goToLogin.addEventListener('click', () => {
-            registerBlock.classList.add('hidden');
-            loginBlock.classList.remove('hidden');
-        });
+        goToRegister.addEventListener('click', () => { loginBlock.classList.add('hidden'); registerBlock.classList.remove('hidden'); });
+        goToLogin.addEventListener('click', () => { registerBlock.classList.add('hidden'); loginBlock.classList.remove('hidden'); });
 
         function resetActiveNav() {
-            navMenu.classList.remove('active');
-            navProfile.classList.remove('active');
-            navAdmin.classList.remove('active');
-            navHelp.classList.remove('active');
-            
-            subMenuPage.classList.add('hidden');
-            infoPage.classList.add('hidden');
-            subProfilePage.classList.add('hidden');
-            subAdminPage.classList.add('hidden');
-            subHelpPage.classList.add('hidden');
-
+            navMenu.classList.remove('active'); navProfile.classList.remove('active'); navAdmin.classList.remove('active'); navHelp.classList.remove('active');
+            subMenuPage.classList.add('hidden'); infoPage.classList.add('hidden'); subProfilePage.classList.add('hidden'); subAdminPage.classList.add('hidden'); subHelpPage.classList.add('hidden');
             clearInterval(chatInterval);
         }
 
-        navMenu.addEventListener('click', () => { 
-            resetActiveNav(); 
-            navMenu.classList.add('active'); 
-            subMenuPage.classList.remove('hidden'); 
-        });
-        navProfile.addEventListener('click', () => { 
-            resetActiveNav(); 
-            navProfile.classList.add('active'); 
-            subProfilePage.classList.remove('hidden'); 
-        });
-        navHelp.addEventListener('click', () => { 
-            resetActiveNav(); 
-            navHelp.classList.add('active'); 
-            subHelpPage.classList.remove('hidden'); 
-            closeUserChat();
-        });
-        navAdmin.addEventListener('click', () => { 
-            resetActiveNav(); 
-            navAdmin.classList.add('active'); 
-            subAdminPage.classList.remove('hidden'); 
-            closeAdminChat();
-            renderUserList(); 
-        });
+        navMenu.addEventListener('click', () => { resetActiveNav(); navMenu.classList.add('active'); subMenuPage.classList.remove('hidden'); });
+        navProfile.addEventListener('click', () => { resetActiveNav(); navProfile.classList.add('active'); subProfilePage.classList.remove('hidden'); });
+        navHelp.addEventListener('click', () => { resetActiveNav(); navHelp.classList.add('active'); subHelpPage.classList.remove('hidden'); closeUserChat(); });
+        navAdmin.addEventListener('click', () => { resetActiveNav(); navAdmin.classList.add('active'); subAdminPage.classList.remove('hidden'); closeAdminChat(); renderUserList(); });
 
-        // --- DELETE USER FUNCTION ---
         window.deleteUser = function(usernameKey) {
-            if (!currentLoggedInUser || currentLoggedInUser.name.toLowerCase() !== 'asadbek') {
-                alert("Faqat admin foydalanuvchilarni o'chira oladi!");
-                return;
-            }
-            
-            if (usernameKey === 'asadbek') {
-                alert("Admin hisobini o'chirib bo'lmaydi!");
-                return;
-            }
-
-            if (!confirm(`"${usernameKey}" foydalanuvchisini rostdan ham o'chirmoqchimisiz? Bu amal qaytarib bo'lmaydi!`)) {
-                return;
-            }
-
+            if (!currentLoggedInUser || currentLoggedInUser.name.toLowerCase() !== 'asadbek') return;
+            if (usernameKey === 'asadbek') { alert("Admin hisobini o'chirib bo'lmaydi!"); return; }
+            if (!confirm(`"${usernameKey}" foydalanuvchisini rostdan ham o'chirmoqchimisiz?`)) return;
             localStorage.removeItem(usernameKey);
-            
             const chats = JSON.parse(localStorage.getItem('quiz_chats')) || {};
-            if (chats[usernameKey]) {
-                delete chats[usernameKey];
-                localStorage.setItem('quiz_chats', JSON.stringify(chats));
-            }
-
+            if (chats[usernameKey]) { delete chats[usernameKey]; localStorage.setItem('quiz_chats', JSON.stringify(chats)); }
             renderUserList();
             alert(`✅ "${usernameKey}" foydalanuvchisi o'chirildi!`);
         }
@@ -1647,50 +1543,36 @@
         function renderUserList() {
             userListTbody.innerHTML = '';
             const chats = JSON.parse(localStorage.getItem('quiz_chats')) || {};
-
             for (let i = 0; i < localStorage.length; i++) {
                 let key = localStorage.key(i);
-                if(key === 'quiz_chats' || key === 'huquqiy_info') continue;
+                if (key === 'quiz_chats' || key === 'huquqiy_info' || key === 'daily_stats') continue;
                 try {
                     let user = JSON.parse(localStorage.getItem(key));
                     if (user && user.name) {
                         let tr = document.createElement('tr');
                         let device = user.device || "Kiritilmagan";
                         let statusText = user.status === 'online' ? '<span class="status-online">● Online</span>' : '<span class="status-offline">Offline</span>';
-                        
-                        if(user.isBlocked) statusText = '<span style="color: #e53e3e; font-weight: bold;">🚫 Bloklangan</span>';
-
+                        if (user.isBlocked) statusText = '<span style="color:#e53e3e;font-weight:bold;">🚫 Bloklangan</span>';
                         let actionButtons = "";
                         if (user.name.toLowerCase() !== 'asadbek') {
                             let blockBtnText = user.isBlocked ? "Chiqarish" : "Bloklash";
                             let blockBtnClass = user.isBlocked ? "btn-unblock" : "btn-block";
-                            
-                            actionButtons = `
-                                <button class="action-btn btn-chat" onclick="openAdminChat('${user.name.toLowerCase()}')">Chat</button>
-                                <button class="action-btn btn-warn" onclick="warnUser('${user.name.toLowerCase()}')">Ogohlantirish</button>
-                                <button class="action-btn ${blockBtnClass}" onclick="toggleBlockUser('${user.name.toLowerCase()}')">${blockBtnText}</button>
-                                <button class="action-btn btn-delete" onclick="deleteUser('${user.name.toLowerCase()}')">🗑 O'chirish</button>
-                            `;
+                            actionButtons = `<button class="action-btn btn-chat" onclick="openAdminChat('${user.name.toLowerCase()}')">Chat</button><button class="action-btn btn-warn" onclick="warnUser('${user.name.toLowerCase()}')">Ogohlantirish</button><button class="action-btn ${blockBtnClass}" onclick="toggleBlockUser('${user.name.toLowerCase()}')">${blockBtnText}</button><button class="action-btn btn-delete" onclick="deleteUser('${user.name.toLowerCase()}')">🗑 O'chirish</button>`;
                         } else {
-                            actionButtons = `<span style="color: #4ade80; font-size:11px;">Asosiy egasi</span>`;
+                            actionButtons = `<span style="color:#4ade80;font-size:11px;">Asosiy egasi</span>`;
                         }
-
                         let userKey = user.name.toLowerCase();
                         let hasNewMessage = false;
                         if (chats[userKey] && chats[userKey].length > 0) {
                             let unreadMsgs = chats[userKey].filter(m => m.sender !== 'admin' && !m.read);
-                            if (unreadMsgs.length > 0) {
-                                hasNewMessage = true;
-                            }
+                            if (unreadMsgs.length > 0) hasNewMessage = true;
                         }
-
                         let tdName = document.createElement('td');
                         if (user.name.toLowerCase() === 'asadbek') {
                             tdName.innerHTML = `${user.name} <img src="${ADMIN_AVATAR_URL}" class="admin-badge-img" alt="verified">`;
                         } else {
-                            tdName.innerHTML = user.name + (hasNewMessage ? ' <span style="background-color: #e53e3e; color: white; padding: 2px 6px; border-radius: 4px; font-size: 10px;">📩 Yangi</span>' : '');
+                            tdName.innerHTML = user.name + (hasNewMessage ? ' <span style="background-color:#e53e3e;color:white;padding:2px 6px;border-radius:4px;font-size:10px;">📩 Yangi</span>' : '');
                         }
-
                         tr.appendChild(tdName);
                         tr.innerHTML += `<td>${user.password}</td><td>${device}</td><td>${statusText}</td><td>${actionButtons}</td>`;
                         userListTbody.appendChild(tr);
@@ -1713,65 +1595,39 @@
         window.toggleBlockUser = function(usernameKey) {
             let user = JSON.parse(localStorage.getItem(usernameKey));
             user.isBlocked = !user.isBlocked;
-            if(user.isBlocked && user.status === 'online') user.status = 'offline';
+            if (user.isBlocked && user.status === 'online') user.status = 'offline';
             localStorage.setItem(usernameKey, JSON.stringify(user));
             renderUserList();
         }
 
-        // --- USER CHAT ---
         openUserChatTrigger.addEventListener('click', () => {
-            helpMainContent.classList.add('hidden');
-            userChatBlock.classList.remove('hidden');
-            
-            markAdminMessagesAsRead();
-            loadUserChatMessages();
-            
+            helpMainContent.classList.add('hidden'); userChatBlock.classList.remove('hidden');
+            markAdminMessagesAsRead(); loadUserChatMessages();
             clearInterval(chatInterval);
-            chatInterval = setInterval(() => {
-                markAdminMessagesAsRead();
-                loadUserChatMessages();
-            }, 500); 
+            chatInterval = setInterval(() => { markAdminMessagesAsRead(); loadUserChatMessages(); }, 500);
         });
 
-        function closeUserChat() {
-            if(userChatBlock) userChatBlock.classList.add('hidden');
-            helpMainContent.classList.remove('hidden');
-            clearInterval(chatInterval);
-        }
+        function closeUserChat() { if (userChatBlock) userChatBlock.classList.add('hidden'); helpMainContent.classList.remove('hidden'); clearInterval(chatInterval); }
         closeUserChatTrigger.addEventListener('click', closeUserChat);
 
         function markAdminMessagesAsRead() {
             if (!currentLoggedInUser) return;
             const chats = JSON.parse(localStorage.getItem('quiz_chats')) || {};
             const userKey = currentLoggedInUser.name.toLowerCase();
-            
-            if (chats[userKey]) {
-                chats[userKey].forEach(msg => {
-                    if (msg.sender === 'admin') msg.read = true;
-                });
-                localStorage.setItem('quiz_chats', JSON.stringify(chats));
-            }
+            if (chats[userKey]) { chats[userKey].forEach(msg => { if (msg.sender === 'admin') msg.read = true; }); localStorage.setItem('quiz_chats', JSON.stringify(chats)); }
         }
 
         function loadUserChatMessages() {
             if (!currentLoggedInUser) return;
             const chats = JSON.parse(localStorage.getItem('quiz_chats')) || {};
             const myChat = chats[currentLoggedInUser.name.toLowerCase()] || [];
-            
             userChatMessages.innerHTML = '';
             myChat.forEach(msg => {
                 const div = document.createElement('div');
                 div.className = `msg-bubble ${msg.sender === 'admin' ? 'msg-received' : 'msg-sent'}`;
-                
                 let tickHTML = '';
-                if (msg.sender !== 'admin') {
-                    tickHTML = msg.read ? '<span class="msg-status-tick tick-read">✓✓</span>' : '<span class="msg-status-tick tick-unread">✓</span>';
-                }
-
-                let authorHTML = msg.sender === 'admin' 
-                    ? `Asadbek <img src="${ADMIN_AVATAR_URL}" class="msg-author-badge" alt="verified">` 
-                    : 'Siz';
-
+                if (msg.sender !== 'admin') tickHTML = msg.read ? '<span class="msg-status-tick tick-read">✓✓</span>' : '<span class="msg-status-tick tick-unread">✓</span>';
+                let authorHTML = msg.sender === 'admin' ? `Asadbek <img src="${ADMIN_AVATAR_URL}" class="msg-author-badge" alt="verified">` : 'Siz';
                 div.innerHTML = `<span class="msg-author">${authorHTML}</span>${msg.text}${tickHTML}`;
                 userChatMessages.appendChild(div);
             });
@@ -1779,76 +1635,48 @@
         }
 
         userSendBtn.addEventListener('click', sendUserMessage);
-        userChatInput.addEventListener('keypress', (e) => { if(e.key === 'Enter') sendUserMessage(); });
+        userChatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') sendUserMessage(); });
 
         function sendUserMessage() {
             const text = userChatInput.value.trim();
-            if(!text || !currentLoggedInUser) return;
-
+            if (!text || !currentLoggedInUser) return;
             const chats = JSON.parse(localStorage.getItem('quiz_chats')) || {};
             const userKey = currentLoggedInUser.name.toLowerCase();
-            if(!chats[userKey]) chats[userKey] = [];
-
+            if (!chats[userKey]) chats[userKey] = [];
             chats[userKey].push({ sender: userKey, text: text, read: false });
             localStorage.setItem('quiz_chats', JSON.stringify(chats));
-            
             userChatInput.value = '';
             loadUserChatMessages();
         }
 
-        // --- ADMIN CHAT ---
         window.openAdminChat = function(usernameKey) {
             activeAdminChatUser = usernameKey;
             adminChatTitle.textContent = `${usernameKey.toUpperCase()} bilan yozishmalar`;
             adminChatBlock.classList.remove('hidden');
-            
-            markUserMessagesAsRead(usernameKey);
-            loadAdminChatMessages();
-            
+            markUserMessagesAsRead(usernameKey); loadAdminChatMessages();
             clearInterval(chatInterval);
-            chatInterval = setInterval(() => {
-                markUserMessagesAsRead(activeAdminChatUser);
-                loadAdminChatMessages();
-            }, 500);
+            chatInterval = setInterval(() => { markUserMessagesAsRead(activeAdminChatUser); loadAdminChatMessages(); }, 500);
         }
 
-        window.closeAdminChat = function() {
-            adminChatBlock.classList.add('hidden');
-            activeAdminChatUser = null;
-            clearInterval(chatInterval);
-        }
+        window.closeAdminChat = function() { adminChatBlock.classList.add('hidden'); activeAdminChatUser = null; clearInterval(chatInterval); }
 
         function markUserMessagesAsRead(userKey) {
             if (!userKey) return;
             const chats = JSON.parse(localStorage.getItem('quiz_chats')) || {};
-            
-            if (chats[userKey]) {
-                chats[userKey].forEach(msg => {
-                    if (msg.sender !== 'admin') msg.read = true;
-                });
-                localStorage.setItem('quiz_chats', JSON.stringify(chats));
-            }
+            if (chats[userKey]) { chats[userKey].forEach(msg => { if (msg.sender !== 'admin') msg.read = true; }); localStorage.setItem('quiz_chats', JSON.stringify(chats)); }
         }
 
         function loadAdminChatMessages() {
-            if(!activeAdminChatUser) return;
+            if (!activeAdminChatUser) return;
             const chats = JSON.parse(localStorage.getItem('quiz_chats')) || {};
             const targetedChat = chats[activeAdminChatUser] || [];
-
             adminChatMessages.innerHTML = '';
             targetedChat.forEach(msg => {
                 const div = document.createElement('div');
                 div.className = `msg-bubble ${msg.sender === 'admin' ? 'msg-sent' : 'msg-received'}`;
-                
                 let tickHTML = '';
-                if (msg.sender === 'admin') {
-                    tickHTML = msg.read ? '<span class="msg-status-tick tick-read">✓✓</span>' : '<span class="msg-status-tick tick-unread">✓</span>';
-                }
-
-                let authorHTML = msg.sender === 'admin' 
-                    ? `Siz (Asadbek) <img src="${ADMIN_AVATAR_URL}" class="msg-author-badge" alt="verified">` 
-                    : activeAdminChatUser;
-
+                if (msg.sender === 'admin') tickHTML = msg.read ? '<span class="msg-status-tick tick-read">✓✓</span>' : '<span class="msg-status-tick tick-unread">✓</span>';
+                let authorHTML = msg.sender === 'admin' ? `Siz (Asadbek) <img src="${ADMIN_AVATAR_URL}" class="msg-author-badge" alt="verified">` : activeAdminChatUser;
                 div.innerHTML = `<span class="msg-author">${authorHTML}</span>${msg.text}${tickHTML}`;
                 adminChatMessages.appendChild(div);
             });
@@ -1856,55 +1684,29 @@
         }
 
         adminSendBtn.addEventListener('click', sendAdminMessage);
-        adminChatInput.addEventListener('keypress', (e) => { if(e.key === 'Enter') sendAdminMessage(); });
+        adminChatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') sendAdminMessage(); });
 
         function sendAdminMessage() {
             const text = adminChatInput.value.trim();
-            if(!text || !activeAdminChatUser) return;
-
+            if (!text || !activeAdminChatUser) return;
             const chats = JSON.parse(localStorage.getItem('quiz_chats')) || {};
-            if(!chats[activeAdminChatUser]) chats[activeAdminChatUser] = [];
-
+            if (!chats[activeAdminChatUser]) chats[activeAdminChatUser] = [];
             chats[activeAdminChatUser].push({ sender: 'admin', text: text, read: false });
             localStorage.setItem('quiz_chats', JSON.stringify(chats));
-
             adminChatInput.value = '';
             loadAdminChatMessages();
         }
 
-        // --- AUTH ---
         registerForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const name = document.getElementById('reg-name').value.trim();
             const password = document.getElementById('reg-password').value;
             const confirmPassword = document.getElementById('reg-confirm-password').value;
-
-            if (name.toLowerCase() === 'asadbek') {
-                alert("Bunday ism tizimda mavjud!");
-                return;
-            }
-            if (password !== confirmPassword) {
-                alert("Parollar mos kelmadi!");
-                return;
-            }
-
-            if (localStorage.getItem(name.toLowerCase())) {
-                alert("Bu ismli foydalanuvchi allaqachon ro'yxatdan o'tgan!");
-                return;
-            }
-
+            if (name.toLowerCase() === 'asadbek') { alert("Bunday ism tizimda mavjud!"); return; }
+            if (password !== confirmPassword) { alert("Parollar mos kelmadi!"); return; }
+            if (localStorage.getItem(name.toLowerCase())) { alert("Bu ismli foydalanuvchi allaqachon ro'yxatdan o'tgan!"); return; }
             const deviceModel = await getExactDeviceName();
-
-            const newUser = {
-                name: name,
-                password: password,
-                device: deviceModel,
-                status: 'offline',
-                isBlocked: false,
-                warning: ""
-            };
-
-            localStorage.setItem(name.toLowerCase(), JSON.stringify(newUser));
+            localStorage.setItem(name.toLowerCase(), JSON.stringify({ name, password, device: deviceModel, status: 'offline', isBlocked: false, warning: "" }));
             alert("Ro'yxatdan muvaffaqiyatli o'tdingiz! Endi kirishingiz mumkin.");
             registerForm.reset();
             registerBlock.classList.add('hidden');
@@ -1915,61 +1717,36 @@
             e.preventDefault();
             const name = document.getElementById('username').value.trim();
             const pass = document.getElementById('password').value;
-
             const userKey = name.toLowerCase();
             const userData = localStorage.getItem(userKey);
-
-            if (!userData) {
-                alert("Foydalanuvchi topilmadi!");
-                return;
-            }
-
+            if (!userData) { alert("Foydalanuvchi topilmadi!"); return; }
             const user = JSON.parse(userData);
-
-            if (user.password !== pass) {
-                alert("Parol noto'g'ri!");
-                return;
-            }
-
-            if (user.isBlocked) {
-                alert("Sizning profilingiz administrator tomonidan bloklangan!");
-                return;
-            }
-
+            if (user.password !== pass) { alert("Parol noto'g'ri!"); return; }
+            if (user.isBlocked) { alert("Sizning profilingiz administrator tomonidan bloklangan!"); return; }
             const detectedDevice = await getExactDeviceName();
             user.device = detectedDevice;
             user.status = 'online';
             currentLoggedInUser = user;
             localStorage.setItem(userKey, JSON.stringify(currentLoggedInUser));
-
+            recordLogin(user.name);
             if (currentLoggedInUser.warning && currentLoggedInUser.warning !== "") {
                 alert("⚠️ Administrator ogohlantirishi:\n" + currentLoggedInUser.warning);
-                currentLoggedInUser.warning = ""; 
+                currentLoggedInUser.warning = "";
                 localStorage.setItem(userKey, JSON.stringify(currentLoggedInUser));
             }
-
             authContainer.classList.add('hidden');
             mainScreenBlock.classList.remove('hidden');
             welcomeTitle.textContent = `Xush kelibsiz, ${user.name}!`;
-
             document.getElementById('prof-name').textContent = user.name;
             document.getElementById('prof-pass').textContent = "******";
             togglePwdBtn.textContent = "Ko'rsatish";
-
             if (userKey === 'asadbek') {
-                navAdmin.classList.remove('hidden');
-                adminOnlineDot.style.display = 'inline-block';
-                profBadge.innerHTML = `<img src="${ADMIN_AVATAR_URL}" class="admin-badge-img" alt="verified">`;
-                profBadge.classList.remove('hidden');
+                navAdmin.classList.remove('hidden'); adminOnlineDot.style.display = 'inline-block';
+                profBadge.innerHTML = `<img src="${ADMIN_AVATAR_URL}" class="admin-badge-img" alt="verified">`; profBadge.classList.remove('hidden');
             } else {
-                navAdmin.classList.add('hidden');
-                adminOnlineDot.style.display = 'none';
-                profBadge.classList.remove('hidden');
+                navAdmin.classList.add('hidden'); adminOnlineDot.style.display = 'none'; profBadge.classList.remove('hidden');
             }
-
-            resetActiveNav();
-            navMenu.classList.add('active');
-            subMenuPage.classList.remove('hidden');
+            resetActiveNav(); navMenu.classList.add('active'); subMenuPage.classList.remove('hidden');
             loginForm.reset();
         });
 
@@ -1977,39 +1754,27 @@
             if (currentLoggedInUser) {
                 const userKey = currentLoggedInUser.name.toLowerCase();
                 let freshData = JSON.parse(localStorage.getItem(userKey));
-                if(freshData) {
-                    freshData.status = 'offline';
-                    localStorage.setItem(userKey, JSON.stringify(freshData));
-                }
+                if (freshData) { freshData.status = 'offline'; localStorage.setItem(userKey, JSON.stringify(freshData)); }
             }
         }
 
         logoutTrigger.addEventListener('click', function() {
-            setOfflineAndLogout();
-            currentLoggedInUser = null;
-            mainScreenBlock.classList.add('hidden');
-            authContainer.classList.remove('hidden');
-            closeUserChat();
+            setOfflineAndLogout(); currentLoggedInUser = null;
+            mainScreenBlock.classList.add('hidden'); authContainer.classList.remove('hidden'); closeUserChat();
         });
 
         togglePwdBtn.addEventListener('click', function() {
             const profPass = document.getElementById('prof-pass');
             if (currentLoggedInUser) {
-                if (profPass.textContent === "******") {
-                    profPass.textContent = currentLoggedInUser.password;
-                    togglePwdBtn.textContent = "Yashirish";
-                } else {
-                    profPass.textContent = "******";
-                    togglePwdBtn.textContent = "Ko'rsatish";
-                }
+                if (profPass.textContent === "******") { profPass.textContent = currentLoggedInUser.password; togglePwdBtn.textContent = "Yashirish"; }
+                else { profPass.textContent = "******"; togglePwdBtn.textContent = "Ko'rsatish"; }
             }
         });
 
         window.addEventListener('beforeunload', () => setOfflineAndLogout());
-        
+
         document.getElementById('start-quiz-trigger').addEventListener('click', () => {
-            subMenuPage.classList.add('hidden');
-            infoPage.classList.remove('hidden');
+            subMenuPage.classList.add('hidden'); infoPage.classList.remove('hidden');
             infoData = JSON.parse(localStorage.getItem('huquqiy_info')) || [];
             currentInfoIndex = 0;
             loadInfoContent();
@@ -2017,34 +1782,22 @@
 
         setInterval(() => {
             if (!currentLoggedInUser || currentLoggedInUser.name.toLowerCase() !== 'asadbek') return;
-
             const chats = JSON.parse(localStorage.getItem('quiz_chats')) || {};
             let totalUnread = false;
-
             for (let userKey in chats) {
                 if (chats[userKey].length > 0) {
                     let unreadMsgs = chats[userKey].filter(m => m.sender !== 'admin' && !m.read);
-                    if (unreadMsgs.length > 0) {
-                        totalUnread = true;
-                        break;
-                    }
+                    if (unreadMsgs.length > 0) { totalUnread = true; break; }
                 }
             }
-
             const navAdminBtn = document.getElementById('nav-admin');
             if (totalUnread && !navAdminBtn.classList.contains('active')) {
-                navAdminBtn.style.borderTop = "3px solid #e53e3e";
-                navAdminBtn.style.color = "#e53e3e";
+                navAdminBtn.style.borderTop = "3px solid #e53e3e"; navAdminBtn.style.color = "#e53e3e";
             } else {
                 navAdminBtn.style.borderTop = "none";
-                if(!navAdminBtn.classList.contains('active')) {
-                    navAdminBtn.style.color = "#a0aec0";
-                }
+                if (!navAdminBtn.classList.contains('active')) navAdminBtn.style.color = "#a0aec0";
             }
-
-            if (navAdminBtn.classList.contains('active') && !subAdminPage.classList.contains('hidden') && !activeAdminChatUser) {
-                renderUserList();
-            }
+            if (navAdminBtn.classList.contains('active') && !subAdminPage.classList.contains('hidden') && !activeAdminChatUser) renderUserList();
         }, 2000);
     </script>
 </body>
