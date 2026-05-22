@@ -3,677 +3,1960 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IIV Qonunlari Platformasi</title>
+    <title>Huquqiy Ma'lumot - Tizimga kirish</title>
     <style>
-        /* NUSXALASHNI TAQIQLASH (CSS) */
-        body {
-            -webkit-user-select: none;  
-            -moz-user-select: none;     
-            -ms-user-select: none;      
-            user-select: none;          
-            background-color: #f0f4f8;
-            color: #1e293b;
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
         }
 
-        /* Simdif uslubidagi katta header (Muqova) */
-        .hero-banner {
-            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
-            color: white;
-            padding: 50px 20px;
+        body {
+            background-color: #0d213b;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        img {
+            -webkit-touch-callout: none;
+            -webkit-user-drag: none;
+            pointer-events: none;
+        }
+
+        .login-container {
+            background-color: #0d213b;
+            color: #ffffff;
+            width: 100%;
+            max-width: 400px;
+            padding: 40px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            overflow-y: auto;
+            max-height: 100vh;
+        }
+
+        .login-logo {
             text-align: center;
-            border-bottom: 5px solid #3b82f6;
-            position: relative;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
         }
 
-        /* Chiqish tugmasi */
-        .logout-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background-color: #ef4444;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            font-size: 13px;
-            font-weight: bold;
-            border-radius: 6px;
-            cursor: pointer;
-            display: none;
+        .login-logo img {
+            width: 110px;
+            height: 110px;
+            min-width: 110px;
+            min-height: 110px;
+            object-fit: cover;
+            border-radius: 50%;
+            background-color: #ffffff; 
+            padding: 5px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
 
-        .logo-container {
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-header h2 {
+            color: #ffffff;
+            margin-bottom: 10px;
+            font-size: 26px;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .login-header p {
+            color: #a0aec0;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .input-group {
             margin-bottom: 20px;
         }
 
-        .logo-container img {
-            width: 100px;
-            height: 100px;
-            object-fit: contain;
-            background-color: rgba(255, 255, 255, 0.1); 
-            padding: 5px;
-            border-radius: 50px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            -webkit-touch-callout: none; 
-            -webkit-user-select: none;
-            user-select: none;
-            pointer-events: none; 
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #e2e8f0;
+            font-weight: 700;
+            font-size: 15px;
+            letter-spacing: 0.5px;
         }
 
-        /* Sarlavha atrofidagi YALTIROQ OVAL RAMKA */
-        .oval-shining-container {
-            display: inline-block;
-            padding: 15px 40px;
-            margin-bottom: 25px;
-            border-radius: 50px; 
-            border: 2px solid #f59e0b; 
-            position: relative;
-            background-color: rgba(15, 23, 42, 0.6); 
-            box-shadow: 0 0 15px rgba(245, 158, 11, 0.4), inset 0 0 15px rgba(245, 158, 11, 0.4);
-            animation: ovalPulse 2.5s ease-in-out infinite alternate;
-        }
-
-        @keyframes ovalPulse {
-            0% {
-                box-shadow: 0 0 10px rgba(245, 158, 11, 0.3), inset 0 0 10px rgba(245, 158, 11, 0.2);
-                border-color: #d97706;
-            }
-            100% {
-                box-shadow: 0 0 25px rgba(255, 215, 0, 0.9), inset 0 0 20px rgba(255, 215, 0, 0.6);
-                border-color: #fff; 
-            }
-        }
-
-        /* Oltin rangli yozuv */
-        .shiny-title {
-            font-size: 28px;
-            font-weight: 800;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            margin: 0;
-            color: #f59e0b; 
-            display: inline-block;
-            background: linear-gradient(to right, #f59e0b 20%, #fff 50%, #f59e0b 80%);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: textShine 3s linear infinite;
-        }
-
-        @keyframes textShine {
-            0% { background-position: 200% center; }
-            100% { background-position: -200% center; }
-        }
-
-        .hero-banner p {
-            font-size: 16px;
-            color: #93c5fd;
-            margin-bottom: 25px;
-        }
-
-        /* Qidiruv paneli */
-        .search-box {
-            max-width: 600px;
-            margin: 0 auto;
-            position: relative;
-        }
-
-        .search-box input {
+        .input-group input, .input-group textarea {
             width: 100%;
-            padding: 15px 20px;
-            border: 2px solid transparent;
-            border-radius: 30px;
+            padding: 14px;
+            border: 2px solid #2a4365;
+            background-color: #1a365d;
+            color: #ffffff;
+            border-radius: 8px;
             font-size: 16px;
-            outline: none;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            transition: 0.3s;
-        }
-
-        .search-box input:focus { border-color: #3b82f6; }
-
-        /* Asosiy bloklar joylashuvu */
-        .main-container {
-            max-width: 1100px;
-            margin: 40px auto;
-            padding: 0 20px;
-            display: none; 
-            grid-template-columns: 1fr 2fr;
-            gap: 40px;
-        }
-
-        /* Agar faqat fuqaro kirsa, sahifa markazlashishi uchun maxsus klass */
-        .main-container.citizen-view {
-            grid-template-columns: 1fr;
-            max-width: 800px;
-        }
-
-        @media (max-width: 768px) {
-            .main-container { grid-template-columns: 1fr !important; }
-        }
-
-        .left-sidebar {
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-        }
-
-        /* Bloklar paneli */
-        .upload-panel, .register-panel, .users-panel {
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
-
-        .upload-panel { border-top: 4px solid #10b981; display: none; }
-        .register-panel { border-top: 4px solid #f59e0b; }
-        .users-panel { border-top: 4px solid #3b82f6; display: none; }
-
-        .upload-panel input, .upload-panel textarea, .register-panel input, .comment-input-box input {
+            font-weight: 700;
+            transition: all 0.3s ease;
             -webkit-user-select: text;
             -moz-user-select: text;
             -ms-user-select: text;
             user-select: text;
         }
 
-        h2 {
-            font-size: 18px;
-            margin-bottom: 15px;
-            color: #0f172a;
+        .input-group textarea {
+            resize: vertical;
+            min-height: 100px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        .form-group { margin-bottom: 15px; }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 6px;
-            font-weight: 600;
-            font-size: 13px;
-            color: #475569;
-        }
-
-        .form-group input, .form-group textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #cbd5e1;
-            border-radius: 8px;
-            font-size: 14px;
+        .input-group input:focus, .input-group textarea:focus {
             outline: none;
-            background-color: #f8fafc;
+            border-color: #63b3ed;
+            background-color: #2b6cb0;
         }
 
-        .form-group input:focus, .form-group textarea:focus {
-            border-color: #3b82f6;
-            background-color: white;
-        }
-
-        .form-group textarea { height: 120px; resize: vertical; }
-
-        .btn-submit {
+        .login-btn {
             width: 100%;
-            padding: 12px;
+            padding: 15px;
+            background-color: #3182ce;
             color: white;
             border: none;
             border-radius: 8px;
-            font-size: 15px;
-            font-weight: bold;
+            font-size: 18px;
+            font-weight: 800;
             cursor: pointer;
-            transition: 0.2s;
+            transition: background-color 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 10px;
         }
 
-        .btn-green { background-color: #10b981; }
-        .btn-green:hover { background-color: #059669; }
-        .btn-gold { background-color: #d97706; }
-        .btn-gold:hover { background-color: #b45309; }
-
-        /* Maxsus ochiq registratsiya qutisi */
-        .auth-container {
-            max-width: 450px;
-            margin: 60px auto;
-            padding: 0 20px;
+        .login-btn:hover {
+            background-color: #2b6cb0;
         }
 
-        .status-msg {
-            font-size: 13px;
-            font-weight: 600;
-            margin-top: 8px;
+        .btn-green {
+            background-color: #38a169;
+        }
+        .btn-green:hover {
+            background-color: #2f855a;
+        }
+
+        .btn-red {
+            background-color: #e53e3e;
+        }
+        .btn-red:hover {
+            background-color: #c53030;
+        }
+
+        .form-footer {
             text-align: center;
-            display: none;
+            margin-top: 25px;
+            font-size: 15px;
+            font-weight: 700;
         }
 
-        .user-list { list-style: none; max-height: 250px; overflow-y: auto; }
-
-        .user-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px solid #f1f5f9;
-        }
-
-        .user-left { display: flex; align-items: center; }
-
-        .user-avatar {
-            width: 35px;
-            height: 35px;
-            background-color: #e2e8f0;
-            color: #1e3a8a;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 14px;
-            margin-right: 12px;
-        }
-
-        .user-info .user-name { font-size: 14px; font-weight: 600; color: #1e293b; }
-        .user-info .user-status { font-size: 11px; color: #64748b; }
-        .user-info .user-status.blocked { color: #ef4444; font-weight: bold; }
-
-        /* Bloklash tugmasi */
-        .btn-block {
-            background-color: #f1f5f9;
-            color: #ef4444;
-            border: 1px solid #fee2e2;
-            padding: 4px 8px;
-            font-size: 11px;
-            font-weight: bold;
-            border-radius: 6px;
+        .form-footer a {
+            color: #63b3ed;
+            text-decoration: none;
             cursor: pointer;
         }
-        .btn-block.unblock { background-color: #dcfce7; color: #15803d; border-color: #bbf7d0; }
 
-        /* Qonunlar ro'yxati */
-        .laws-list { display: flex; flex-direction: column; }
+        /* ASOSIY EKRAN */
+        .main-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #0d213b;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            z-index: 999;
+        }
 
-        .modda-card {
-            background: white;
+        .screen-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            padding-bottom: 85px;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .menu-text-container {
+            text-align: center;
+            width: 100%;
+            max-width: 500px;
+            margin: auto 0;
+        }
+
+        .menu-text-container h1 {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .menu-text-container p {
+            color: #63b3ed;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 40px;
+        }
+
+        .start-quiz-btn {
+            padding: 20px 40px;
+            background-color: #3182ce;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 22px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 15px rgba(49, 130, 206, 0.4);
+            width: 100%;
+            max-width: 320px;
+        }
+
+        .start-quiz-btn:hover {
+            background-color: #2b6cb0;
+            transform: translateY(-3px);
+        }
+
+        /* MA'LUMOTLAR STYLES */
+        .info-wrapper {
+            width: 100%;
+            max-width: 600px;
+            text-align: left;
+        }
+
+        .info-card {
+            background: #1a365d;
             padding: 25px;
             border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            margin-bottom: 25px;
-            border-left: 6px solid #1e3a8a;
+            margin-bottom: 20px;
+            border: 1px solid #2a4365;
         }
 
-        .modda-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
-        .modda-number { font-size: 18px; font-weight: 700; color: #1e3a8a; text-transform: uppercase; }
+        .info-card h3 {
+            color: #63b3ed;
+            font-size: 20px;
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
 
-        .btn-delete {
-            background-color: #ef4444;
+        .info-card p {
+            color: #e2e8f0;
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .info-stats {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #2a4365;
+            flex-wrap: wrap;
+        }
+
+        .reaction-btns {
+            display: flex;
+            gap: 10px;
+        }
+
+        .reaction-btn {
+            background: #0d213b;
+            border: 1px solid #2a4365;
+            color: #a0aec0;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 700;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .reaction-btn:hover {
+            background: #2b6cb0;
+            color: white;
+            border-color: #3182ce;
+        }
+
+        .reaction-btn.liked {
+            background: #38a169;
+            color: white;
+            border-color: #38a169;
+        }
+
+        .reaction-btn.disliked {
+            background: #e53e3e;
+            color: white;
+            border-color: #e53e3e;
+        }
+
+        .view-count {
+            color: #a0aec0;
+            font-size: 13px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* CUSTOM CONTEXT MENU */
+        .custom-context-menu {
+            position: fixed;
+            background: #1a365d;
+            border: 2px solid #3182ce;
+            border-radius: 10px;
+            padding: 5px 0;
+            z-index: 99999;
+            min-width: 180px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+            animation: contextFadeIn 0.15s ease;
+        }
+
+        @keyframes contextFadeIn {
+            0% { opacity: 0; transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .context-menu-item {
+            padding: 12px 20px;
+            color: #ffffff;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: background 0.2s;
+        }
+
+        .context-menu-item:hover {
+            background: #2b6cb0;
+        }
+
+        .context-menu-item:first-child {
+            border-radius: 8px 8px 0 0;
+        }
+
+        .context-menu-item:last-child {
+            border-radius: 0 0 8px 8px;
+        }
+
+        .context-menu-divider {
+            height: 1px;
+            background: #2a4365;
+            margin: 5px 0;
+        }
+
+        /* CUSTOM MODAL */
+        .custom-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .custom-modal {
+            background-color: #1a365d;
+            border: 2px solid #2a4365;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            max-width: 350px;
+            width: 90%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            animation: modalPop 0.3s ease;
+        }
+
+        @keyframes modalPop {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .custom-modal .modal-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+
+        .custom-modal .modal-title {
+            color: #ffffff;
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .custom-modal .modal-message {
+            color: #a0aec0;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .custom-modal.success { border-color: #38a169; }
+        .custom-modal.success .modal-title { color: #4ade80; }
+        .custom-modal.success .modal-icon { color: #4ade80; }
+
+        .modal-close-btn {
+            background-color: #3182ce;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.3s;
+            text-transform: uppercase;
+        }
+
+        .modal-close-btn:hover {
+            background-color: #2b6cb0;
+        }
+
+        /* ADMIN ADD FORM */
+        .admin-add-form {
+            background: #0d213b;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border: 1px dashed #3182ce;
+        }
+
+        .admin-add-form h3 {
+            color: #63b3ed;
+            margin-bottom: 15px;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .admin-add-form .input-group {
+            margin-bottom: 15px;
+        }
+
+        .admin-add-form .input-group label {
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+
+        .admin-add-form .input-group input,
+        .admin-add-form .input-group textarea {
+            padding: 10px;
+            font-size: 14px;
+        }
+
+        .btn-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .btn-row button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: background 0.3s;
+        }
+
+        /* PROFIL VA PANEL KONTEYNERLARI */
+        .profile-container, .admin-container, .help-container {
+            width: 100%;
+            max-width: 800px;
+            background-color: #1a365d;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+
+        .profile-card {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .profile-item {
+            background-color: #0d213b;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #3182ce;
+        }
+
+        .name-status-box {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .admin-badge-img {
+            width: 18px;
+            height: 18px;
+            object-fit: contain;
+            vertical-align: middle;
+            display: inline-block;
+        }
+
+        .admin-badge-wrapper {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .online-dot {
+            width: 10px;
+            height: 10px;
+            background-color: #4ade80; 
+            border-radius: 50%;
+            display: none; 
+            box-shadow: 0 0 8px #4ade80;
+        }
+
+        .profile-item span {
+            display: block;
+            font-size: 12px;
+            color: #a0aec0;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .profile-item strong {
+            font-size: 18px;
+            color: #ffffff;
+            font-weight: 800;
+        }
+
+        .password-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .toggle-pwd {
+            background: none;
+            border: none;
+            color: #63b3ed;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .logout-btn-profile {
+            margin-top: 10px;
+            padding: 12px;
+            background-color: #e53e3e;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: background 0.3s;
+            text-transform: uppercase;
+        }
+        
+        .logout-btn-profile:hover {
+            background-color: #c53030;
+        }
+
+        /* JADVAL */
+        .admin-table-wrapper {
+            margin-top: 15px;
+            max-height: 250px;
+            overflow-y: auto;
+            border-radius: 8px;
+        }
+
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #0d213b;
+            color: white;
+            font-size: 13px;
+            text-align: left;
+        }
+
+        .admin-table th, .admin-table td {
+            padding: 12px 10px;
+            border-bottom: 1px solid #2a4365;
+        }
+
+        .admin-table th {
+            background-color: #2b6cb0;
+            font-weight: 700;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .status-online {
+            color: #4ade80;
+            font-weight: bold;
+        }
+
+        .status-offline {
+            color: #a0aec0;
+        }
+
+        /* AMAL TUGMALARI */
+        .action-btn {
+            padding: 6px 10px;
+            border: none;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-right: 5px;
+            transition: background 0.2s;
+        }
+
+        .btn-warn { background-color: #d69e2e; color: white; }
+        .btn-warn:hover { background-color: #b7791f; }
+        .btn-block { background-color: #e53e3e; color: white; }
+        .btn-block:hover { background-color: #c53030; }
+        .btn-unblock { background-color: #38a169; color: white; }
+        .btn-unblock:hover { background-color: #2f855a; }
+        .btn-chat { background-color: #3182ce; color: white; }
+        .btn-chat:hover { background-color: #2b6cb0; }
+
+        /* YORDAM BO'LIMI */
+        .help-content {
+            margin-top: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .help-faq-item {
+            background-color: #0d213b;
+            padding: 12px;
+            border-radius: 6px;
+        }
+
+        .help-faq-item h4 {
+            color: #63b3ed;
+            margin-bottom: 5px;
+            font-size: 15px;
+        }
+
+        .help-faq-item p {
+            color: #e2e8f0;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        .admin-contact-box {
+            background-color: #0d213b;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px dashed #3182ce;
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        .admin-contact-box h4 {
+            color: #ffffff;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .open-chat-btn {
+            background-color: #3182ce;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 15px;
+            font-weight: 700;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+            text-transform: uppercase;
+            width: 100%;
+            max-width: 280px;
+        }
+
+        .open-chat-btn:hover {
+            background-color: #2b6cb0;
+        }
+
+        /* CHAT OYNASI */
+        .chat-window {
+            background-color: #0d213b;
+            border: 2px solid #2a4365;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            height: 350px;
+            margin-top: 15px;
+        }
+
+        .chat-header {
+            background-color: #1a365d;
+            padding: 12px;
+            border-bottom: 1px solid #2a4365;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .chat-close-btn {
+            background: none;
+            border: none;
+            color: #e53e3e;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 12px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .msg-bubble {
+            max-width: 75%;
+            padding: 10px 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            line-height: 1.4;
+            word-break: break-word;
+            -webkit-user-select: text;
+            user-select: text;
+            position: relative;
+        }
+
+        .msg-sent {
+            background-color: #143d73;
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 0;
+            padding-right: 35px;
+        }
+
+        .msg-received {
+            background-color: #2d3748;
+            color: white;
+            align-self: flex-start;
+            border-bottom-left-radius: 0;
+        }
+
+        .msg-author {
+            font-size: 10px;
+            color: #a0aec0;
+            margin-bottom: 3px;
+            display: block;
+            font-weight: bold;
+        }
+
+        .msg-author-badge {
+            width: 14px;
+            height: 14px;
+            object-fit: contain;
+            vertical-align: middle;
+            display: inline-block;
+            margin-left: 2px;
+        }
+
+        .msg-status-tick {
+            position: absolute;
+            bottom: 3px;
+            right: 7px;
+            font-size: 8px;
+            font-weight: bold;
+        }
+        .tick-unread {
+            color: #a0aec0;
+        }
+        .tick-read {
+            color: #49c5ff;
+        }
+
+        .chat-input-area {
+            display: flex;
+            padding: 8px;
+            background-color: #1a365d;
+            border-top: 1px solid #2a4365;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
+
+        .chat-input-area input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #2a4365;
+            background-color: #0d213b;
+            color: white;
+            border-radius: 4px;
+            font-size: 14px;
+            -webkit-user-select: text;
+            user-select: text;
+        }
+
+        .chat-send-btn {
+            background-color: #38a169;
+            color: white;
+            border: none;
+            padding: 0 16px;
+            margin-left: 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .chat-send-btn:hover {
+            background-color: #2f855a;
+        }
+
+        /* NAVIGATSIYA PANEL */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100vw;
+            height: 65px;
+            background-color: #1a365d;
+            border-top: 2px solid #2a4365;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #a0aec0;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 14px;
+            flex: 1;
+            height: 100%;
+            transition: all 0.2s ease;
+        }
+
+        .nav-item.active {
+            color: #63b3ed;
+            background-color: #0d213b;
+        }
+
+        .nav-icon {
+            font-size: 20px;
+            margin-bottom: 2px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .delete-info-btn {
+            background: #e53e3e;
             color: white;
             border: none;
             padding: 5px 10px;
-            font-size: 12px;
+            border-radius: 4px;
+            font-size: 11px;
             font-weight: bold;
-            border-radius: 6px;
             cursor: pointer;
-            display: none; 
+            float: right;
         }
-
-        .modda-text { font-size: 15px; line-height: 1.7; color: #334155; white-space: pre-line; }
-        .modda-footer { margin-top: 15px; font-size: 12px; color: #94a3b8; text-align: right; border-bottom: 1px dashed #e2e8f0; padding-bottom: 10px; }
-
-        /* KOMMENTARIYA TIZIMI */
-        .comments-section { margin-top: 15px; background-color: #f8fafc; padding: 15px; border-radius: 8px; }
-        .comments-title { font-size: 13px; font-weight: 700; color: #475569; margin-bottom: 10px; display: flex; align-items: center; gap: 5px; }
-        
-        .comment-item { background: white; padding: 10px; border-radius: 6px; margin-bottom: 8px; border: 1px solid #e2e8f0; }
-        .comment-meta { font-size: 11px; font-weight: bold; color: #1e3a8a; margin-bottom: 4px; display: flex; justify-content: space-between; }
-        .comment-meta span { color: #94a3b8; font-weight: normal; }
-        .comment-body { font-size: 13px; color: #334155; -webkit-user-select: text; user-select: text; }
-
-        .comment-input-box { display: flex; gap: 10px; margin-top: 12px; }
-        .comment-input-box input { flex: 1; padding: 8px 12px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 13px; outline: none; }
-        .comment-input-box input:focus { border-color: #3b82f6; }
-        .btn-reply { background-color: #3b82f6; color: white; border: none; padding: 8px 15px; font-size: 12px; font-weight: bold; border-radius: 6px; cursor: pointer; }
-        .btn-reply:hover { background-color: #2563eb; }
+        .delete-info-btn:hover {
+            background: #c53030;
+        }
     </style>
 </head>
-<body oncontextmenu="return false;">
+<body>
 
-    <div class="hero-banner">
-        <button class="logout-btn" id="logoutButton" onclick="logout()">Tizimdan chiqish</button>
-        <div class="logo-container">
-            <img src="logo.png" alt="IIV Logotipi" draggable="false">
+    <!-- CUSTOM CONTEXT MENU -->
+    <div id="custom-context-menu" class="custom-context-menu hidden">
+        <div class="context-menu-item" id="context-paste-btn">
+            📋 Joylash (Paste)
         </div>
-        
-        <div class="oval-shining-container">
-            <h1 class="shiny-title">ICHKI ISHLAR ORGANLARI TOʻGʻRISIDAGI QONUNI</h1>
+        <div class="context-menu-divider"></div>
+        <div class="context-menu-item" id="context-copy-btn">
+            📝 Nusxalash (Copy)
         </div>
-        
-        <p>IIV tizimiga oid qonunlar, buyruqlar va moddalar toʻplami</p>
-        
-        <div class="search-box" id="searchBoxContainer" style="display: none;">
-            <input type="text" id="searchBar" style="user-select: text;" placeholder="Modda raqami yoki kalit so'zni yozing..." oninput="searchModda()">
+        <div class="context-menu-item" id="context-cut-btn">
+            ✂️ Kesish (Cut)
+        </div>
+        <div class="context-menu-divider"></div>
+        <div class="context-menu-item" id="context-select-all-btn">
+            ✅ Barchasini belgilash
         </div>
     </div>
 
-    <div class="auth-container" id="authScreen">
-        <div class="register-panel">
-            <h2>Platformaga kirish</h2>
-            <form id="registerForm" onsubmit="handleLogin(event)">
-                <div class="form-group">
-                    <label for="regName">Ismingiz va Familiyangiz (Yoki 'Admin')</label>
-                    <input type="text" id="regName" placeholder="Masalan: Ali Valiyev" required>
+    <div id="auth-container" class="login-container">
+        <div class="login-logo">
+            <img src="logo.png" alt="Ilova logotipi">
+        </div>
+
+        <div id="login-form-block">
+            <div class="login-header">
+                <h2>Huquqiy Ma'lumot</h2>
+                <p>TIZIMGA KIRISH</p>
+            </div>
+            <form id="login-form">
+                <div class="input-group">
+                    <label for="username">ISMINGIZ</label>
+                    <input type="text" id="username" placeholder="Ismingizni kiriting" required>
                 </div>
-                <div class="form-group">
-                    <label for="regPassword">Parol</label>
-                    <input type="password" id="regPassword" placeholder="Parolingizni kiriting" required>
+                <div class="input-group">
+                    <label for="password">PAROL</label>
+                    <input type="password" id="password" placeholder="Parolingizni kiriting" required>
                 </div>
-                <button type="submit" class="btn-submit btn-gold">Kirish</button>
-                <div id="authError" class="status-msg" style="color: #ef4444;"></div>
+                <button type="submit" class="login-btn">KIRISH</button>
             </form>
+            <div class="form-footer">
+                <p>Hisobingiz yo'qmi? <a id="go-to-register">Ro'yxatdan o'tish</a></p>
+            </div>
+        </div>
+
+        <div id="register-form-block" class="hidden">
+            <div class="login-header">
+                <h2>Huquqiy Ma'lumot</h2>
+                <p>RO'YXATDAN O'TISH</p>
+            </div>
+            <form id="register-form">
+                <div class="input-group">
+                    <label for="reg-name">ISMINGIZ</label>
+                    <input type="text" id="reg-name" placeholder="Ismingizni kiriting" required>
+                </div>
+                <div class="input-group">
+                    <label for="reg-password">YANGI PAROL</label>
+                    <input type="password" id="reg-password" placeholder="Parol o'ylab toping" required>
+                </div>
+                <div class="input-group">
+                    <label for="reg-confirm-password">PAROLNI TASDIQLASH</label>
+                    <input type="password" id="reg-confirm-password" placeholder="Parolni qayta kiriting" required>
+                </div>
+                <button type="submit" class="login-btn">RO'YXATDAN O'TISH</button>
+            </form>
+            <div class="form-footer">
+                <p>Hisobingiz bormi? <a id="go-to-login">Kirish oynasiga qaytish</a></p>
+            </div>
         </div>
     </div>
 
-    <div class="main-container" id="mainPlatform">
+    <div id="main-screen-block" class="main-screen hidden">
         
-        <div class="left-sidebar" id="sidebarPanel" style="display: none;">
-            
-            <div class="upload-panel" id="uploadPanelBlock" style="display: none;">
-                <h2>Yangi Modda Qoʻshish</h2>
-                <form id="moddaForm" onsubmit="saveModda(event)">
-                    <div class="form-group">
-                        <label for="moddaTitle">Modda raqami / Nomi</label>
-                        <input type="text" id="moddaTitle" placeholder="Masalan: 15-modda" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="moddaContent">Modda matni</label>
-                        <textarea id="moddaContent" placeholder="Qonun matnini kiriting..." required></textarea>
-                    </div>
-                    <button type="submit" class="btn-submit btn-green">Bazaga saqlash</button>
-                </form>
+        <div class="screen-content">
+            <div id="sub-menu-page" class="menu-text-container">
+                <div class="login-logo" style="margin-bottom: 25px;">
+                    <img src="logo.png" alt="Ilova logotipi">
+                </div>
+                <h1 id="welcome-title">Xush kelibsiz!</h1>
+                <p>Huquqiy ma'lumotlarni o'rganishga tayyormisiz?</p>
+                <button class="start-quiz-btn" id="start-quiz-trigger">Ma'lumotlarni ko'rish</button>
             </div>
 
-            <div class="users-panel" id="adminUsersPanel" style="display: none;">
-                <h2>Roʻyxatdan oʻtgan fuqarolar (<span id="userCount">0</span>)</h2>
-                <ul class="user-list" id="usersContainer">
-                </ul>
+            <div id="info-page" class="info-wrapper hidden">
+                <div id="dynamic-info-content"></div>
+                <div id="info-navigation" style="margin-top: 15px; text-align: center; padding-bottom: 10px;">
+                    <button class="login-btn" id="prev-info-btn" style="display:none; width: auto; padding: 10px 20px; font-size: 14px;">⬅ Oldingi</button>
+                    <button class="login-btn" id="next-info-btn" style="display:none; width: auto; padding: 10px 20px; font-size: 14px;">Keyingi ➡</button>
+                </div>
+            </div>
+
+            <div id="sub-profile-page" class="profile-container hidden">
+                <div class="login-header" style="margin-bottom: 15px;">
+                    <h2>Mening Profilim</h2>
+                </div>
+                <div class="profile-card">
+                    <div class="profile-item">
+                        <span>ISM / FOYDALANUVCHI</span>
+                        <div class="name-status-box">
+                            <strong id="prof-name">---</strong>
+                            <span id="prof-badge" class="admin-badge-wrapper hidden"></span>
+                            <span class="online-dot" id="admin-online-dot"></span>
+                        </div>
+                    </div>
+                    <div class="profile-item">
+                        <span>XAVFSIZLIK PAROLI</span>
+                        <div class="password-box">
+                            <strong id="prof-pass">******</strong>
+                            <button class="toggle-pwd" id="toggle-pwd-btn">Ko'rsatish</button>
+                        </div>
+                    </div>
+                    <button class="logout-btn-profile" id="logout-trigger">Tizimdan chiqish</button>
+                </div>
+            </div>
+
+            <div id="sub-admin-page" class="admin-container hidden">
+                <div class="login-header" style="margin-bottom: 15px;">
+                    <h2 id="admin-panel-title-text">Panel</h2>
+                    <p style="color: #4ade80;" id="admin-panel-sub-text">Boshqaruvchi: Asadbek</p>
+                </div>
+                
+                <button class="login-btn btn-green" id="toggle-add-form-btn" style="margin-bottom: 15px;">➕ Yangi Ma'lumot Qo'shish</button>
+                
+                <div id="admin-add-form-block" class="admin-add-form hidden">
+                    <h3>📝 Yangi huquqiy ma'lumot qo'shish</h3>
+                    <div class="input-group">
+                        <label>Sarlavha</label>
+                        <input type="text" id="new-title" placeholder="Ma'lumot sarlavhasini kiriting">
+                    </div>
+                    <div class="input-group">
+                        <label>Matn</label>
+                        <textarea id="new-content" placeholder="Ma'lumot matnini kiriting"></textarea>
+                    </div>
+                    <div class="btn-row">
+                        <button class="login-btn btn-green" id="save-new-info-btn">💾 Saqlash</button>
+                        <button class="login-btn btn-red" id="cancel-add-form-btn">❌ Bekor qilish</button>
+                    </div>
+                </div>
+
+                <p style="font-size: 14px; color: #a0aec0; margin-bottom: 10px;">Ro'yxatdan o'tganlar va boshqaruv:</p>
+                <div class="admin-table-wrapper">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Foydalanuvchi</th>
+                                <th>Parol</th>
+                                <th>Qurilma modeli</th>
+                                <th>Status</th>
+                                <th>Amallar</th>
+                            </tr>
+                        </thead>
+                        <tbody id="user-list-tbody"></tbody>
+                    </table>
+                </div>
+
+                <div id="admin-chat-block" class="chat-window hidden">
+                    <div class="chat-header">
+                        <span id="admin-chat-title">Foydalanuvchi bilan chat</span>
+                        <button class="chat-close-btn" onclick="closeAdminChat()">❌</button>
+                    </div>
+                    <div class="chat-messages" id="admin-chat-messages"></div>
+                    <div class="chat-input-area">
+                        <input type="text" id="admin-chat-input" placeholder="Javobingizni yozing...">
+                        <button class="chat-send-btn" id="admin-send-btn">Yuborish</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="sub-help-page" class="help-container hidden">
+                <div class="login-header" style="margin-bottom: 15px;">
+                    <h2>Yordam va Qo'llab-quvvatlash</h2>
+                    <p>Tizim bo'yicha ko'p beriladigan savollar</p>
+                </div>
+                
+                <div id="help-main-content" class="help-content">
+                    <div class="help-faq-item">
+                        <h4>❓ Ma'lumotlarni qanday ko'rish mumkin?</h4>
+                        <p>"Ma'lumotlar" bo'limiga o'ting va "Ma'lumotlarni ko'rish" tugmasini bosing.</p>
+                    </div>
+                    <div class="help-faq-item">
+                        <h4>❓ Parolni o'zgartirsa bo'ladimi?</h4>
+                        <p>Hozircha parolni faqat mas'ul boshqaruvchi orqali tiklash yoki o'zgartirish imkoniyati mavjud.</p>
+                    </div>
+                    <div class="help-faq-item">
+                        <h4>⚙️ Texnik muammo yuzasidan bog'lanish:</h4>
+                        <p>Ilova sinov rejimida ishlamoqda. Muammo bo'lsa, tizim ichida bog'laning.</p>
+                    </div>
+
+                    <div class="admin-contact-box">
+                        <h4>👨‍💻 Administrator bilan aloqa</h4>
+                        <p style="font-size: 13px; color: #a0aec0; margin-bottom: 12px;">Xatoliklar yoki savollar bo'yicha ilova ichida chat ochish:</p>
+                        <button class="open-chat-btn" id="open-user-chat-trigger">💬 Bog'lanish</button>
+                    </div>
+                </div>
+
+                <div id="user-chat-block" class="chat-window hidden">
+                    <div class="chat-header">
+                        <span>👨‍💻 Asadbek <img src="https://img.icons8.com/color/48/verified-badge.png" class="msg-author-badge" alt="verified"></span>
+                        <button class="chat-close-btn" id="close-user-chat-trigger">❌</button>
+                    </div>
+                    <div class="chat-messages" id="user-chat-messages"></div>
+                    <div class="chat-input-area">
+                        <input type="text" id="user-chat-input" placeholder="Xabaringizni yozing...">
+                        <button class="chat-send-btn" id="user-send-btn">Yuborish</button>
+                    </div>
+                </div>
             </div>
 
         </div>
 
-        <div class="laws-list" id="moddaContainer">
+        <div class="bottom-nav">
+            <div class="nav-item active" id="nav-menu">
+                <div class="nav-icon">📋</div>
+                <div>Ma'lumotlar</div>
+            </div>
+            <div class="nav-item" id="nav-profile">
+                <div class="nav-icon">👤</div>
+                <div>Profil</div>
+            </div>
+            <div class="nav-item" id="nav-help">
+                <div class="nav-icon">ℹ️</div>
+                <div>Yordam</div>
+            </div>
+            <div class="nav-item hidden" id="nav-admin">
+                <div class="nav-icon">⚙️</div>
+                <div>Panel</div>
+            </div>
         </div>
 
     </div>
 
     <script>
-        document.addEventListener('keydown', function(e) {
-            if (e.ctrlKey && (e.keyCode === 67 || e.keyCode === 85 || e.keyCode === 73)) {
+        // --- CUSTOM CONTEXT MENU ---
+        const contextMenu = document.getElementById('custom-context-menu');
+        let activeInputElement = null;
+
+        document.addEventListener('contextmenu', function(e) {
+            const target = e.target;
+            if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA') {
                 e.preventDefault();
-                return false;
+                activeInputElement = target;
+                
+                const menuWidth = 200;
+                const menuHeight = 160;
+                let x = e.clientX;
+                let y = e.clientY;
+                
+                if (x + menuWidth > window.innerWidth) {
+                    x = window.innerWidth - menuWidth - 10;
+                }
+                if (y + menuHeight > window.innerHeight) {
+                    y = window.innerHeight - menuHeight - 10;
+                }
+                if (x < 5) x = 5;
+                if (y < 5) y = 5;
+                
+                contextMenu.style.left = x + 'px';
+                contextMenu.style.top = y + 'px';
+                contextMenu.classList.remove('hidden');
             }
         });
 
-        document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
-
-        let isAdminMode = false;
-        let currentUserGlobal = null;
-
-        const initialData = [
-            {
-                id: 1,
-                title: "1-modda. Qonunning maqsadi",
-                text: "Ushbu Qonunning maqsadi ichki ishlar organlarining faoliyatini tartibga solishdan iborat.",
-                date: "2026-05-19",
-                comments: [
-                    { name: "Asadbek Abdurahmonov", text: "Fuqarolar uchun juda foydali platforma boʻlibdi.", date: "2026-05-19" }
-                ]
+        document.addEventListener('click', function(e) {
+            if (!contextMenu.contains(e.target)) {
+                contextMenu.classList.add('hidden');
+                activeInputElement = null;
             }
-        ];
+        });
 
-        let iivLaws = JSON.parse(localStorage.getItem('iiv_laws')) || initialData;
-        let registeredUsers = JSON.parse(localStorage.getItem('registered_users')) || [];
+        document.getElementById('context-paste-btn').addEventListener('click', async function() {
+            if (!activeInputElement) return;
+            try {
+                const text = await navigator.clipboard.readText();
+                const start = activeInputElement.selectionStart;
+                const end = activeInputElement.selectionEnd;
+                const value = activeInputElement.value;
+                activeInputElement.value = value.substring(0, start) + text + value.substring(end);
+                activeInputElement.selectionStart = activeInputElement.selectionEnd = start + text.length;
+                activeInputElement.focus();
+            } catch (err) {
+                alert("Bu brauzerda clipboard ruxsati yo'q!");
+            }
+            contextMenu.classList.add('hidden');
+        });
 
-        window.onload = function() {
-            const savedUser = localStorage.getItem('current_logged_user');
-            if (savedUser) {
-                if (savedUser.toLowerCase() === "admin") {
-                    isAdminMode = true;
-                    currentUserGlobal = "Admin";
-                    showPlatform();
+        document.getElementById('context-copy-btn').addEventListener('click', function() {
+            if (!activeInputElement) return;
+            const selectedText = activeInputElement.value.substring(
+                activeInputElement.selectionStart,
+                activeInputElement.selectionEnd
+            );
+            if (selectedText) {
+                navigator.clipboard.writeText(selectedText).catch(() => {});
+            } else {
+                navigator.clipboard.writeText(activeInputElement.value).catch(() => {});
+            }
+            contextMenu.classList.add('hidden');
+        });
+
+        document.getElementById('context-cut-btn').addEventListener('click', function() {
+            if (!activeInputElement) return;
+            const start = activeInputElement.selectionStart;
+            const end = activeInputElement.selectionEnd;
+            const selectedText = activeInputElement.value.substring(start, end);
+            if (selectedText) {
+                navigator.clipboard.writeText(selectedText).catch(() => {});
+                activeInputElement.value = activeInputElement.value.substring(0, start) + activeInputElement.value.substring(end);
+                activeInputElement.selectionStart = activeInputElement.selectionEnd = start;
+            }
+            activeInputElement.focus();
+            contextMenu.classList.add('hidden');
+        });
+
+        document.getElementById('context-select-all-btn').addEventListener('click', function() {
+            if (!activeInputElement) return;
+            activeInputElement.select();
+            activeInputElement.focus();
+            contextMenu.classList.add('hidden');
+        });
+
+        // --- DATA STORAGE ---
+        if (!localStorage.getItem('huquqiy_info')) {
+            const defaultInfo = [
+                {
+                    id: Date.now(),
+                    title: "Shaharlararo avtobus haydovchilarining vazifalari",
+                    content: "Harakatni boshlashdan avval shaharlararo avtobus haydovchilari yo'lovchilarga halokat bo'lganda chiqish joylaridan foydalanish haqida tushuntirishlari shart. Bu yo'lovchilar xavfsizligini ta'minlashning muhim talabidir.",
+                    likes: 0,
+                    dislikes: 0,
+                    views: 0,
+                    likedBy: [],
+                    dislikedBy: []
+                }
+            ];
+            localStorage.setItem('huquqiy_info', JSON.stringify(defaultInfo));
+        }
+
+        let currentInfoIndex = 0;
+        let infoData = JSON.parse(localStorage.getItem('huquqiy_info')) || [];
+
+        function loadInfoContent() {
+            const container = document.getElementById('dynamic-info-content');
+            const prevBtn = document.getElementById('prev-info-btn');
+            const nextBtn = document.getElementById('next-info-btn');
+
+            if (infoData.length === 0) {
+                container.innerHTML = '<div class="info-card"><p style="text-align:center;">Hozircha ma\'lumotlar mavjud emas.</p></div>';
+                prevBtn.style.display = 'none';
+                nextBtn.style.display = 'none';
+                return;
+            }
+
+            if (currentInfoIndex >= infoData.length) currentInfoIndex = 0;
+            if (currentInfoIndex < 0) currentInfoIndex = infoData.length - 1;
+
+            const item = infoData[currentInfoIndex];
+            const currentUser = currentLoggedInUser ? currentLoggedInUser.name.toLowerCase() : '';
+            const isLiked = item.likedBy && item.likedBy.includes(currentUser);
+            const isDisliked = item.dislikedBy && item.dislikedBy.includes(currentUser);
+            
+            container.innerHTML = `
+                <div class="info-card" id="info-card-${item.id}">
+                    <h3>${item.title}</h3>
+                    <p>${item.content}</p>
+                    <div class="info-stats">
+                        <div class="reaction-btns">
+                            <button class="reaction-btn ${isLiked ? 'liked' : ''}" onclick="reactToInfo(${item.id}, 'like')">
+                                👍 <span id="likes-${item.id}">${item.likes || 0}</span>
+                            </button>
+                            <button class="reaction-btn ${isDisliked ? 'disliked' : ''}" onclick="reactToInfo(${item.id}, 'dislike')">
+                                👎 <span id="dislikes-${item.id}">${item.dislikes || 0}</span>
+                            </button>
+                        </div>
+                        <div class="view-count">
+                            👁 <span id="views-${item.id}">${item.views || 0}</span> ko'rish
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            prevBtn.style.display = currentInfoIndex > 0 ? 'inline-block' : 'none';
+            nextBtn.style.display = currentInfoIndex < infoData.length - 1 ? 'inline-block' : 'none';
+        }
+
+        function reactToInfo(infoId, type) {
+            if (!currentLoggedInUser) {
+                alert("Reaksiya qoldirish uchun tizimga kiring!");
+                return;
+            }
+
+            infoData = JSON.parse(localStorage.getItem('huquqiy_info')) || [];
+            const infoIndex = infoData.findIndex(item => item.id === infoId);
+            
+            if (infoIndex === -1) return;
+
+            const item = infoData[infoIndex];
+            const userKey = currentLoggedInUser.name.toLowerCase();
+
+            if (!item.likedBy) item.likedBy = [];
+            if (!item.dislikedBy) item.dislikedBy = [];
+            if (!item.likes) item.likes = 0;
+            if (!item.dislikes) item.dislikes = 0;
+
+            if (type === 'like') {
+                if (item.likedBy.includes(userKey)) {
+                    item.likedBy = item.likedBy.filter(u => u !== userKey);
+                    item.likes--;
                 } else {
-                    const userObj = registeredUsers.find(u => u.name === savedUser);
-                    if (userObj && userObj.isBlocked) {
-                        localStorage.removeItem('current_logged_user');
-                    } else {
-                        isAdminMode = false;
-                        currentUserGlobal = savedUser;
-                        showPlatform();
+                    if (item.dislikedBy.includes(userKey)) {
+                        item.dislikedBy = item.dislikedBy.filter(u => u !== userKey);
+                        item.dislikes--;
+                    }
+                    item.likedBy.push(userKey);
+                    item.likes++;
+                }
+            } else if (type === 'dislike') {
+                if (item.dislikedBy.includes(userKey)) {
+                    item.dislikedBy = item.dislikedBy.filter(u => u !== userKey);
+                    item.dislikes--;
+                } else {
+                    if (item.likedBy.includes(userKey)) {
+                        item.likedBy = item.likedBy.filter(u => u !== userKey);
+                        item.likes--;
+                    }
+                    item.dislikedBy.push(userKey);
+                    item.dislikes++;
+                }
+            }
+
+            infoData[infoIndex] = item;
+            localStorage.setItem('huquqiy_info', JSON.stringify(infoData));
+            
+            document.getElementById(`likes-${infoId}`).textContent = item.likes;
+            document.getElementById(`dislikes-${infoId}`).textContent = item.dislikes;
+            
+            const likeBtn = document.querySelector(`#info-card-${infoId} .reaction-btn:first-child`);
+            const dislikeBtn = document.querySelector(`#info-card-${infoId} .reaction-btn:last-child`);
+            
+            if (item.likedBy.includes(userKey)) {
+                likeBtn.classList.add('liked');
+            } else {
+                likeBtn.classList.remove('liked');
+            }
+            
+            if (item.dislikedBy.includes(userKey)) {
+                dislikeBtn.classList.add('disliked');
+            } else {
+                dislikeBtn.classList.remove('disliked');
+            }
+        }
+
+        document.getElementById('prev-info-btn').addEventListener('click', () => {
+            if (currentInfoIndex > 0) {
+                currentInfoIndex--;
+                loadInfoContent();
+            }
+        });
+
+        document.getElementById('next-info-btn').addEventListener('click', () => {
+            if (currentInfoIndex < infoData.length - 1) {
+                currentInfoIndex++;
+                loadInfoContent();
+            }
+        });
+
+        // --- ADMIN ADD INFO ---
+        const toggleAddFormBtn = document.getElementById('toggle-add-form-btn');
+        const adminAddFormBlock = document.getElementById('admin-add-form-block');
+        const saveNewInfoBtn = document.getElementById('save-new-info-btn');
+        const cancelAddFormBtn = document.getElementById('cancel-add-form-btn');
+
+        toggleAddFormBtn.addEventListener('click', () => {
+            adminAddFormBlock.classList.toggle('hidden');
+        });
+
+        cancelAddFormBtn.addEventListener('click', () => {
+            adminAddFormBlock.classList.add('hidden');
+            document.getElementById('new-title').value = '';
+            document.getElementById('new-content').value = '';
+        });
+
+        saveNewInfoBtn.addEventListener('click', () => {
+            const title = document.getElementById('new-title').value.trim();
+            const content = document.getElementById('new-content').value.trim();
+
+            if (!title || !content) {
+                alert("Iltimos, sarlavha va matnni to'ldiring!");
+                return;
+            }
+
+            const newInfo = {
+                id: Date.now(),
+                title: title,
+                content: content,
+                likes: 0,
+                dislikes: 0,
+                views: 0,
+                likedBy: [],
+                dislikedBy: []
+            };
+
+            infoData.push(newInfo);
+            localStorage.setItem('huquqiy_info', JSON.stringify(infoData));
+            
+            document.getElementById('new-title').value = '';
+            document.getElementById('new-content').value = '';
+            adminAddFormBlock.classList.add('hidden');
+            alert("✅ Yangi ma'lumot muvaffaqiyatli qo'shildi!");
+        });
+
+        // --- REST OF THE CODE ---
+        document.addEventListener('copy', e => e.preventDefault());
+        document.addEventListener('cut', e => e.preventDefault());
+
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && (e.keyCode === 67 || e.keyCode === 88 || e.keyCode === 85 || e.keyCode === 83)) e.preventDefault();
+            if (e.ctrlKey && e.keyCode === 65 && e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') e.preventDefault();
+            if (e.keyCode === 123 || (e.ctrlKey && e.shiftKey && e.keyCode === 73)) e.preventDefault();
+        });
+
+        const ADMIN_AVATAR_URL = "https://img.icons8.com/color/48/verified-badge.png";
+
+        const authContainer = document.getElementById('auth-container');
+        const loginBlock = document.getElementById('login-form-block');
+        const registerBlock = document.getElementById('register-form-block');
+        const mainScreenBlock = document.getElementById('main-screen-block');
+        
+        const subMenuPage = document.getElementById('sub-menu-page');
+        const infoPage = document.getElementById('info-page');
+        const subProfilePage = document.getElementById('sub-profile-page');
+        const subAdminPage = document.getElementById('sub-admin-page');
+        const subHelpPage = document.getElementById('sub-help-page');
+        
+        const navMenu = document.getElementById('nav-menu');
+        const navProfile = document.getElementById('nav-profile');
+        const navAdmin = document.getElementById('nav-admin');
+        const navHelp = document.getElementById('nav-help');
+
+        const goToRegister = document.getElementById('go-to-register');
+        const goToLogin = document.getElementById('go-to-login');
+        const welcomeTitle = document.getElementById('welcome-title');
+        const logoutTrigger = document.getElementById('logout-trigger');
+        const togglePwdBtn = document.getElementById('toggle-pwd-btn');
+        const adminOnlineDot = document.getElementById('admin-online-dot');
+        const userListTbody = document.getElementById('user-list-tbody');
+        const profBadge = document.getElementById('prof-badge');
+
+        const registerForm = document.getElementById('register-form');
+        const loginForm = document.getElementById('login-form');
+
+        const helpMainContent = document.getElementById('help-main-content');
+        const userChatBlock = document.getElementById('user-chat-block');
+        const userChatMessages = document.getElementById('user-chat-messages');
+        const userChatInput = document.getElementById('user-chat-input');
+        const userSendBtn = document.getElementById('user-send-btn');
+        const openUserChatTrigger = document.getElementById('open-user-chat-trigger');
+        const closeUserChatTrigger = document.getElementById('close-user-chat-trigger');
+
+        const adminChatBlock = document.getElementById('admin-chat-block');
+        const adminChatMessages = document.getElementById('admin-chat-messages');
+        const adminChatInput = document.getElementById('admin-chat-input');
+        const adminSendBtn = document.getElementById('admin-send-btn');
+        const adminChatTitle = document.getElementById('admin-chat-title');
+
+        let currentLoggedInUser = null;
+        let activeAdminChatUser = null; 
+        let chatInterval = null;
+
+        if (!localStorage.getItem('asadbek')) {
+            localStorage.setItem('asadbek', JSON.stringify({ 
+                name: 'Asadbek', password: 'admin123', device: 'PC / Admin Panel', status: 'offline', isBlocked: false, warning: ""
+            }));
+        }
+
+        if (!localStorage.getItem('quiz_chats')) {
+            localStorage.setItem('quiz_chats', JSON.stringify({}));
+        }
+
+        async function getExactDeviceName() {
+            if (navigator.userAgentData && typeof navigator.userAgentData.getHighEntropyValues === 'function') {
+                try {
+                    const hints = await navigator.userAgentData.getHighEntropyValues(['model']);
+                    if (hints.model) return hints.model; 
+                } catch (e) {}
+            }
+            const ua = navigator.userAgent;
+            if (/iPhone/.test(ua)) return "iPhone";
+            if (/Android/.test(ua)) return "Android Qurilma";
+            if (/Windows/.test(ua)) return "Windows PC";
+            return "Noma'lum qurilma";
+        }
+
+        goToRegister.addEventListener('click', () => {
+            loginBlock.classList.add('hidden');
+            registerBlock.classList.remove('hidden');
+        });
+
+        goToLogin.addEventListener('click', () => {
+            registerBlock.classList.add('hidden');
+            loginBlock.classList.remove('hidden');
+        });
+
+        function resetActiveNav() {
+            navMenu.classList.remove('active');
+            navProfile.classList.remove('active');
+            navAdmin.classList.remove('active');
+            navHelp.classList.remove('active');
+            
+            subMenuPage.classList.add('hidden');
+            infoPage.classList.add('hidden');
+            subProfilePage.classList.add('hidden');
+            subAdminPage.classList.add('hidden');
+            subHelpPage.classList.add('hidden');
+
+            clearInterval(chatInterval);
+        }
+
+        navMenu.addEventListener('click', () => { 
+            resetActiveNav(); 
+            navMenu.classList.add('active'); 
+            subMenuPage.classList.remove('hidden'); 
+        });
+        navProfile.addEventListener('click', () => { 
+            resetActiveNav(); 
+            navProfile.classList.add('active'); 
+            subProfilePage.classList.remove('hidden'); 
+        });
+        navHelp.addEventListener('click', () => { 
+            resetActiveNav(); 
+            navHelp.classList.add('active'); 
+            subHelpPage.classList.remove('hidden'); 
+            closeUserChat();
+        });
+        navAdmin.addEventListener('click', () => { 
+            resetActiveNav(); 
+            navAdmin.classList.add('active'); 
+            subAdminPage.classList.remove('hidden'); 
+            closeAdminChat();
+            renderUserList(); 
+        });
+
+        function renderUserList() {
+            userListTbody.innerHTML = '';
+            const chats = JSON.parse(localStorage.getItem('quiz_chats')) || {};
+
+            for (let i = 0; i < localStorage.length; i++) {
+                let key = localStorage.key(i);
+                if(key === 'quiz_chats' || key === 'huquqiy_info') continue;
+                try {
+                    let user = JSON.parse(localStorage.getItem(key));
+                    if (user && user.name) {
+                        let tr = document.createElement('tr');
+                        let device = user.device || "Kiritilmagan";
+                        let statusText = user.status === 'online' ? '<span class="status-online">● Online</span>' : '<span class="status-offline">Offline</span>';
+                        
+                        if(user.isBlocked) statusText = '<span style="color: #e53e3e; font-weight: bold;">🚫 Bloklangan</span>';
+
+                        let actionButtons = "";
+                        if (user.name.toLowerCase() !== 'asadbek') {
+                            let blockBtnText = user.isBlocked ? "Chiqarish" : "Bloklash";
+                            let blockBtnClass = user.isBlocked ? "btn-unblock" : "btn-block";
+                            
+                            actionButtons = `
+                                <button class="action-btn btn-chat" onclick="openAdminChat('${user.name.toLowerCase()}')">Chat</button>
+                                <button class="action-btn btn-warn" onclick="warnUser('${user.name.toLowerCase()}')">Ogohlantirish</button>
+                                <button class="action-btn ${blockBtnClass}" onclick="toggleBlockUser('${user.name.toLowerCase()}')">${blockBtnText}</button>
+                            `;
+                        } else {
+                            actionButtons = `<span style="color: #4ade80; font-size:11px;">Asosiy egasi</span>`;
+                        }
+
+                        let userKey = user.name.toLowerCase();
+                        let hasNewMessage = false;
+                        if (chats[userKey] && chats[userKey].length > 0) {
+                            let unreadMsgs = chats[userKey].filter(m => m.sender !== 'admin' && !m.read);
+                            if (unreadMsgs.length > 0) {
+                                hasNewMessage = true;
+                            }
+                        }
+
+                        let tdName = document.createElement('td');
+                        if (user.name.toLowerCase() === 'asadbek') {
+                            tdName.innerHTML = `${user.name} <img src="${ADMIN_AVATAR_URL}" class="admin-badge-img" alt="verified">`;
+                        } else {
+                            tdName.innerHTML = user.name + (hasNewMessage ? ' <span style="background-color: #e53e3e; color: white; padding: 2px 6px; border-radius: 4px; font-size: 10px;">📩 Yangi</span>' : '');
+                        }
+
+                        tr.appendChild(tdName);
+                        tr.innerHTML += `<td>${user.password}</td><td>${device}</td><td>${statusText}</td><td>${actionButtons}</td>`;
+                        userListTbody.appendChild(tr);
+                    }
+                } catch(e) {}
+            }
+        }
+
+        window.warnUser = function(usernameKey) {
+            let msg = prompt("Ogohlantirish xabarini kiriting:");
+            if (msg && msg.trim() !== "") {
+                let user = JSON.parse(localStorage.getItem(usernameKey));
+                user.warning = msg.trim();
+                localStorage.setItem(usernameKey, JSON.stringify(user));
+                alert("Ogohlantirish yuborildi!");
+                renderUserList();
+            }
+        }
+
+        window.toggleBlockUser = function(usernameKey) {
+            let user = JSON.parse(localStorage.getItem(usernameKey));
+            user.isBlocked = !user.isBlocked;
+            if(user.isBlocked && user.status === 'online') user.status = 'offline';
+            localStorage.setItem(usernameKey, JSON.stringify(user));
+            renderUserList();
+        }
+
+        // --- USER CHAT ---
+        openUserChatTrigger.addEventListener('click', () => {
+            helpMainContent.classList.add('hidden');
+            userChatBlock.classList.remove('hidden');
+            
+            markAdminMessagesAsRead();
+            loadUserChatMessages();
+            
+            clearInterval(chatInterval);
+            chatInterval = setInterval(() => {
+                markAdminMessagesAsRead();
+                loadUserChatMessages();
+            }, 500); 
+        });
+
+        function closeUserChat() {
+            if(userChatBlock) userChatBlock.classList.add('hidden');
+            helpMainContent.classList.remove('hidden');
+            clearInterval(chatInterval);
+        }
+        closeUserChatTrigger.addEventListener('click', closeUserChat);
+
+        function markAdminMessagesAsRead() {
+            if (!currentLoggedInUser) return;
+            const chats = JSON.parse(localStorage.getItem('quiz_chats')) || {};
+            const userKey = currentLoggedInUser.name.toLowerCase();
+            
+            if (chats[userKey]) {
+                chats[userKey].forEach(msg => {
+                    if (msg.sender === 'admin') msg.read = true;
+                });
+                localStorage.setItem('quiz_chats', JSON.stringify(chats));
+            }
+        }
+
+        function loadUserChatMessages() {
+            if (!currentLoggedInUser) return;
+            const chats = JSON.parse(localStorage.getItem('quiz_chats')) || {};
+            const myChat = chats[currentLoggedInUser.name.toLowerCase()] || [];
+            
+            userChatMessages.innerHTML = '';
+            myChat.forEach(msg => {
+                const div = document.createElement('div');
+                div.className = `msg-bubble ${msg.sender === 'admin' ? 'msg-received' : 'msg-sent'}`;
+                
+                let tickHTML = '';
+                if (msg.sender !== 'admin') {
+                    tickHTML = msg.read ? '<span class="msg-status-tick tick-read">✓✓</span>' : '<span class="msg-status-tick tick-unread">✓</span>';
+                }
+
+                let authorHTML = msg.sender === 'admin' 
+                    ? `Asadbek <img src="${ADMIN_AVATAR_URL}" class="msg-author-badge" alt="verified">` 
+                    : 'Siz';
+
+                div.innerHTML = `<span class="msg-author">${authorHTML}</span>${msg.text}${tickHTML}`;
+                userChatMessages.appendChild(div);
+            });
+            userChatMessages.scrollTop = userChatMessages.scrollHeight;
+        }
+
+        userSendBtn.addEventListener('click', sendUserMessage);
+        userChatInput.addEventListener('keypress', (e) => { if(e.key === 'Enter') sendUserMessage(); });
+
+        function sendUserMessage() {
+            const text = userChatInput.value.trim();
+            if(!text || !currentLoggedInUser) return;
+
+            const chats = JSON.parse(localStorage.getItem('quiz_chats')) || {};
+            const userKey = currentLoggedInUser.name.toLowerCase();
+            if(!chats[userKey]) chats[userKey] = [];
+
+            chats[userKey].push({ sender: userKey, text: text, read: false });
+            localStorage.setItem('quiz_chats', JSON.stringify(chats));
+            
+            userChatInput.value = '';
+            loadUserChatMessages();
+        }
+
+        // --- ADMIN CHAT ---
+        window.openAdminChat = function(usernameKey) {
+            activeAdminChatUser = usernameKey;
+            adminChatTitle.textContent = `${usernameKey.toUpperCase()} bilan yozishmalar`;
+            adminChatBlock.classList.remove('hidden');
+            
+            markUserMessagesAsRead(usernameKey);
+            loadAdminChatMessages();
+            
+            clearInterval(chatInterval);
+            chatInterval = setInterval(() => {
+                markUserMessagesAsRead(activeAdminChatUser);
+                loadAdminChatMessages();
+            }, 500);
+        }
+
+        window.closeAdminChat = function() {
+            adminChatBlock.classList.add('hidden');
+            activeAdminChatUser = null;
+            clearInterval(chatInterval);
+        }
+
+        function markUserMessagesAsRead(userKey) {
+            if (!userKey) return;
+            const chats = JSON.parse(localStorage.getItem('quiz_chats')) || {};
+            
+            if (chats[userKey]) {
+                chats[userKey].forEach(msg => {
+                    if (msg.sender !== 'admin') msg.read = true;
+                });
+                localStorage.setItem('quiz_chats', JSON.stringify(chats));
+            }
+        }
+
+        function loadAdminChatMessages() {
+            if(!activeAdminChatUser) return;
+            const chats = JSON.parse(localStorage.getItem('quiz_chats')) || {};
+            const targetedChat = chats[activeAdminChatUser] || [];
+
+            adminChatMessages.innerHTML = '';
+            targetedChat.forEach(msg => {
+                const div = document.createElement('div');
+                div.className = `msg-bubble ${msg.sender === 'admin' ? 'msg-sent' : 'msg-received'}`;
+                
+                let tickHTML = '';
+                if (msg.sender === 'admin') {
+                    tickHTML = msg.read ? '<span class="msg-status-tick tick-read">✓✓</span>' : '<span class="msg-status-tick tick-unread">✓</span>';
+                }
+
+                let authorHTML = msg.sender === 'admin' 
+                    ? `Siz (Asadbek) <img src="${ADMIN_AVATAR_URL}" class="msg-author-badge" alt="verified">` 
+                    : activeAdminChatUser;
+
+                div.innerHTML = `<span class="msg-author">${authorHTML}</span>${msg.text}${tickHTML}`;
+                adminChatMessages.appendChild(div);
+            });
+            adminChatMessages.scrollTop = adminChatMessages.scrollHeight;
+        }
+
+        adminSendBtn.addEventListener('click', sendAdminMessage);
+        adminChatInput.addEventListener('keypress', (e) => { if(e.key === 'Enter') sendAdminMessage(); });
+
+        function sendAdminMessage() {
+            const text = adminChatInput.value.trim();
+            if(!text || !activeAdminChatUser) return;
+
+            const chats = JSON.parse(localStorage.getItem('quiz_chats')) || {};
+            if(!chats[activeAdminChatUser]) chats[activeAdminChatUser] = [];
+
+            chats[activeAdminChatUser].push({ sender: 'admin', text: text, read: false });
+            localStorage.setItem('quiz_chats', JSON.stringify(chats));
+
+            adminChatInput.value = '';
+            loadAdminChatMessages();
+        }
+
+        // --- AUTH ---
+        registerForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('reg-name').value.trim();
+            const password = document.getElementById('reg-password').value;
+            const confirmPassword = document.getElementById('reg-confirm-password').value;
+
+            if (name.toLowerCase() === 'asadbek') {
+                alert("Bunday ism tizimda mavjud!");
+                return;
+            }
+            if (password !== confirmPassword) {
+                alert("Parollar mos kelmadi!");
+                return;
+            }
+
+            if (localStorage.getItem(name.toLowerCase())) {
+                alert("Bu ismli foydalanuvchi allaqachon ro'yxatdan o'tgan!");
+                return;
+            }
+
+            const deviceModel = await getExactDeviceName();
+
+            const newUser = {
+                name: name,
+                password: password,
+                device: deviceModel,
+                status: 'offline',
+                isBlocked: false,
+                warning: ""
+            };
+
+            localStorage.setItem(name.toLowerCase(), JSON.stringify(newUser));
+            alert("Ro'yxatdan muvaffaqiyatli o'tdingiz! Endi kirishingiz mumkin.");
+            registerForm.reset();
+            registerBlock.classList.add('hidden');
+            loginBlock.classList.remove('hidden');
+        });
+
+        loginForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const name = document.getElementById('username').value.trim();
+            const pass = document.getElementById('password').value;
+
+            const userKey = name.toLowerCase();
+            const userData = localStorage.getItem(userKey);
+
+            if (!userData) {
+                alert("Foydalanuvchi topilmadi!");
+                return;
+            }
+
+            const user = JSON.parse(userData);
+
+            if (user.password !== pass) {
+                alert("Parol noto'g'ri!");
+                return;
+            }
+
+            if (user.isBlocked) {
+                alert("Sizning profilingiz administrator tomonidan bloklangan!");
+                return;
+            }
+
+            const detectedDevice = await getExactDeviceName();
+            user.device = detectedDevice;
+            user.status = 'online';
+            currentLoggedInUser = user;
+            localStorage.setItem(userKey, JSON.stringify(currentLoggedInUser));
+
+            if (currentLoggedInUser.warning && currentLoggedInUser.warning !== "") {
+                alert("⚠️ Administrator ogohlantirishi:\n" + currentLoggedInUser.warning);
+                currentLoggedInUser.warning = ""; 
+                localStorage.setItem(userKey, JSON.stringify(currentLoggedInUser));
+            }
+
+            authContainer.classList.add('hidden');
+            mainScreenBlock.classList.remove('hidden');
+            welcomeTitle.textContent = `Xush kelibsiz, ${user.name}!`;
+
+            document.getElementById('prof-name').textContent = user.name;
+            document.getElementById('prof-pass').textContent = "******";
+            togglePwdBtn.textContent = "Ko'rsatish";
+
+            if (userKey === 'asadbek') {
+                navAdmin.classList.remove('hidden');
+                adminOnlineDot.style.display = 'inline-block';
+                profBadge.innerHTML = `<img src="${ADMIN_AVATAR_URL}" class="admin-badge-img" alt="verified">`;
+                profBadge.classList.remove('hidden');
+            } else {
+                navAdmin.classList.add('hidden');
+                adminOnlineDot.style.display = 'none';
+                profBadge.classList.remove('hidden');
+            }
+
+            resetActiveNav();
+            navMenu.classList.add('active');
+            subMenuPage.classList.remove('hidden');
+            loginForm.reset();
+        });
+
+        function setOfflineAndLogout() {
+            if (currentLoggedInUser) {
+                const userKey = currentLoggedInUser.name.toLowerCase();
+                let freshData = JSON.parse(localStorage.getItem(userKey));
+                if(freshData) {
+                    freshData.status = 'offline';
+                    localStorage.setItem(userKey, JSON.stringify(freshData));
+                }
+            }
+        }
+
+        logoutTrigger.addEventListener('click', function() {
+            setOfflineAndLogout();
+            currentLoggedInUser = null;
+            mainScreenBlock.classList.add('hidden');
+            authContainer.classList.remove('hidden');
+            closeUserChat();
+        });
+
+        togglePwdBtn.addEventListener('click', function() {
+            const profPass = document.getElementById('prof-pass');
+            if (currentLoggedInUser) {
+                if (profPass.textContent === "******") {
+                    profPass.textContent = currentLoggedInUser.password;
+                    togglePwdBtn.textContent = "Yashirish";
+                } else {
+                    profPass.textContent = "******";
+                    togglePwdBtn.textContent = "Ko'rsatish";
+                }
+            }
+        });
+
+        window.addEventListener('beforeunload', () => setOfflineAndLogout());
+        
+        document.getElementById('start-quiz-trigger').addEventListener('click', () => {
+            subMenuPage.classList.add('hidden');
+            infoPage.classList.remove('hidden');
+            infoData = JSON.parse(localStorage.getItem('huquqiy_info')) || [];
+            currentInfoIndex = 0;
+            loadInfoContent();
+            
+            if (infoData.length > 0) {
+                infoData[currentInfoIndex].views = (infoData[currentInfoIndex].views || 0) + 1;
+                localStorage.setItem('huquqiy_info', JSON.stringify(infoData));
+                const viewsEl = document.getElementById(`views-${infoData[currentInfoIndex].id}`);
+                if (viewsEl) viewsEl.textContent = infoData[currentInfoIndex].views;
+            }
+        });
+
+        setInterval(() => {
+            if (!currentLoggedInUser || currentLoggedInUser.name.toLowerCase() !== 'asadbek') return;
+
+            const chats = JSON.parse(localStorage.getItem('quiz_chats')) || {};
+            let totalUnread = false;
+
+            for (let userKey in chats) {
+                if (chats[userKey].length > 0) {
+                    let unreadMsgs = chats[userKey].filter(m => m.sender !== 'admin' && !m.read);
+                    if (unreadMsgs.length > 0) {
+                        totalUnread = true;
+                        break;
                     }
                 }
             }
-        }
 
-        function showPlatform() {
-            document.getElementById('authScreen').style.display = 'none';
-            const mainPlatform = document.getElementById('mainPlatform');
-            mainPlatform.style.display = 'grid';
-            document.getElementById('searchBoxContainer').style.display = 'block';
-            document.getElementById('logoutButton').style.display = 'block';
-
-            if (isAdminMode) {
-                // Admin kirsa hamma narsani ochish
-                document.getElementById('sidebarPanel').style.display = 'flex';
-                document.getElementById('uploadPanelBlock').style.display = 'block';
-                document.getElementById('adminUsersPanel').style.display = 'block';
-                mainPlatform.classList.remove('citizen-view');
+            const navAdminBtn = document.getElementById('nav-admin');
+            if (totalUnread && !navAdminBtn.classList.contains('active')) {
+                navAdminBtn.style.borderTop = "3px solid #e53e3e";
+                navAdminBtn.style.color = "#e53e3e";
             } else {
-                // Fuqaro kirsa chap panelni butunlay yashirish va o'ng tomonni kengaytirish
-                document.getElementById('sidebarPanel').style.display = 'none';
-                document.getElementById('uploadPanelBlock').style.display = 'none';
-                document.getElementById('adminUsersPanel').style.display = 'none';
-                mainPlatform.classList.add('citizen-view');
-            }
-
-            renderLaws(iivLaws);
-            renderUsers(registeredUsers);
-        }
-
-        // INTEGRAL KIRISH TIZIMI (Ikki marta kod yozilmaydi)
-        function handleLogin(event) {
-            event.preventDefault();
-            const name = document.getElementById('regName').value.trim();
-            const password = document.getElementById('regPassword').value;
-            const errorDiv = document.getElementById('authError');
-
-            // 1. ADMIN TEKSHIRUVI
-            if (name.toLowerCase() === "admin") {
-                if (password === "1234") {
-                    isAdminMode = true;
-                    currentUserGlobal = "Admin";
-                    localStorage.setItem('current_logged_user', "Admin");
-                    errorDiv.style.display = 'none';
-                    showPlatform();
-                } else {
-                    errorDiv.innerText = "Admin paroli notoʻgʻri!";
-                    errorDiv.style.display = 'block';
-                }
-                return;
-            }
-
-            // 2. ODDIY FUQARO TEKSHIRUVI
-            const existingUser = registeredUsers.find(u => u.name.toLowerCase() === name.toLowerCase());
-            if (existingUser && existingUser.isBlocked) {
-                errorDiv.innerText = "Ushbu akkaunt admin tomonidan bloklangan!";
-                errorDiv.style.display = 'block';
-                return;
-            }
-
-            if (!existingUser) {
-                const newUser = { id: Date.now(), name: name, isBlocked: false };
-                registeredUsers.unshift(newUser);
-                localStorage.setItem('registered_users', JSON.stringify(registeredUsers));
-            }
-
-            isAdminMode = false;
-            currentUserGlobal = name;
-            localStorage.setItem('current_logged_user', name);
-            errorDiv.style.display = 'none';
-            showPlatform();
-        }
-
-        function logout() {
-            localStorage.removeItem('current_logged_user');
-            location.reload();
-        }
-
-        // Qonun moddalarini chizish
-        function renderLaws(data) {
-            const container = document.getElementById('moddaContainer');
-            container.innerHTML = '';
-            if (data.length === 0) {
-                container.innerHTML = '<p style="text-align:center; color:#64748b; padding: 20px;">Hech qanday modda topilmadi.</p>';
-                return;
-            }
-            data.forEach(item => {
-                if(!item.comments) item.comments = [];
-                
-                const card = document.createElement('div');
-                card.className = 'modda-card';
-                // O'chirish tugmasi FAQAT adminga ko'rinadi
-                const deleteBtnStyle = isAdminMode ? 'display: block;' : 'display: none;';
-
-                let commentsHTML = '';
-                item.comments.forEach(com => {
-                    commentsHTML += `
-                        <div class="comment-item">
-                            <div class="comment-meta">${com.name} <span>${com.date}</span></div>
-                            <div class="comment-body">${com.text}</div>
-                        </div>
-                    `;
-                });
-
-                card.innerHTML = `
-                    <div class="modda-header">
-                        <div class="modda-number">${item.title}</div>
-                        <button class="btn-delete" style="${deleteBtnStyle}" onclick="deleteModda(${item.id})">Oʻchirish</button>
-                    </div>
-                    <div class="modda-text">${item.text}</div>
-                    <div class="modda-footer">Kiritilgan sana: ${item.date}</div>
-                    
-                    <div class="comments-section">
-                        <div class="comments-title">Muhokamalar (${item.comments.length})</div>
-                        <div class="comments-list">${commentsHTML}</div>
-                        <div class="comment-input-box">
-                            <input type="text" id="input-com-${item.id}" placeholder="Fikringizni yozing (Reply)...">
-                            <button class="btn-reply" onclick="addComment(${item.id})">Reply</button>
-                        </div>
-                    </div>
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        function addComment(moddaId) {
-            const inputField = document.getElementById(`input-com-${moddaId}`);
-            const commentText = inputField.value.trim();
-            if(!commentText) return;
-
-            const targetModda = iivLaws.find(item => item.id === moddaId);
-            if(targetModda) {
-                const today = new Date().toISOString().split('T')[0];
-                targetModda.comments.push({
-                    name: currentUserGlobal || "Fuqaro",
-                    text: commentText,
-                    date: today
-                });
-                localStorage.setItem('iiv_laws', JSON.stringify(iivLaws));
-                renderLaws(iivLaws);
-            }
-            inputField.value = '';
-        }
-
-        function deleteModda(id) {
-            iivLaws = iivLaws.filter(item => item.id !== id);
-            localStorage.setItem('iiv_laws', JSON.stringify(iivLaws));
-            renderLaws(iivLaws);
-        }
-
-        // Fuqarolar ro'yxatini shakllantirish (Bloklash tugmasi faqat adminga chiqadi)
-        function renderUsers(users) {
-            const container = document.getElementById('usersContainer');
-            const countSpan = document.getElementById('userCount');
-            container.innerHTML = '';
-            countSpan.innerText = users.length;
-            
-            users.forEach(user => {
-                const firstLetter = user.name.charAt(0).toUpperCase();
-                const li = document.createElement('li');
-                li.className = 'user-item';
-                
-                const statusLabel = user.isBlocked ? '<span class="user-status blocked">Bloklangan</span>' : '<span class="user-status">Faol</span>';
-                const btnLabel = user.isBlocked ? 'Tiklash' : 'Bloklash';
-                const btnClass = user.isBlocked ? 'btn-block unblock' : 'btn-block';
-
-                // AGAR ADMIN BO'LSA BLOKLASH TUGMASI CHIQADI, FUQARODA ESA TUGMA CHIQMAYDI
-                const actionButton = isAdminMode ? `<button class="${btnClass}" onclick="toggleBlockUser(${user.id})">${btnLabel}</button>` : '';
-
-                li.innerHTML = `
-                    <div class="user-left">
-                        <div class="user-avatar">${firstLetter}</div>
-                        <div class="user-info">
-                            <div class="user-name">${user.name}</div>
-                            ${statusLabel}
-                        </div>
-                    </div>
-                    ${actionButton}
-                `;
-                container.appendChild(li);
-            });
-        }
-
-        function toggleBlockUser(id) {
-            const userObj = registeredUsers.find(u => u.id === id);
-            if(userObj) {
-                userObj.isBlocked = !userObj.isBlocked;
-                localStorage.setItem('registered_users', JSON.stringify(registeredUsers));
-                
-                if(userObj.isBlocked && currentUserGlobal === userObj.name) {
-                    localStorage.removeItem('current_logged_user');
-                    location.reload();
-                } else {
-                    renderUsers(registeredUsers);
+                navAdminBtn.style.borderTop = "none";
+                if(!navAdminBtn.classList.contains('active')) {
+                    navAdminBtn.style.color = "#a0aec0";
                 }
             }
-        }
 
-        function saveModda(event) {
-            event.preventDefault();
-            const title = document.getElementById('moddaTitle').value;
-            const text = document.getElementById('moddaContent').value;
-            const today = new Date().toISOString().split('T')[0];
-
-            const newModda = {
-                id: Date.now(),
-                title: title,
-                text: text,
-                date: today,
-                comments: []
-            };
-
-            iivLaws.unshift(newModda);
-            localStorage.setItem('iiv_laws', JSON.stringify(iivLaws));
-            renderLaws(iivLaws);
-            document.getElementById('moddaForm').reset();
-        }
-
-        function searchModda() {
-            const query = document.getElementById('searchBar').value.toLowerCase();
-            const result = iivLaws.filter(item => 
-                item.title.toLowerCase().includes(query) || 
-                item.text.toLowerCase().includes(query)
-            );
-            renderLaws(result);
-        }
+            if (navAdminBtn.classList.contains('active') && !subAdminPage.classList.contains('hidden') && !activeAdminChatUser) {
+                renderUserList();
+            }
+        }, 2000);
     </script>
 </body>
 </html>
