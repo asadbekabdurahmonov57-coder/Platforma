@@ -126,6 +126,7 @@
         }
         .admin-edit-stats button:hover { background: #2b6cb0; }
 
+        /* Kontekst menyu - faqat Copy, Cut, Select All */
         .custom-context-menu {
             position: fixed; background: #1a365d; border: 2px solid #3182ce;
             border-radius: 10px; padding: 5px 0; z-index: 99999;
@@ -319,39 +320,18 @@
         }
         .stat-item .stat-value { font-size: 28px; font-weight: 800; color: #63b3ed; }
         .stat-item .stat-label { font-size: 11px; color: #a0aec0; margin-top: 5px; font-weight: 700; }
-
-        .paste-modal-input {
-            width: 100%; padding: 10px; border: 2px solid #3182ce;
-            background: #0d213b; color: white; border-radius: 8px;
-            font-size: 14px; margin-bottom: 15px;
-            -webkit-user-select: text; user-select: text;
-            min-height: 80px; resize: vertical;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
     </style>
 </head>
 <body>
 
+    <!-- Kontekst menyu - faqat Copy, Cut, Select All -->
     <div id="custom-context-menu" class="custom-context-menu hidden">
-        <div class="context-menu-item" id="context-paste-btn">📋 Joylash (Paste)</div>
+        <div class="context-menu-item" id="context-paste-btn">📋 Joylash</div>
         <div class="context-menu-divider"></div>
-        <div class="context-menu-item" id="context-copy-btn">📝 Nusxalash (Copy)</div>
-        <div class="context-menu-item" id="context-cut-btn">✂️ Kesish (Cut)</div>
+        <div class="context-menu-item" id="context-copy-btn">📝 Nusxalash</div>
+        <div class="context-menu-item" id="context-cut-btn">✂️ Kesish</div>
         <div class="context-menu-divider"></div>
         <div class="context-menu-item" id="context-select-all-btn">✅ Barchasini belgilash</div>
-    </div>
-
-    <div id="paste-modal-overlay" class="custom-modal-overlay hidden">
-        <div class="custom-modal">
-            <div class="modal-icon">📋</div>
-            <div class="modal-title" style="color:#63b3ed;">Matnni joylash</div>
-            <div class="modal-message">Pastdagi maydonga matnni qo'ying (Ctrl+V ishlaydi)</div>
-            <textarea id="paste-textarea" class="paste-modal-input" placeholder="Matnni shu yerga qo'ying..."></textarea>
-            <div class="btn-row">
-                <button class="login-btn btn-green" id="confirm-paste-btn">📋 Joylash</button>
-                <button class="login-btn btn-red" id="cancel-paste-btn">❌ Bekor qilish</button>
-            </div>
-        </div>
     </div>
 
     <div id="auth-container" class="login-container">
@@ -453,12 +433,6 @@
     <script>
         const contextMenu = document.getElementById('custom-context-menu');
         let activeInputElement = null;
-        let pendingPasteElement = null;
-
-        const pasteModalOverlay = document.getElementById('paste-modal-overlay');
-        const pasteTextarea = document.getElementById('paste-textarea');
-        const confirmPasteBtn = document.getElementById('confirm-paste-btn');
-        const cancelPasteBtn = document.getElementById('cancel-paste-btn');
 
         document.addEventListener('contextmenu', function(e) {
             const target = e.target;
@@ -481,39 +455,20 @@
             if (!contextMenu.contains(e.target)) { contextMenu.classList.add('hidden'); activeInputElement = null; }
         });
 
-        function openPasteModal() {
+        // Paste - oddiy prompt orqali
+        document.getElementById('context-paste-btn').addEventListener('click', function() {
             if (!activeInputElement) return;
             contextMenu.classList.add('hidden');
-            pendingPasteElement = activeInputElement;
-            pasteTextarea.value = '';
-            pasteModalOverlay.classList.remove('hidden');
-            setTimeout(() => pasteTextarea.focus(), 300);
-        }
-
-        function performPaste() {
-            if (!pendingPasteElement) return;
-            const text = pasteTextarea.value;
-            if (text) {
-                const start = pendingPasteElement.selectionStart;
-                const end = pendingPasteElement.selectionEnd;
-                const value = pendingPasteElement.value;
-                pendingPasteElement.value = value.substring(0, start) + text + value.substring(end);
-                pendingPasteElement.selectionStart = pendingPasteElement.selectionEnd = start + text.length;
-                pendingPasteElement.focus();
+            const text = prompt("Joylanadigan matnni kiriting (Ctrl+V ishlaydi):");
+            if (text !== null && text !== '') {
+                const start = activeInputElement.selectionStart;
+                const end = activeInputElement.selectionEnd;
+                const value = activeInputElement.value;
+                activeInputElement.value = value.substring(0, start) + text + value.substring(end);
+                activeInputElement.selectionStart = activeInputElement.selectionEnd = start + text.length;
+                activeInputElement.focus();
             }
-            pasteModalOverlay.classList.add('hidden');
-            pendingPasteElement = null;
-        }
-
-        function closePasteModal() {
-            pasteModalOverlay.classList.add('hidden');
-            pendingPasteElement = null;
-        }
-
-        document.getElementById('context-paste-btn').addEventListener('click', openPasteModal);
-        confirmPasteBtn.addEventListener('click', performPaste);
-        cancelPasteBtn.addEventListener('click', closePasteModal);
-        pasteModalOverlay.addEventListener('click', function(e) { if (e.target === pasteModalOverlay) closePasteModal(); });
+        });
 
         document.getElementById('context-copy-btn').addEventListener('click', function() {
             if (!activeInputElement) return;
@@ -749,9 +704,7 @@
         document.addEventListener('copy', e => e.preventDefault());
         document.addEventListener('cut', e => e.preventDefault());
         document.addEventListener('keydown', function(e) {
-            if (e.ctrlKey && e.keyCode === 67 && e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') e.preventDefault();
-            if (e.ctrlKey && e.keyCode === 88 && e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') e.preventDefault();
-            if (e.ctrlKey && (e.keyCode === 85 || e.keyCode === 83)) e.preventDefault();
+            if (e.ctrlKey && (e.keyCode === 67 || e.keyCode === 88 || e.keyCode === 85 || e.keyCode === 83)) e.preventDefault();
             if (e.ctrlKey && e.keyCode === 65 && e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') e.preventDefault();
             if (e.keyCode === 123 || (e.ctrlKey && e.shiftKey && e.keyCode === 73)) e.preventDefault();
         });
